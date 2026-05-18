@@ -1,0 +1,269 @@
+@PhotoStudioCRM.Backend_HostAddress = http://localhost:5170
+
+### 1. Получение всех услуг (доступно без авторизации)
+GET {{PhotoStudioCRM.Backend_HostAddress}}/api/services
+Accept: application/json
+
+###
+
+### 2. Аутентификация - Логин
+POST {{PhotoStudioCRM.Backend_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@photostudio.com",
+  "password": "Admin123!"
+}
+
+###
+
+### 3. Аутентификация - Регистрация нового клиента
+POST {{PhotoStudioCRM.Backend_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "client@test.com",
+  "password": "Client123!",
+  "firstName": "Иван",
+  "lastName": "Петров",
+  "phone": "+79991234567",
+  "role": "Client"
+}
+
+###
+
+### 4. Получение услуги по ID
+GET {{PhotoStudioCRM.Backend_HostAddress}}/api/services/1
+Accept: application/json
+
+###
+
+### 5. Клиентские эндпоинты (требуют авторизации)
+### Сначала выполните логин и скопируйте токен, затем вставьте ниже
+
+@token = ваш_токен_здесь
+
+### 5.1 Получение дашборда клиента
+GET {{PhotoStudioCRM.Backend_HostAddress}}/api/client/dashboard
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+### 5.2 Получение заказов клиента
+GET {{PhotoStudioCRM.Backend_HostAddress}}/api/client/orders
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+### 5.3 Получение деталей заказа
+GET {{PhotoStudioCRM.Backend_HostAddress}}/api/client/orders/1
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+### 5.4 Создание нового заказа
+POST {{PhotoStudioCRM.Backend_HostAddress}}/api/client/orders
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "serviceIds": [1, 2, 3],
+  "notes": "Хочу сделать семейную фотосессию"
+}
+
+###
+
+### 5.5 Создание платежа
+POST {{PhotoStudioCRM.Backend_HostAddress}}/api/client/payments
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "orderId": 1,
+  "amount": 5000,
+  "paymentMethod": "card"
+}
+
+###
+
+### 6. Фотограф - эндпоинты
+### 6.1 Дашборд фотографа
+GET {{PhotoStudioCRM.Backend_HostAddress}}/api/photographer/dashboard
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+### 6.2 Получение назначенных заказов
+GET {{PhotoStudioCRM.Backend_HostAddress}}/api/photographer/assigned-orders
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+### 6.3 Обновление статуса заказа
+PUT {{PhotoStudioCRM.Backend_HostAddress}}/api/photographer/orders/1/status
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "status": 2
+}
+### Статусы: 0-Pending, 1-Confirmed, 2-InProgress, 3-Completed, 4-Cancelled
+
+###
+
+### 6.4 Получение расписания фотографа
+GET {{PhotoStudioCRM.Backend_HostAddress}}/api/photographer/schedule
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+### 6.5 Добавление в расписание
+POST {{PhotoStudioCRM.Backend_HostAddress}}/api/photographer/schedule
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "startTime": "2024-12-20T10:00:00Z",
+  "endTime": "2024-12-20T12:00:00Z"
+}
+
+###
+
+### 7. Администратор - эндпоинты
+### 7.1 Получение всех пользователей
+GET {{PhotoStudioCRM.Backend_HostAddress}}/api/admin/users
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+### 7.2 Создание пользователя
+POST {{PhotoStudioCRM.Backend_HostAddress}}/api/admin/users
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "email": "photographer@test.com",
+  "password": "Photo123!",
+  "firstName": "Анна",
+  "lastName": "Смирнова",
+  "phone": "+79998887766",
+  "role": "Photographer"
+}
+
+###
+
+### 7.3 Активация/деактивация пользователя
+PUT {{PhotoStudioCRM.Backend_HostAddress}}/api/admin/users/1/activate
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+### 7.4 Статистика для админа
+GET {{PhotoStudioCRM.Backend_HostAddress}}/api/admin/dashboard/stats
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+### 8. Бухгалтер - эндпоинты
+### 8.1 Финансовый отчет
+GET {{PhotoStudioCRM.Backend_HostAddress}}/api/accountant/financial-summary?startDate=2024-01-01&endDate=2024-12-31
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+### 8.2 Генерация отчета по доходам
+GET {{PhotoStudioCRM.Backend_HostAddress}}/api/accountant/reports/revenue?startDate=2024-01-01&endDate=2024-12-31
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+### 8.3 Получение всех отчетов
+GET {{PhotoStudioCRM.Backend_HostAddress}}/api/accountant/reports
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+### 9. Отчеты (для админа и бухгалтера)
+### 9.1 Сводка по заказам
+GET {{PhotoStudioCRM.Backend_HostAddress}}/api/reports/orders-summary?startDate=2024-01-01&endDate=2024-12-31
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+### 9.2 Популярность услуг
+GET {{PhotoStudioCRM.Backend_HostAddress}}/api/reports/services-popularity
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+### 9.3 Статистика клиентов
+GET {{PhotoStudioCRM.Backend_HostAddress}}/api/reports/client-statistics
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+### 10. Расписание (общие эндпоинты)
+### 10.1 Получение расписания фотографа по дате
+GET {{PhotoStudioCRM.Backend_HostAddress}}/api/schedule/photographer/1?date=2024-12-20
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+### 10.2 Доступные слоты для записи
+GET {{PhotoStudioCRM.Backend_HostAddress}}/api/schedule/available-slots?photographerId=1&date=2024-12-20
+Accept: application/json
+
+###
+
+### 11. Управление услугами (только для админа)
+### 11.1 Создание услуги
+POST {{PhotoStudioCRM.Backend_HostAddress}}/api/services
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Свадебная фотосессия Premium",
+  "description": "Полный день съемки, 500+ фото, обработка",
+  "price": 50000,
+  "durationMinutes": 480,
+  "isActive": true
+}
+
+###
+
+### 11.2 Обновление услуги
+PUT {{PhotoStudioCRM.Backend_HostAddress}}/api/services/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Портретная фотосессия",
+  "description": "Профессиональная портретная съемка в студии",
+  "price": 15000,
+  "durationMinutes": 60,
+  "isActive": true
+}
+
+###
+
+### 11.3 Удаление услуги
+DELETE {{PhotoStudioCRM.Backend_HostAddress}}/api/services/5
+Authorization: Bearer {{token}}
+Accept: application/json

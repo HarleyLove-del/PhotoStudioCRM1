@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ панель - PhotoStudio CRM</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Дополнительные стили для админ-панели в неоновой теме */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        .modal-content {
+            background: var(--bg-card);
+            padding: 32px;
+            border-radius: 32px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid rgba(255, 0, 255, 0.3);
+            color: var(--text-white);
+        }
+        .modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        .modal-content::-webkit-scrollbar-track {
+            background: rgba(45, 27, 46, 0.5);
+            border-radius: 10px;
+        }
+        .modal-content::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--crimson) 0%, var(--fuchsia) 50%, var(--neon-purple) 100%);
+            border-radius: 10px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .btn-small {
+            padding: 6px 14px;
+            font-size: 12px;
+            margin: 0 3px;
+            border-radius: 30px;
+            cursor: pointer;
+            border: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-small:hover {
+            transform: translateY(-2px);
+        }
+        .btn-edit { background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); color: white; }
+        .btn-delete { background: linear-gradient(135deg, #ef4444 0%, #f87171 100%); color: white; }
+        .btn-add { background: linear-gradient(135deg, #10b981 0%, #34d399 100%); color: white; margin-bottom: 20px; }
+        .btn-assign { background: var(--main-gradient); color: white; }
+        .btn-cancel { background: linear-gradient(135deg, #ef4444 0%, #f87171 100%); color: white; }
+        .btn-reassign { background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); color: white; }
+        .btn-mark-paid { background: linear-gradient(135deg, #10b981 0%, #34d399 100%); color: white; }
+        
+        /* Стили для выбора эмодзи в неоновой теме */
+        .emoji-picker {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        .emoji-preview {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 12px 15px;
+            border: 2px solid rgba(255, 0, 255, 0.3);
+            border-radius: 28px;
+            background: rgba(30, 15, 40, 0.8);
+            transition: all 0.3s;
+            color: var(--text-white);
+        }
+        .emoji-preview:hover {
+            border-color: var(--fuchsia);
+            background: rgba(255, 0, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+        .emoji-preview span:first-child {
+            font-size: 24px;
+        }
+        .emoji-preview span:last-child {
+            color: var(--text-white-dim);
+            font-size: 12px;
+        }
+        .emoji-dropdown {
+            position: absolute;
+            background: rgba(30, 15, 40, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 0, 255, 0.3);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            z-index: 1002;
+            max-height: 320px;
+            overflow-y: auto;
+            display: none;
+            min-width: 280px;
+            left: 0;
+            right: 0;
+        }
+        .emoji-dropdown.show {
+            display: block;
+            animation: fadeInUp 0.2s ease-out;
+        }
+        .emoji-categories {
+            display: flex;
+            gap: 6px;
+            padding: 12px;
+            border-bottom: 1px solid rgba(255, 0, 255, 0.2);
+            background: rgba(45, 27, 46, 0.8);
+            position: sticky;
+            top: 0;
+            flex-wrap: wrap;
+            z-index: 1;
+        }
+        .emoji-cat-btn {
+            padding: 6px 14px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            border-radius: 25px;
+            font-size: 12px;
+            transition: all 0.3s;
+            font-weight: 500;
+            color: var(--text-white-dim);
+        }
+        .emoji-cat-btn:hover {
+            background: rgba(255, 0, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        .emoji-cat-btn.active {
+            background: var(--main-gradient);
+            color: white;
+        }
+        .emoji-list {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 6px;
+            padding: 12px;
+            max-height: 220px;
+            overflow-y: auto;
+        }
+        .emoji-item {
+            font-size: 26px;
+            padding: 8px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+        .emoji-item:hover {
+            background: rgba(255, 0, 255, 0.2);
+            transform: scale(1.15);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        /* Статусы в неоновой теме */
+        .status-pending { background: rgba(254, 243, 199, 0.2); color: #fde047; padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; }
+        .status-confirmed { background: rgba(219, 234, 254, 0.2); color: #93c5fd; padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; }
+        .status-progress { background: rgba(252, 231, 243, 0.2); color: #f9a8d4; padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; }
+        .status-completed { background: rgba(209, 250, 229, 0.2); color: #6ee7b7; padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; }
+        .status-cancelled { background: rgba(254, 226, 226, 0.2); color: #fca5a5; padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; }
+        
+        .payment-status-paid { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; }
+        .payment-status-partial { background: rgba(245, 158, 11, 0.2); color: #fcd34d; padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; }
+        .payment-status-notpaid { background: rgba(239, 68, 68, 0.2); color: #fca5a5; padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; }
+        
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .tab { padding: 8px 20px; background: rgba(30, 15, 40, 0.6); border-radius: 40px; cursor: pointer; transition: all 0.3s; font-weight: 600; font-size: 13px; color: var(--text-white-dim); border: 1px solid rgba(255, 0, 255, 0.2); }
+        .tab:hover { background: rgba(255, 0, 255, 0.15); transform: translateY(-2px); color: var(--text-white); }
+        .tab.active { background: var(--main-gradient); color: white; border-color: transparent; box-shadow: var(--shadow-glow); }
+        .count-badge { background: var(--fuchsia); color: white; border-radius: 50%; padding: 2px 8px; font-size: 11px; margin-left: 8px; }
+        
+        .order-table { width: 100%; border-collapse: collapse; }
+        .order-table th, .order-table td { padding: 12px; text-align: left; border-bottom: 1px solid rgba(255, 0, 255, 0.15); color: var(--text-white-dim); }
+        .order-table th { background: rgba(179, 68, 108, 0.3); font-weight: 700; color: var(--text-white); }
+        select.btn-small { 
+            padding: 6px 12px; 
+            background: rgba(30, 15, 40, 0.8); 
+            border: 1px solid rgba(255, 0, 255, 0.3); 
+            border-radius: 20px; 
+            color: var(--text-white);
+            cursor: pointer;
+        }
+        
+        .status-active { color: #6ee7b7; font-weight: 600; background: rgba(16,185,129,0.15); padding: 4px 12px; border-radius: 20px; display: inline-block; }
+        .status-inactive { color: #fca5a5; font-weight: 600; background: rgba(239,68,68,0.15); padding: 4px 12px; border-radius: 20px; display: inline-block; }
+        .role-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        
+        .stats-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px; }
+        .stat-summary-card { background: linear-gradient(135deg, rgba(179, 68, 108, 0.3) 0%, rgba(191, 0, 255, 0.3) 100%); padding: 15px; border-radius: 20px; text-align: center; border: 1px solid rgba(255, 0, 255, 0.2); backdrop-filter: blur(5px); }
+        .stat-summary-card .value { font-size: 28px; font-weight: bold; background: var(--main-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .stat-summary-card .label { font-size: 12px; color: var(--text-white-dim); }
+        
+        .filter-bar { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
+        .filter-select { padding: 8px 16px; border-radius: 30px; border: 1px solid rgba(255, 0, 255, 0.3); background: rgba(30, 15, 40, 0.8); cursor: pointer; color: var(--text-white); }
+        .search-input { padding: 8px 16px; border-radius: 30px; border: 1px solid rgba(255, 0, 255, 0.3); background: rgba(30, 15, 40, 0.8); width: 250px; color: var(--text-white); }
+        .search-input::placeholder { color: var(--text-white-dimmer); }
+        .total-count { margin-left: auto; font-size: 14px; color: var(--text-white-dim); }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .option-card {
+            background: rgba(30, 15, 40, 0.8);
+            border-radius: 20px;
+            padding: 15px;
+            border: 1px solid rgba(255, 0, 255, 0.2);
+            transition: all 0.3s;
+            color: var(--text-white);
+        }
+        .option-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--fuchsia); }
+        .option-icon { font-size: 40px; margin-bottom: 10px; }
+        .option-name { font-size: 16px; font-weight: bold; color: var(--text-white); }
+        .option-price { font-size: 18px; font-weight: bold; background: var(--main-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 8px 0; }
+        .option-description { font-size: 12px; color: var(--text-white-dim); }
+        .option-category { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 10px; margin-top: 8px; }
+        .category-effect { background: rgba(224, 231, 255, 0.2); color: #a78bfa; }
+        .category-frame { background: rgba(252, 231, 243, 0.2); color: #f9a8d4; }
+        .category-filter { background: rgba(209, 250, 229, 0.2); color: #6ee7b7; }
+        
+        @media (max-width: 768px) {
+            .form-row { grid-template-columns: 1fr; }
+            .emoji-list { grid-template-columns: repeat(6, 1fr); }
+            .filter-bar { flex-direction: column; align-items: stretch; }
+            .filter-bar .total-count { margin-left: 0; text-align: center; }
+            .search-input { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    
+    <script src="../js/animations-light.js"></script>
+    <script>
+        const API_URL = 'https://localhost:7042/api';
+        let currentToken = null;
+        let currentUser = null;
+        let currentOrderTab = 'all';
+        let allOrders = [];
+        let pendingOrders = [];
+        let photographers = [];
+        let userRoleFilter = 'all';
+        let userStatusFilter = 'all';
+        let userSearchQuery = '';
+        
+        // Загрузка эффектов из localStorage
+        let extraOptions = [];
+        
+        // Сертификаты
+        let certificates = [];
+        
+        // Эмодзи для выбора
+        const emojiCategories = {
+            '😀 Смайлы': ['😀','😃','😄','😁','😆','😅','😂','🤣','😊','😇','🙂','🙃','😉','😌','😍','🥰','😘','😗','😙','😚','😋','😛','😝','😜','🤪','🤨','🧐','🤓','😎','🤩','🥳','😏','😒','😞','😔','😟','😕','🙁','☹️','😣','😖','😫','😩','🥺','😢','😭','😤','😠','😡','🤬','🤯','😳','🥵','🥶','😱','😨','😰','😥','😓','🤗','🤔','🤭','🤫','🤥','😶','😐','😑','😬','🙄','😯','😦','😧','😮','😲','🥱','😴','🤤','😪','😵','🤐','🥴','🤢','🤮','🤧','😷','🤒','🤕','🤑','🤠','😈','👿','👹','👺','🤡','💩','👻','💀','☠️','👽','👾','🤖','🎃','😺','😸','😹','😻','😼','😽','🙀','😿','😾'],
+            '❤️ Сердца': ['❤️','🧡','💛','💚','💙','💜','🖤','🤍','🤎','💔','❣️','💕','💞','💓','💗','💖','💘','💝','💟','☮️','✝️','☪️','🕉️','☸️','✡️','🔯','🕎','☯️','☦️','🛐','⛎','♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓','🆔','⚛️','🉑','☢️','☣️','📴','📳','🈶','🈚','🈸','🈺','🈷️','✴️','🆚','💮','🉐','㊙️','㊗️','🈴','🈵','🈹','🈲','🅰️','🅱️','🆎','🆑','🅾️','🆘','❌','⭕','💢','♨️','‼️','⁉️','❓','❔','❕','❗','〰️','💱','💲','⚕️','♻️','⚜️','🔱','📛','🔰','⭕','✅','☑️','✔️','✖️','❌','❎','➕','➖','➗','➰','➿','〽️','✳️','✴️','❇️','™️','🔚','🔙','🔛','🔝','🔜','✔️','☑️','🔘','🔴','🟠','🟡','🟢','🔵','🟣','⚫','⚪','🟤','🔺','🔻','🔸','🔹','🔶','🔷','🔳','🔲','▪️','▫️','◾','◽','◼️','◻️','⬛','⬜','🟥','🟧','🟨','🟩','🟦','🟪','⬛','⬜','🟫','🔈','🔇','🔉','🔊','🔔','🔕','📣','📢','💬','💭','🗯️','♠️','♣️','♥️','♦️','🃏','🎴','🀄️','🕐','🕑','🕒','🕓','🕔','🕕','🕖','🕗','🕘','🕙','🕚','🕛','🕜','🕝','🕞','🕟','🕠','🕡','🕢','🕣','🕤','🕥','🕦','🕧'],
+            '🎁 Предметы': ['🎁','🎀','🎂','🎈','🎉','🎊','🎋','🎍','🎎','🎏','🎐','🎑','🎒','🎓','🎖️','🎗️','🎙️','🎚️','🎛️','🎞️','🎟️','🎠','🎡','🎢','🎣','🎤','🎥','🎦','🎧','🎨','🎩','🎪','🎫','🎬','🎭','🎮','🎯','🎰','🎱','🎲','🎳','🎴','🎵','🎶','🎷','🎸','🎹','🎺','🎻','🎼','🎽','🎾','🎿','🏀','🏁','🏂','🏃','🏄','🏆','🏇','🏈','🏉','🏊','🏋️','🏌️','🏍️','🏎️','🏏','🏐','🏑','🏒','🏓','🏔️','🏕️','🏖️','🏗️','🏘️','🏙️','🏚️','🏛️','🏜️','🏝️','🏞️','🏟️','🏠','🏡','🏢','🏣','🏤','🏥','🏦','🏧','🏨','🏩','🏪','🏫','🏬','🏭','🏮','🏯','🏰','🏳️','🏴','🏵️','🏷️','🏸','🏹','🏺','🏻','🏼','🏽','🏾','🏿','🐀','🐁','🐂','🐃','🐄','🐅','🐆','🐇','🐈','🐉','🐊','🐋','🐌','🐍','🐎','🐏','🐐','🐑','🐒','🐓','🐔','🐕','🐖','🐗','🐘','🐙','🐚','🐛','🐜','🐝','🐞','🐟','🐠','🐡','🐢','🐣','🐤','🐥','🐦','🐧','🐨','🐩','🐪','🐫','🐬','🐭','🐮','🐯','🐰','🐱','🐲','🐳','🐴','🐵','🐶','🐷','🐸','🐹','🐺','🐻','🐼','🐽','🐾','🐿️','👀','👂','👃','👄','👅','👆','👇','👈','👉','👊','👋','👌','👍','👎','👏','👐','👑','👒','👓','👔','👕','👖','👗','👘','👙','👚','👛','👜','👝','👞','👟','👠','👡','👢','👣','👤','👥','👦','👧','👨','👩','👪','👫','👬','👭','👮','👯','👰','👱','👲','👳','👴','👵','👶','👷','👸','👹','👺','👻','👼','👽','👾','👿','💀','💁','💂','💃','💄','💅','💆','💇','💈','💉','💊','💋','💌','💍','💎','💏','💐','💑','💒','💓','💔','💕','💖','💗','💘','💙','💚','💛','💜','💝','💞','💟','💠','💡','💢','💣','💤','💥','💦','💧','💨','💩','💪','💫','💬','💭','💮','💯','💰','💱','💲','💳','💴','💵','💶','💷','💸','💹','💺','💻','💼','💽','💾','💿','📀','📁','📂','📃','📄','📅','📆','📇','📈','📉','📊','📋','📌','📍','📎','📏','📐','📑','📒','📓','📔','📕','📖','📗','📘','📙','📚','📛','📜','📝','📞','📟','📠','📡','📢','📣','📤','📥','📦','📧','📨','📩','📪','📫','📬','📭','📮','📯','📰','📱','📲','📳','📴','📵','📶','📷','📸','📹','📺','📻','📼','📽️','📿','🔀','🔁','🔂','🔃','🔄','🔅','🔆','🔇','🔈','🔉','🔊','🔋','🔌','🔍','🔎','🔏','🔐','🔑','🔒','🔓','🔔','🔕','🔖','🔗','🔘','🔙','🔚','🔛','🔜','🔝','🔞','🔟','🔠','🔡','🔢','🔣','🔤','🔥','🔦','🔧','🔨','🔩','🔪','🔫','🔬','🔭','🔮','🔯','🔰','🔱','🔲','🔳','🔴','🔵','🔶','🔷','🔸','🔹','🔺','🔻','🔼','🔽','🕉️','🕊️','🕋','🕌','🕍','🕎','🕐','🕑','🕒','🕓','🕔','🕕','🕖','🕗','🕘','🕙','🕚','🕛','🕜','🕝','🕞','🕟','🕠','🕡','🕢','🕣','🕤','🕥','🕦','🕧','🕯️','🕰️','🕳️','🕴️','🕵️','🕶️','🕷️','🕸️','🕹️','🕺','🖇️','🖊️','🖋️','🖌️','🖍️','🖐️','🖕','🖖','🖤','🖥️','🖨️','🖱️','🖲️','🖼️','🗂️','🗃️','🗄️','🗑️','🗒️','🗓️','🗜️','🗝️','🗞️','🗡️','🗣️','🗨️','🗯️','🗳️','🗺️','🗻','🗼','🗽','🗾','🗿','😀','😁','😂','😃','😄','😅','😆','😇','😈','😉','😊','😋','😌','😍','😎','😏','😐','😑','😒','😓','😔','😕','😖','😗','😘','😙','😚','😛','😜','😝','😞','😟','😠','😡','😢','😣','😤','😥','😦','😧','😨','😩','😪','😫','😬','😭','😮','😯','😰','😱','😲','😳','😴','😵','😶','😷','😸','😹','😺','😻','😼','😽','😾','😿','🙀','🙁','🙂','🙃','🙄','🙅','🙆','🙇','🙈','🙉','🙊','🙋','🙌','🙍','🙎','🙏'],
+            '📸 Фото/Камера': ['📸','🎥','📹','📷','🎬','🎞️','🕹️','📽️','🔭','🔬','📡','🎥','🎦','📺','📻','🎙️','🎚️','🎛️','📀','💿','📼','🔊','🔉','🔈','🔇','📢','📣','🔔','🔕','🎵','🎶','🎤','🎧','📞','📟','📠','📨','📩','📪','📫','📮','🕯️','💡','🔦','🏮','📯','🪔','🧨','🎇','🎆','✨','⭐','🌟','🌠','🌈','☀️','☁️','⛅','🌤️','🌥️','🌦️','🌧️','🌨️','🌩️','🌪️','🌫️','🌬️','🌀','🌂','☂️','☔','⛱️','⚡','❄️','☃️','⛄','☄️','🔥','💧','🌊','💨','🌫️','🌡️','🧊','🍃','🍂','🍁','🍄','🌰','🌱','🌿','☘️','🍀','🎋','🎍','🌴','🌵','🌲','🌳','🌾','🌽','🍅','🍆','🍇','🍈','🍉','🍊','🍋','🍌','🍍','🥭','🍎','🍏','🍐','🍑','🍒','🍓','🥝','🍅','🥥','🥑','🍆','🥔','🥕','🌽','🌶️','🥒','🥬','🥦','🧄','🧅','🍄','🥜','🌰','🍞','🥐','🥖','🥨','🥯','🥞','🧇','🧀','🍖','🍗','🥩','🥓','🍔','🍟','🍕','🌭','🥪','🌮','🌯','🫔','🥙','🧆','🥚','🍳','🥘','🍲','🫕','🥣','🥗','🍿','🧈','🧂','🥫','🍱','🍘','🍙','🍚','🍛','🍜','🍝','🍠','🍢','🍣','🍤','🍥','🥮','🍡','🥟','🥠','🥡','🦀','🦞','🦐','🦑','🐙','🍦','🍧','🍨','🍩','🍪','🎂','🍰','🧁','🥧','🍫','🍬','🍭','🍮','🍯','🥛','🍼','🥤','🧃','🧉','🧊','🍶','🍷','🍸','🍹','🍺','🍻','🥂','🥃','🫖','🥄','🔪','🍴','🍽️','🥢','⚽','🏀','🏈','⚾','🥎','🎾','🏐','🏉','🥏','🎱','🪀','🏓','🏸','🏒','🏑','🥍','🏏','🥅','⛳','🏹','🎣','🥊','🥋','🎽','🛹','🛷','⛸️','🥌','🎿','⛷️','🏂','🪂','🏋️','🤼','🤸','🤹','🧘','🏄','🏊','🤽','🚣','🏇','🚴','🚵','🎯','🎳','🎮','🎰','🧩','♟️','🎲','♠️','♥️','♦️','♣️','🃏','🀄️','🎴','🔮','🎭','🎨','🪄'],
+            '🎨 Искусство': ['🎨','🖌️','🖍️','🖼️','🖌️','✏️','📝','📓','📔','📕','📖','📗','📘','📙','📚','📜','📄','📃','📑','📊','📈','📉','🗒️','🗓️','📆','📅','📇','🗃️','🗳️','🗄️','📁','📂','🗂️','📰','📓','📔','📒','📕','📗','📘','📙','📚','📖','🔖','🧾','🏷️','💰','💴','💵','💶','💷','💸','💳','🧾','✉️','📧','📨','📩','📤','📥','📦','📫','📪','📬','📭','📮','📯','📜','📃','📄','📑','📊','📈','📉','🗒️','🗓️','📆','📅','📇','🗃️','🗳️','🗄️','📁','📂','🗂️','🗞️','📰','📓','📔','📒','📕','📗','📘','📙','📚','📖','🔖','🧾','🏷️']
+        };
+        
+        // Функция для создания выпадающего списка эмодзи
+        function createEmojiPicker(inputId, previewId) {
+            return `
+                <div class="emoji-picker" id="emoji-picker-${previewId}">
+                    <div class="emoji-preview" onclick="toggleEmojiDropdown('${previewId}')">
+                        <span id="${previewId}_icon">🎁</span>
+                        <span>▼ Выбрать эмодзи</span>
+                    </div>
+                    <div class="emoji-dropdown" id="${previewId}_dropdown">
+                        <div class="emoji-categories" id="${previewId}_categories"></div>
+                        <div class="emoji-list" id="${previewId}_list"></div>
+                    </div>
+                    <input type="hidden" id="${inputId}" value="🎁">
+                </div>
+            `;
+        }
+        
+        function toggleEmojiDropdown(previewId) {
+            const dropdown = document.getElementById(`${previewId}_dropdown`);
+            document.querySelectorAll('.emoji-dropdown').forEach(d => {
+                if (d.id !== `${previewId}_dropdown`) {
+                    d.classList.remove('show');
+                }
+            });
+            dropdown.classList.toggle('show');
+        }
+        
+        function initEmojiPicker(previewId, inputId, currentEmoji = '🎁') {
+            const categoriesContainer = document.getElementById(`${previewId}_categories`);
+            const listContainer = document.getElementById(`${previewId}_list`);
+            const previewSpan = document.getElementById(`${previewId}_icon`);
+            const hiddenInput = document.getElementById(inputId);
+            
+            if (!categoriesContainer || !listContainer) return;
+            
+            previewSpan.textContent = currentEmoji;
+            hiddenInput.value = currentEmoji;
+            
+            const categoryNames = Object.keys(emojiCategories);
+            categoriesContainer.innerHTML = categoryNames.map((cat, idx) => `
+                <button class="emoji-cat-btn ${idx === 0 ? 'active' : ''}" onclick="switchEmojiCategory('${previewId}', '${cat.replace(/'/g, "\\'")}')">${cat}</button>
+            `).join('');
+            
+            renderEmojiList(previewId, categoryNames[0], hiddenInput, previewSpan);
+        }
+        
+        function switchEmojiCategory(previewId, category) {
+            const hiddenInput = document.getElementById(previewId === 'certIcon_preview' ? 'certIcon' : 'optIcon');
+            const previewSpan = document.getElementById(`${previewId}_icon`);
+            
+            const buttons = document.querySelectorAll(`#${previewId}_categories .emoji-cat-btn`);
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent === category) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            renderEmojiList(previewId, category, hiddenInput, previewSpan);
+        }
+        
+        function renderEmojiList(previewId, category, hiddenInput, previewSpan) {
+            const listContainer = document.getElementById(`${previewId}_list`);
+            const emojis = emojiCategories[category] || emojiCategories[Object.keys(emojiCategories)[0]];
+            
+            listContainer.innerHTML = emojis.map(emoji => `
+                <div class="emoji-item" onclick="selectEmoji('${previewId}', '${emoji}')">${emoji}</div>
+            `).join('');
+        }
+        
+        function selectEmoji(previewId, emoji) {
+            const previewSpan = document.getElementById(`${previewId}_icon`);
+            const hiddenInput = document.getElementById(previewId === 'certIcon_preview' ? 'certIcon' : 'optIcon');
+            const dropdown = document.getElementById(`${previewId}_dropdown`);
+            
+            previewSpan.textContent = emoji;
+            hiddenInput.value = emoji;
+            dropdown.classList.remove('show');
+        }
+        
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.emoji-picker')) {
+                document.querySelectorAll('.emoji-dropdown').forEach(d => {
+                    d.classList.remove('show');
+                });
+            }
+        });
+        
+        function loadExtraOptionsFromStorage() {
+            const saved = localStorage.getItem('photoStudioExtraOptions');
+            if (saved) {
+                try {
+                    extraOptions = JSON.parse(saved);
+                } catch(e) {
+                    extraOptions = [];
+                }
+            }
+            if (!extraOptions || extraOptions.length === 0) {
+                extraOptions = [
+                    { id: 1, name: "Винтажный эффект", description: "Старение фото, пленочный эффект", price: 500, icon: "📷", category: "effect", isAvailable: true },
+                    { id: 2, name: "Черно-белый", description: "Классическое черно-белое фото", price: 300, icon: "⚫", category: "effect", isAvailable: true },
+                    { id: 3, name: "Цветокоррекция", description: "Профессиональная цветокоррекция", price: 800, icon: "🎨", category: "effect", isAvailable: true },
+                    { id: 4, name: "Глянец", description: "Эффект глянцевой поверхности", price: 400, icon: "✨", category: "effect", isAvailable: true },
+                    { id: 5, name: "Рамка", description: "Декоративная рамка для фото", price: 200, icon: "🖼️", category: "frame", isAvailable: true },
+                    { id: 6, name: "Свечение", description: "Мягкое свечение вокруг объекта", price: 600, icon: "💫", category: "effect", isAvailable: true },
+                    { id: 7, name: "Пленка", description: "Эффект старой пленки", price: 450, icon: "🎞️", category: "effect", isAvailable: true },
+                    { id: 8, name: "Звездная пыль", description: "Эффект звездной пыли", price: 700, icon: "🌟", category: "effect", isAvailable: true },
+                    { id: 9, name: "Розовая дымка", description: "Романтический розовый эффект", price: 550, icon: "💖", category: "effect", isAvailable: true },
+                    { id: 10, name: "Акварель", description: "Эффект акварельного рисунка", price: 650, icon: "🎨", category: "effect", isAvailable: true }
+                ];
+                saveExtraOptionsToStorage();
+            }
+        }
+        
+        function saveExtraOptionsToStorage() {
+            localStorage.setItem('photoStudioExtraOptions', JSON.stringify(extraOptions));
+        }
+        
+        function saveCertificatesToStorage() {
+            localStorage.setItem('photoStudioCertificates', JSON.stringify(certificates));
+            window.localStorage.setItem('photoStudioCertificates', JSON.stringify(certificates));
+        }
+        
+        function getPaymentStatusText(status) {
+            const statuses = { 0: '⏳ Не оплачен', 1: '🔄 Частично оплачен', 2: '✅ Оплачен', 3: '↩️ Возврат' };
+            return statuses[status] || 'Неизвестно';
+        }
+        
+        function getPaymentStatusClass(status) {
+            const classes = { 0: 'payment-status-notpaid', 1: 'payment-status-partial', 2: 'payment-status-paid', 3: 'payment-status-notpaid' };
+            return classes[status] || 'payment-status-notpaid';
+        }
+        
+        function getPaymentMethodText(method) {
+            const methods = { 'card': '💳 Карта', 'cash': '💰 Наличные', 'online': '🏦 Онлайн перевод', 'installment': '📅 Рассрочка' };
+            return methods[method] || method || 'Не указан';
+        }
+        
+        function getRoleColor(role) {
+            const colors = { 'Admin': '#dc3545', 'Photographer': '#17a2b8', 'Client': '#28a745', 'Accountant': '#fd7e14' };
+            return colors[role] || '#6c757d';
+        }
+        
+        function getRoleIcon(role) {
+            const icons = { 'Admin': '👑', 'Photographer': '📸', 'Client': '👤', 'Accountant': '💰' };
+            return icons[role] || '👥';
+        }
+        
+        function getRoleName(role) {
+            const names = { 'Admin': 'Администратор', 'Photographer': 'Фотограф', 'Client': 'Клиент', 'Accountant': 'Бухгалтер' };
+            return names[role] || role;
+        }
+        
+        function checkAuth() {
+            const token = localStorage.getItem('token');
+            const user = localStorage.getItem('user');
+            if (!token || !user) {
+                window.location.href = 'login.html';
+                return false;
+            }
+            currentToken = token;
+            currentUser = JSON.parse(user);
+            if (currentUser.role !== 'Admin') {
+                alert('Доступ только для администратора!');
+                window.location.href = 'client-dashboard.html';
+                return false;
+            }
+            return true;
+        }
+        
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = 'login.html';
+        }
+        
+        async function apiRequest(endpoint, options = {}) {
+            const response = await fetch(`${API_URL}${endpoint}`, {
+                ...options,
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${currentToken}`, ...options.headers }
+            });
+            if (response.status === 401) logout();
+            return response;
+        }
+        
+        function showAlert(message, type = 'success') {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.textContent = message;
+            alertDiv.style.position = 'fixed';
+            alertDiv.style.top = '20px';
+            alertDiv.style.right = '20px';
+            alertDiv.style.zIndex = '9999';
+            alertDiv.style.padding = '15px';
+            alertDiv.style.borderRadius = '10px';
+            document.body.appendChild(alertDiv);
+            setTimeout(() => alertDiv.remove(), 3000);
+        }
+        
+        function getStatusName(status) {
+            const statuses = { 0: 'Ожидает', 1: 'Подтвержден', 2: 'В работе', 3: 'Выполнен', 4: 'Отменен' };
+            return statuses[status] || 'Неизвестно';
+        }
+        
+        function getStatusClass(status) {
+            const classes = { 0: 'status-pending', 1: 'status-confirmed', 2: 'status-progress', 3: 'status-completed', 4: 'status-cancelled' };
+            return classes[status] || 'status-pending';
+        }
+        
+        function renderNavbar() {
+            return `
+                <div class="navbar">
+                    <div class="navbar-content">
+                        <div class="navbar-logo">📸 PhotoStudio CRM - Админ панель</div>
+                        <div class="navbar-links">
+                            <a onclick="loadServices()">✨ Услуги</a>
+                            <a onclick="loadExtraOptions()">🎨 Эффекты</a>
+                            <a onclick="loadCertificates()">🎁 Сертификаты</a>
+                            <a onclick="loadPhotographers()">📷 Фотографы</a>
+                            <a onclick="loadOrders()">📋 Заказы</a>
+                            <a onclick="loadUsers()">👥 Пользователи</a>
+                        </div>
+                        <div class="user-info">
+                            <span class="user-name">👑 ${currentUser.firstName} (Admin)</span>
+                            <button class="logout-btn" onclick="logout()">Выйти</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="container" id="pageContent"><div class="spinner"></div></div>
+            `;
+        }
+        
+        // ============ УПРАВЛЕНИЕ УСЛУГАМИ ============
+        
+        async function loadServices() {
+            const content = document.getElementById('pageContent');
+            content.innerHTML = '<div class="spinner"></div>';
+            try {
+                const response = await fetch(`${API_URL}/services`);
+                const services = await response.json();
+                content.innerHTML = `
+                    <div class="card"><h2>✨ Управление услугами</h2>
+                    <button class="btn btn-add" onclick="showAddServiceModal()">+ Добавить услугу</button>
+                    <div class="table-responsive"><table class="order-table"><thead><tr><th>ID</th><th>Название</th><th>Цена</th><th>Длительность</th><th>Статус</th><th>Действия</th></tr></thead>
+                    <tbody>${services.map(service => `
+                        <tr>
+                            <td>${service.id}</td>
+                            <td>${service.name}</td>
+                            <td>${service.price} ₽}</td>
+                            <td>${service.durationMinutes} мин}</td>
+                            <td>${service.isActive ? '🟢 Активна' : '🔴 Неактивна'}</td>
+                            <td>
+                                <button class="btn-small btn-edit" onclick="editService(${service.id})">✏ Ред.</button>
+                                <button class="btn-small btn-delete" onclick="deleteService(${service.id})">🗑 Удалить</button>
+                            </td>
+                        </tr>
+                    `).join('')}</tbody></table></div></div>`;
+            } catch (error) { content.innerHTML = `<div class="alert alert-error">Ошибка: ${error.message}</div>`; }
+        }
+        
+        // ============ УПРАВЛЕНИЕ ЭФФЕКТАМИ ============
+        
+        function loadExtraOptions() {
+            const content = document.getElementById('pageContent');
+            content.innerHTML = `
+                <div class="card">
+                    <h2>🎨 Управление эффектами и дополнительными опциями</h2>
+                    <button class="btn btn-add" onclick="showAddOptionModal()">+ Добавить эффект</button>
+                    <div class="options-grid">
+                        ${extraOptions.map(opt => `
+                            <div class="option-card">
+                                <div class="option-icon">${opt.icon}</div>
+                                <div class="option-name">${opt.name}</div>
+                                <div class="option-price">${opt.price} ₽</div>
+                                <div class="option-description">${opt.description}</div>
+                                <span class="option-category category-${opt.category}">${opt.category === 'effect' ? '✨ Эффект' : opt.category === 'frame' ? '🖼️ Рамка' : '🎨 Фильтр'}</span>
+                                <div style="margin-top: 15px;">
+                                    <button class="btn-small btn-edit" onclick="editOption(${opt.id})">✏ Редактировать</button>
+                                    <button class="btn-small btn-delete" onclick="deleteOption(${opt.id})">🗑 Удалить</button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <p style="margin-top: 20px; font-size: 12px; color: var(--text-white-dim);">* Эти эффекты будут доступны клиентам при выборе услуг</p>
+                </div>
+            `;
+        }
+        
+        function showAddOptionModal() {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'flex';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <h3>➕ Добавить эффект/опцию</h3>
+                    <form id="addOptionForm">
+                        <div class="form-row">
+                            <div class="form-group"><label>Название</label><input type="text" id="optName" required placeholder="Винтажный эффект"></div>
+                            <div class="form-group"><label>Иконка (эмодзи)</label>
+                                ${createEmojiPicker('optIcon', 'optIcon_preview')}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group"><label>Цена (₽)</label><input type="number" id="optPrice" required placeholder="500"></div>
+                            <div class="form-group"><label>Категория</label>
+                                <select id="optCategory"><option value="effect">✨ Эффект</option><option value="frame">🖼️ Рамка</option><option value="filter">🎨 Фильтр</option></select>
+                            </div>
+                        </div>
+                        <div class="form-group"><label>Описание</label><textarea id="optDescription" rows="3" placeholder="Описание эффекта..."></textarea></div>
+                        <div class="btn-group"><button type="submit" class="btn btn-primary">Сохранить</button>
+                        <button type="button" class="btn btn-secondary" onclick="this.closest('.modal').remove()">Отмена</button></div>
+                    </form>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            
+            initEmojiPicker('optIcon_preview', 'optIcon', '✨');
+            
+            document.getElementById('addOptionForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const newOption = {
+                    id: Date.now(),
+                    name: document.getElementById('optName').value,
+                    icon: document.getElementById('optIcon').value,
+                    price: parseInt(document.getElementById('optPrice').value),
+                    category: document.getElementById('optCategory').value,
+                    description: document.getElementById('optDescription').value,
+                    isAvailable: true
+                };
+                extraOptions.push(newOption);
+                saveExtraOptionsToStorage();
+                showAlert('✅ Эффект добавлен!', 'success');
+                modal.remove();
+                loadExtraOptions();
+            });
+        }
+        
+        window.editOption = function(optId) {
+            const option = extraOptions.find(o => o.id === optId);
+            if (!option) return;
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'flex';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <h3>✏ Редактировать эффект</h3>
+                    <form id="editOptionForm">
+                        <div class="form-row">
+                            <div class="form-group"><label>Название</label><input type="text" id="optName" value="${option.name}" required></div>
+                            <div class="form-group"><label>Иконка</label>
+                                ${createEmojiPicker('optIcon', 'optIcon_preview')}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group"><label>Цена (₽)</label><input type="number" id="optPrice" value="${option.price}" required></div>
+                            <div class="form-group"><label>Категория</label>
+                                <select id="optCategory"><option value="effect" ${option.category === 'effect' ? 'selected' : ''}>✨ Эффект</option>
+                                <option value="frame" ${option.category === 'frame' ? 'selected' : ''}>🖼️ Рамка</option>
+                                <option value="filter" ${option.category === 'filter' ? 'selected' : ''}>🎨 Фильтр</option></select>
+                            </div>
+                        </div>
+                        <div class="form-group"><label>Описание</label><textarea id="optDescription" rows="3">${option.description || ''}</textarea></div>
+                        <div class="btn-group"><button type="submit" class="btn btn-primary">Сохранить</button>
+                        <button type="button" class="btn btn-secondary" onclick="this.closest('.modal').remove()">Отмена</button></div>
+                    </form>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            
+            initEmojiPicker('optIcon_preview', 'optIcon', option.icon);
+            
+            document.getElementById('editOptionForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                option.name = document.getElementById('optName').value;
+                option.icon = document.getElementById('optIcon').value;
+                option.price = parseInt(document.getElementById('optPrice').value);
+                option.category = document.getElementById('optCategory').value;
+                option.description = document.getElementById('optDescription').value;
+                saveExtraOptionsToStorage();
+                showAlert('✅ Эффект обновлен!', 'success');
+                modal.remove();
+                loadExtraOptions();
+            });
+        };
+        
+        window.deleteOption = function(optId) {
+            if (confirm('Удалить этот эффект?')) {
+                extraOptions = extraOptions.filter(o => o.id !== optId);
+                saveExtraOptionsToStorage();
+                showAlert('✅ Эффект удален!', 'success');
+                loadExtraOptions();
+            }
+        };
+        
+        // ============ УПРАВЛЕНИЕ СЕРТИФИКАТАМИ ============
+        
+        async function loadCertificates() {
+            const content = document.getElementById('pageContent');
+            content.innerHTML = '<div class="spinner"></div>';
+            try {
+                const response = await fetch(`${API_URL}/certificates`);
+                if (response.ok) {
+                    certificates = await response.json();
+                    saveCertificatesToStorage();
+                } else {
+                    throw new Error('API не доступен');
+                }
+            } catch (error) {
+                console.log('Бэкенд не доступен, загружаем из localStorage');
+                const saved = localStorage.getItem('photoStudioCertificates');
+                if (saved) {
+                    certificates = JSON.parse(saved);
+                } else {
+                    certificates = [
+                        { id: 1, name: "Светлая душа", price: 3000, icon: "✨", description: "Сертификат на 1 час фотосессии в любом зале. Включает 20 обработанных фото.", isAvailable: true },
+                        { id: 2, name: "Творческий вдох", price: 5000, icon: "🎨", description: "Сертификат на 2 часа фотосессии + 2 дополнительных эффекта бесплатно.", isAvailable: true },
+                        { id: 3, name: "Звездный час", price: 10000, icon: "⭐", description: "Сертификат на 3 часа фотосессии + все эффекты бесплатно + приоритетное бронирование.", isAvailable: true },
+                        { id: 4, name: "Королевская съемка", price: 15000, icon: "👑", description: "VIP сертификат: 4 часа съемки, все эффекты, ретушь всех фото, альбом.", isAvailable: true }
+                    ];
+                    saveCertificatesToStorage();
+                }
+            }
+            
+            renderCertificatesList();
+        }
+        
+        function renderCertificatesList() {
+            const content = document.getElementById('pageContent');
+            content.innerHTML = `
+                <div class="card">
+                    <h2>🎁 Управление подарочными сертификатами</h2>
+                    <button class="btn btn-add" onclick="showAddCertificateModal()">+ Добавить сертификат</button>
+                    <div class="options-grid">
+                        ${certificates.map(cert => `
+                            <div class="option-card">
+                                <div class="option-icon">${cert.icon || '🎁'}</div>
+                                <div class="option-name">${cert.name}</div>
+                                <div class="option-price">${cert.price} ₽</div>
+                                <div class="option-description">${cert.description}</div>
+                                <div style="margin-top: 15px;">
+                                    <button class="btn-small btn-edit" onclick="editCertificate(${cert.id})">✏ Редактировать</button>
+                                    <button class="btn-small btn-delete" onclick="deleteCertificate(${cert.id})">🗑 Удалить</button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <p style="margin-top: 20px; font-size: 12px; color: var(--text-white-dim);">* Сертификаты сохраняются в localStorage и отображаются на главной странице</p>
+                </div>
+            `;
+        }
+        
+        function showAddCertificateModal() {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'flex';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <h3>➕ Добавить подарочный сертификат</h3>
+                    <form id="addCertificateForm">
+                        <div class="form-row">
+                            <div class="form-group"><label>Название</label><input type="text" id="certName" required placeholder="Светлая душа"></div>
+                            <div class="form-group"><label>Иконка (эмодзи)</label>
+                                ${createEmojiPicker('certIcon', 'certIcon_preview')}
+                            </div>
+                        </div>
+                        <div class="form-group"><label>Цена (₽)</label><input type="number" id="certPrice" required placeholder="3000"></div>
+                        <div class="form-group"><label>Описание</label><textarea id="certDescription" rows="4" required placeholder="Полное описание сертификата..."></textarea></div>
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-primary">Сохранить</button>
+                            <button type="button" class="btn btn-secondary" onclick="this.closest('.modal').remove()">Отмена</button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            
+            initEmojiPicker('certIcon_preview', 'certIcon', '🎁');
+            
+            document.getElementById('addCertificateForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const newId = Math.max(...certificates.map(c => c.id), 0) + 1;
+                const newCert = {
+                    id: newId,
+                    name: document.getElementById('certName').value,
+                    icon: document.getElementById('certIcon').value,
+                    price: parseInt(document.getElementById('certPrice').value),
+                    description: document.getElementById('certDescription').value,
+                    isAvailable: true
+                };
+                
+                certificates.push(newCert);
+                saveCertificatesToStorage();
+                showAlert('✅ Сертификат добавлен!', 'success');
+                modal.remove();
+                loadCertificates();
+            });
+        }
+        
+        window.editCertificate = function(certId) {
+            const cert = certificates.find(c => c.id === certId);
+            if (!cert) return;
+            
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'flex';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <h3>✏ Редактировать сертификат</h3>
+                    <form id="editCertificateForm">
+                        <div class="form-row">
+                            <div class="form-group"><label>Название</label><input type="text" id="certName" value="${cert.name}" required></div>
+                            <div class="form-group"><label>Иконка</label>
+                                ${createEmojiPicker('certIcon', 'certIcon_preview')}
+                            </div>
+                        </div>
+                        <div class="form-group"><label>Цена (₽)</label><input type="number" id="certPrice" value="${cert.price}" required></div>
+                        <div class="form-group"><label>Описание</label><textarea id="certDescription" rows="4" required>${cert.description}</textarea></div>
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-primary">Сохранить</button>
+                            <button type="button" class="btn btn-secondary" onclick="this.closest('.modal').remove()">Отмена</button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            
+            initEmojiPicker('certIcon_preview', 'certIcon', cert.icon || '🎁');
+            
+            document.getElementById('editCertificateForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                cert.name = document.getElementById('certName').value;
+                cert.icon = document.getElementById('certIcon').value;
+                cert.price = parseInt(document.getElementById('certPrice').value);
+                cert.description = document.getElementById('certDescription').value;
+                
+                saveCertificatesToStorage();
+                showAlert('✅ Сертификат обновлен!', 'success');
+                modal.remove();
+                loadCertificates();
+            });
+        };
+        
+        window.deleteCertificate = function(certId) {
+            if (confirm('Удалить сертификат?')) {
+                certificates = certificates.filter(c => c.id !== certId);
+                saveCertificatesToStorage();
+                showAlert('✅ Сертификат удален!', 'success');
+                loadCertificates();
+            }
+        };
+        
+        // ============ УПРАВЛЕНИЕ ФОТОГРАФАМИ ============
+        
+        async function loadPhotographers() {
+            const content = document.getElementById('pageContent');
+            content.innerHTML = '<div class="spinner"></div>';
+            try {
+                const response = await apiRequest('/admin/users');
+                const users = await response.json();
+                const photographersList = users.filter(u => u.role === 'Photographer');
+                if (photographersList.length === 0) {
+                    content.innerHTML = `<div class="card"><h2>📷 Управление фотографами</h2>
+                    <button class="btn btn-add" onclick="showAddPhotographerModal()">+ Добавить фотографа</button>
+                    <p style="text-align:center;padding:40px; color: var(--text-white-dim);">Нет добавленных фотографов</p></div>`;
+                    return;
+                }
+                content.innerHTML = `<div class="card"><h2>📷 Управление фотографами</h2>
+                    <button class="btn btn-add" onclick="showAddPhotographerModal()">+ Добавить фотографа</button>
+                    <div class="table-responsive"><table class="order-table"><thead><tr><th>ID</th><th>Имя</th><th>Email</th><th>Телефон</th><th>Статус</th><th>Действия</th></tr></thead>
+                    <tbody>${photographersList.map(photog => `
+                        <tr>
+                            <td>${photog.id}</td>
+                            <td><strong>${photog.firstName} ${photog.lastName}</strong></td>
+                            <td>${photog.email}</td>
+                            <td>${photog.phone || '—'}</td>
+                            <td><span class="${photog.isActive ? 'status-active' : 'status-inactive'}">${photog.isActive ? '🟢 Активен' : '🔴 Неактивен'}</span></td>
+                            <td><button class="btn-small btn-delete" onclick="deletePhotographer(${photog.id})">🗑 Удалить</button></td>
+                        </tr>
+                    `).join('')}</tbody></table></div></div>`;
+            } catch (error) { content.innerHTML = `<div class="alert alert-error">Ошибка: ${error.message}</div>`; }
+        }
+        
+        // ============ УПРАВЛЕНИЕ ЗАКАЗАМИ ============
+        
+        async function loadOrders() {
+            const content = document.getElementById('pageContent');
+            content.innerHTML = '<div class="spinner"></div>';
+            try {
+                const usersResponse = await apiRequest('/admin/users');
+                const allUsers = await usersResponse.json();
+                photographers = allUsers.filter(u => u.role === 'Photographer' && u.isActive);
+                const ordersResponse = await apiRequest('/admin/orders');
+                allOrders = ordersResponse.ok ? await ordersResponse.json() : [];
+                const pendingResponse = await apiRequest('/admin/orders/pending');
+                pendingOrders = pendingResponse.ok ? await pendingResponse.json() : [];
+                const totalRevenue = Array.isArray(allOrders) ? allOrders.reduce((sum, o) => sum + (o.paymentStatus === 2 ? o.totalAmount : 0), 0) : 0;
+                const paidOrders = Array.isArray(allOrders) ? allOrders.filter(o => o.paymentStatus === 2).length : 0;
+                const unpaidOrders = Array.isArray(allOrders) ? allOrders.filter(o => o.paymentStatus === 0).length : 0;
+                const partiallyPaidOrders = Array.isArray(allOrders) ? allOrders.filter(o => o.paymentStatus === 1).length : 0;
+                content.innerHTML = `
+                    <div class="card"><h2>📋 Управление заказами</h2>
+                    <div class="stats-summary">
+                        <div class="stat-summary-card"><div class="value">${allOrders.length}</div><div class="label">Всего заказов</div></div>
+                        <div class="stat-summary-card"><div class="value">${totalRevenue} ₽</div><div class="label">Оплачено</div></div>
+                        <div class="stat-summary-card"><div class="value">${paidOrders}</div><div class="label">Оплаченных</div></div>
+                        <div class="stat-summary-card"><div class="value">${unpaidOrders}</div><div class="label">Неоплаченных</div></div>
+                        <div class="stat-summary-card"><div class="value">${partiallyPaidOrders}</div><div class="label">Частично оплаченных</div></div>
+                    </div>
+                    <div class="tabs"><div class="tab ${currentOrderTab === 'all' ? 'active' : ''}" onclick="switchOrderTab('all')">📋 Все заказы (${allOrders.length})</div>
+                    <div class="tab ${currentOrderTab === 'pending' ? 'active' : ''}" onclick="switchOrderTab('pending')">⏳ Ожидают назначения ${pendingOrders.length > 0 ? `<span class="count-badge">${pendingOrders.length}</span>` : ''}</div></div>
+                    <div id="ordersContainer"></div></div>`;
+                renderOrdersTab();
+            } catch (error) { content.innerHTML = `<div class="alert alert-error">Ошибка: ${error.message}</div>`; }
+        }
+        
+        window.switchOrderTab = function(tab) { currentOrderTab = tab; renderOrdersTab(); };
+        
+        function renderOrdersTab() {
+            const container = document.getElementById('ordersContainer');
+            const orders = currentOrderTab === 'all' ? allOrders : pendingOrders;
+            if (!orders || orders.length === 0) { container.innerHTML = '<p style="text-align: center; padding: 20px; color: var(--text-white-dim);">Нет заказов</p>'; return; }
+            let html = `<div class="table-responsive"><table class="order-table"><thead><tr><th>ID</th><th>Клиент</th><th>Дата</th><th>Сумма</th><th>Способ оплаты</th><th>Статус оплаты</th><th>Фотограф</th><th>Статус заказа</th><th>Действия</th></tr></thead><tbody>`;
+            orders.forEach(order => {
+                const canAssign = order.status === 0 && !order.photographerId;
+                const canCancel = order.status !== 3 && order.status !== 4;
+                const canMarkPaid = order.paymentStatus !== 2 && order.status !== 4;
+                html += `<tr>
+                    <td>${order.id}</td>
+                    <td>${order.client?.firstName || '?'} ${order.client?.lastName || ''}</td>
+                    <td>${new Date(order.orderDate).toLocaleDateString()}</td>
+                    <td>${order.totalAmount} ₽}</td>
+                    <td>${getPaymentMethodText(order.paymentMethod)}</td>
+                    <td><span class="${getPaymentStatusClass(order.paymentStatus)}">${getPaymentStatusText(order.paymentStatus)}</span></td>
+                    <td>${order.photographer?.firstName || order.photographerId || '—'}</td>
+                    <td><span class="${getStatusClass(order.status)}">${getStatusName(order.status)}</span></td>
+                    <td>
+                        ${canAssign ? `<select id="assign_${order.id}" class="btn-small"><option value="">Выбрать</option>${photographers.map(p => `<option value="${p.id}">${p.firstName} ${p.lastName}</option>`).join('')}</select><button class="btn-small btn-assign" onclick="assignOrder(${order.id})">📌 Назначить</button>` : ''}
+                        ${canMarkPaid ? `<button class="btn-small btn-mark-paid" onclick="markOrderAsPaid(${order.id})">💰 Оплачен</button>` : ''}
+                        ${canCancel ? `<button class="btn-small btn-cancel" onclick="cancelOrderByAdmin(${order.id})">❌ Отменить</button>` : ''}
+                    </td>
+                `;
+            });
+            html += `</tbody></table></div>`;
+            container.innerHTML = html;
+        }
+        
+        window.assignOrder = async function(orderId) {
+            const select = document.getElementById(`assign_${orderId}`);
+            const photographerId = select.value;
+            if (!photographerId) { showAlert('Выберите фотографа', 'error'); return; }
+            const response = await apiRequest(`/admin/orders/${orderId}/assign/${photographerId}`, { method: 'POST' });
+            if (response.ok) { showAlert('✅ Заказ назначен', 'success'); loadOrders(); }
+            else { showAlert('❌ Ошибка назначения', 'error'); }
+        };
+        
+        window.cancelOrderByAdmin = async function(orderId) {
+            if (!confirm('Отменить этот заказ?')) return;
+            const response = await apiRequest(`/admin/orders/${orderId}/cancel`, { method: 'PUT' });
+            if (response.ok) { showAlert('✅ Заказ отменен', 'success'); loadOrders(); }
+            else { showAlert('❌ Ошибка отмены', 'error'); }
+        };
+        
+        window.markOrderAsPaid = async function(orderId) {
+            if (!confirm('Отметить заказ как оплаченный?')) return;
+            const response = await apiRequest(`/admin/orders/${orderId}/mark-paid`, { method: 'PUT' });
+            if (response.ok) { showAlert('✅ Заказ отмечен как оплаченный', 'success'); loadOrders(); }
+            else { showAlert('❌ Ошибка', 'error'); }
+        };
+        
+        // ============ ПРОСМОТР ПОЛЬЗОВАТЕЛЕЙ ============
+        
+        function filterUsers(users) {
+            return users.filter(user => {
+                if (userRoleFilter !== 'all' && user.role !== userRoleFilter) return false;
+                if (userStatusFilter !== 'all') { const isActive = userStatusFilter === 'active'; if (user.isActive !== isActive) return false; }
+                if (userSearchQuery) { const query = userSearchQuery.toLowerCase(); const fullName = `${user.firstName} ${user.lastName}`.toLowerCase(); const email = user.email.toLowerCase(); if (!fullName.includes(query) && !email.includes(query)) return false; }
+                return true;
+            });
+        }
+        
+        async function loadUsers() {
+            const content = document.getElementById('pageContent');
+            content.innerHTML = '<div class="spinner"></div>';
+            try {
+                const response = await apiRequest('/admin/users');
+                let allUsers = await response.json();
+                const filteredUsers = filterUsers(allUsers);
+                const totalClients = allUsers.filter(u => u.role === 'Client').length;
+                const totalPhotographers = allUsers.filter(u => u.role === 'Photographer').length;
+                const totalAdmins = allUsers.filter(u => u.role === 'Admin').length;
+                const totalAccountants = allUsers.filter(u => u.role === 'Accountant').length;
+                const activeUsers = allUsers.filter(u => u.isActive).length;
+                const inactiveUsers = allUsers.filter(u => !u.isActive).length;
+                content.innerHTML = `<div class="card"><h2>👥 Управление пользователями</h2>
+                    <div class="stats-summary">
+                        <div class="stat-summary-card"><div class="value">${allUsers.length}</div><div class="label">Всего пользователей</div></div>
+                        <div class="stat-summary-card"><div class="value">${totalClients}</div><div class="label">👤 Клиенты</div></div>
+                        <div class="stat-summary-card"><div class="value">${totalPhotographers}</div><div class="label">📸 Фотографы</div></div>
+                        <div class="stat-summary-card"><div class="value">${totalAdmins}</div><div class="label">👑 Администраторы</div></div>
+                        <div class="stat-summary-card"><div class="value">${totalAccountants}</div><div class="label">💰 Бухгалтеры</div></div>
+                        <div class="stat-summary-card"><div class="value">${activeUsers}</div><div class="label">🟢 Активные</div></div>
+                        <div class="stat-summary-card"><div class="value">${inactiveUsers}</div><div class="label">🔴 Неактивные</div></div>
+                    </div>
+                    <div class="filter-bar">
+                        <select id="roleFilter" class="filter-select" onchange="applyFilters()"><option value="all">Все роли</option><option value="Client">👤 Клиенты</option><option value="Photographer">📸 Фотографы</option><option value="Admin">👑 Администраторы</option><option value="Accountant">💰 Бухгалтеры</option></select>
+                        <select id="statusFilter" class="filter-select" onchange="applyFilters()"><option value="all">Все статусы</option><option value="active">🟢 Активные</option><option value="inactive">🔴 Неактивные</option></select>
+                        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Поиск..." onkeyup="applyFilters()">
+                        <button class="btn-add" onclick="showAddUserModal()" style="margin:0; padding:8px 20px;">+ Добавить пользователя</button>
+                        <div class="total-count">Найдено: ${filteredUsers.length}</div>
+                    </div>
+                    <div class="table-responsive"><table class="order-table"><thead><tr><th>ID</th><th>Имя</th><th>Email</th><th>Телефон</th><th>Роль</th><th>Дата регистрации</th><th>Статус</th><th>Действия</th></tr></thead>
+                    <tbody>${filteredUsers.map(user => `<tr>
+                        <td>${user.id}</td>
+                        <td><strong>${user.firstName} ${user.lastName}</strong></td>
+                        <td>${user.email}</td>
+                        <td>${user.phone || '—'}</td>
+                        <td><span class="role-badge" style="background:${getRoleColor(user.role)};color:white;">${getRoleIcon(user.role)} ${getRoleName(user.role)}</span></td>
+                        <td>${user.createdAt ? new Date(user.createdAt).toLocaleDateString() : '—'}</td>
+                        <td><span class="${user.isActive ? 'status-active' : 'status-inactive'}">${user.isActive ? '🟢 Активен' : '🔴 Неактивен'}</span></td>
+                        <td><button class="btn-small ${user.isActive ? 'btn-delete' : 'btn-add'}" onclick="toggleUserStatus(${user.id}, ${!user.isActive})">${user.isActive ? '🔒 Заблокировать' : '✅ Активировать'}</button>
+                        <button class="btn-small btn-delete" onclick="deleteUser(${user.id})">🗑 Удалить</button></td>
+                    `).join('')}</tbody></table></div></div>`;
+            } catch (error) { content.innerHTML = `<div class="alert alert-error">Ошибка: ${error.message}</div>`; }
+        }
+        
+        window.applyFilters = function() {
+            userRoleFilter = document.getElementById('roleFilter').value;
+            userStatusFilter = document.getElementById('statusFilter').value;
+            userSearchQuery = document.getElementById('searchInput').value;
+            loadUsers();
+        };
+        
+        window.showAddUserModal = function() {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'flex';
+            modal.innerHTML = `<div class="modal-content"><h3>➕ Добавить пользователя</h3>
+                <form id="addUserForm"><div class="form-row"><div class="form-group"><label>Имя *</label><input type="text" id="firstName" required></div>
+                <div class="form-group"><label>Фамилия *</label><input type="text" id="lastName" required></div></div>
+                <div class="form-group"><label>Email *</label><input type="email" id="email" required></div>
+                <div class="form-group"><label>Пароль *</label><input type="password" id="password" required></div>
+                <div class="form-group"><label>Телефон</label><input type="text" id="phone"></div>
+                <div class="form-group"><label>Роль *</label><select id="role" required><option value="Client">👤 Клиент</option><option value="Photographer">📸 Фотограф</option><option value="Accountant">💰 Бухгалтер</option><option value="Admin">👑 Администратор</option></select></div>
+                <div class="btn-group"><button type="submit" class="btn btn-primary">Сохранить</button><button type="button" class="btn btn-secondary" onclick="this.closest('.modal').remove()">Отмена</button></div></form></div>`;
+            document.body.appendChild(modal);
+            document.getElementById('addUserForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const user = { email: document.getElementById('email').value, password: document.getElementById('password').value, firstName: document.getElementById('firstName').value, lastName: document.getElementById('lastName').value, phone: document.getElementById('phone').value, role: document.getElementById('role').value };
+                const response = await apiRequest('/admin/users', { method: 'POST', body: JSON.stringify(user) });
+                if (response.ok) { showAlert('✅ Пользователь добавлен!', 'success'); modal.remove(); loadUsers(); }
+                else { showAlert('❌ Ошибка добавления', 'error'); }
+            });
+        };
+        
+        window.deleteUser = async function(userId) {
+            if (confirm('Удалить пользователя?')) {
+                const response = await apiRequest(`/admin/users/${userId}`, { method: 'DELETE' });
+                if (response.ok) { showAlert('✅ Пользователь удален!', 'success'); loadUsers(); }
+                else { showAlert('❌ Ошибка удаления', 'error'); }
+            }
+        };
+        
+        window.toggleUserStatus = async function(userId, activate) {
+            const response = await apiRequest(`/admin/users/${userId}/activate`, { method: 'PUT' });
+            if (response.ok) { showAlert(`✅ Пользователь ${activate ? 'активирован' : 'заблокирован'}!`, 'success'); loadUsers(); }
+            else { showAlert('❌ Ошибка изменения статуса', 'error'); }
+        };
+        
+        function showAddServiceModal() {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'flex';
+            modal.innerHTML = `<div class="modal-content"><h3>➕ Добавить услугу</h3>
+                <form id="addServiceForm"><div class="form-group"><label>Название</label><input type="text" id="name" required></div>
+                <div class="form-group"><label>Описание</label><textarea id="description" rows="3"></textarea></div>
+                <div class="form-row"><div class="form-group"><label>Цена (₽)</label><input type="number" id="price" required></div>
+                <div class="form-group"><label>Длительность (мин)</label><input type="number" id="duration" required></div></div>
+                <div class="form-group"><label><input type="checkbox" id="isActive" checked> Активна</label></div>
+                <div class="btn-group"><button type="submit" class="btn btn-primary">Сохранить</button>
+                <button type="button" class="btn btn-secondary" onclick="this.closest('.modal').remove()">Отмена</button></div></form></div>`;
+            document.body.appendChild(modal);
+            document.getElementById('addServiceForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const service = { name: document.getElementById('name').value, description: document.getElementById('description').value, price: parseFloat(document.getElementById('price').value), durationMinutes: parseInt(document.getElementById('duration').value), isActive: document.getElementById('isActive').checked };
+                const response = await apiRequest('/services', { method: 'POST', body: JSON.stringify(service) });
+                if (response.ok) { showAlert('✅ Услуга добавлена!', 'success'); modal.remove(); loadServices(); }
+                else { showAlert('❌ Ошибка добавления', 'error'); }
+            });
+        }
+        
+        window.editService = async function(id) {
+            try {
+                const response = await fetch(`${API_URL}/services/${id}`);
+                const service = await response.json();
+                const modal = document.createElement('div');
+                modal.className = 'modal';
+                modal.style.display = 'flex';
+                modal.innerHTML = `<div class="modal-content"><h3>✏ Редактировать услугу</h3>
+                    <form id="editServiceForm"><div class="form-group"><label>Название</label><input type="text" id="name" value="${service.name}" required></div>
+                    <div class="form-group"><label>Описание</label><textarea id="description" rows="3">${service.description || ''}</textarea></div>
+                    <div class="form-row"><div class="form-group"><label>Цена (₽)</label><input type="number" id="price" value="${service.price}" required></div>
+                    <div class="form-group"><label>Длительность (мин)</label><input type="number" id="duration" value="${service.durationMinutes}" required></div></div>
+                    <div class="form-group"><label><input type="checkbox" id="isActive" ${service.isActive ? 'checked' : ''}> Активна</label></div>
+                    <div class="btn-group"><button type="submit" class="btn btn-primary">Сохранить</button>
+                    <button type="button" class="btn btn-secondary" onclick="this.closest('.modal').remove()">Отмена</button></div></form></div>`;
+                document.body.appendChild(modal);
+                document.getElementById('editServiceForm').addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const updatedService = { id: id, name: document.getElementById('name').value, description: document.getElementById('description').value, price: parseFloat(document.getElementById('price').value), durationMinutes: parseInt(document.getElementById('duration').value), isActive: document.getElementById('isActive').checked };
+                    const response = await apiRequest(`/services/${id}`, { method: 'PUT', body: JSON.stringify(updatedService) });
+                    if (response.ok) { showAlert('✅ Услуга обновлена!', 'success'); modal.remove(); loadServices(); }
+                    else { showAlert('❌ Ошибка обновления', 'error'); }
+                });
+            } catch (error) { showAlert('Ошибка загрузки услуги', 'error'); }
+        };
+        
+        window.deleteService = async function(id) {
+            if (confirm('Удалить услугу?')) {
+                const response = await apiRequest(`/services/${id}`, { method: 'DELETE' });
+                if (response.ok) { showAlert('✅ Услуга удалена!', 'success'); loadServices(); }
+                else { showAlert('❌ Ошибка удаления', 'error'); }
+            }
+        };
+        
+        function showAddPhotographerModal() {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'flex';
+            modal.innerHTML = `<div class="modal-content"><h3>➕ Добавить фотографа</h3>
+                <form id="addPhotographerForm"><div class="form-row"><div class="form-group"><label>Имя</label><input type="text" id="firstName" required></div>
+                <div class="form-group"><label>Фамилия</label><input type="text" id="lastName" required></div></div>
+                <div class="form-group"><label>Email</label><input type="email" id="email" required></div>
+                <div class="form-group"><label>Пароль</label><input type="password" id="password" required></div>
+                <div class="form-group"><label>Телефон</label><input type="text" id="phone"></div>
+                <div class="btn-group"><button type="submit" class="btn btn-primary">Сохранить</button>
+                <button type="button" class="btn btn-secondary" onclick="this.closest('.modal').remove()">Отмена</button></div></form></div>`;
+            document.body.appendChild(modal);
+            document.getElementById('addPhotographerForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const photographer = { email: document.getElementById('email').value, password: document.getElementById('password').value, firstName: document.getElementById('firstName').value, lastName: document.getElementById('lastName').value, phone: document.getElementById('phone').value, role: 'Photographer' };
+                const response = await apiRequest('/admin/users', { method: 'POST', body: JSON.stringify(photographer) });
+                if (response.ok) { showAlert('✅ Фотограф добавлен!', 'success'); modal.remove(); loadPhotographers(); }
+                else { showAlert('❌ Ошибка добавления', 'error'); }
+            });
+        }
+        
+        window.deletePhotographer = async function(id) {
+            if (confirm('Удалить фотографа?')) {
+                const response = await apiRequest(`/admin/users/${id}`, { method: 'DELETE' });
+                if (response.ok) { showAlert('✅ Фотограф удален!', 'success'); loadPhotographers(); }
+                else { showAlert('❌ Ошибка удаления', 'error'); }
+            }
+        };
+        
+        // Инициализация
+        loadExtraOptionsFromStorage();
+        
+        window.toggleEmojiDropdown = toggleEmojiDropdown;
+        window.switchEmojiCategory = switchEmojiCategory;
+        window.selectEmoji = selectEmoji;
+        window.loadServices = loadServices;
+        window.loadExtraOptions = loadExtraOptions;
+        window.loadCertificates = loadCertificates;
+        window.loadPhotographers = loadPhotographers;
+        window.loadOrders = loadOrders;
+        window.loadUsers = loadUsers;
+        
+        if (checkAuth()) {
+            document.getElementById('app').innerHTML = renderNavbar();
+            loadServices();
+        }
+    </script>
+</body>
+</html>

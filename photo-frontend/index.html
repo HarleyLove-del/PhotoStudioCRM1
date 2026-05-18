@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фотостудия | Профессиональная фотосъемка</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css">
+    <style>
+        /* ========== ОБЩИЕ СТИЛИ ДЛЯ ГЛАВНОЙ СТРАНИЦЫ (НЕОНОВАЯ ТЕМА) ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Inter', 'Poppins', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-white);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        .container-landing {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Анимация появления элементов при скролле */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+        .delay-5 { transition-delay: 0.5s; }
+        
+        /* ========== НАВИГАЦИЯ (НЕОНОВАЯ) ========== */
+        .navbar-landing {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(30, 15, 40, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: var(--shadow-sm);
+            border-bottom: 1px solid rgba(255, 0, 255, 0.3);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+            text-shadow: var(--neon-text-shadow);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-white);
+            transition: all 0.3s;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .nav-links a:hover {
+            color: var(--fuchsia);
+            text-shadow: var(--neon-text-shadow);
+        }
+        
+        .btn-login {
+            background: var(--main-gradient);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 0, 255, 0.3);
+        }
+        
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+            border-color: var(--fuchsia);
+        }
+        
+        /* ========== ГЕРОЙ СЕКЦИЯ С АНИМИРОВАННОЙ ЛЕНТОЙ ФОТОГРАФИЙ ========== */
+        .hero {
+            min-height: 100vh;
+            background: var(--bg-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 20px 60px;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        /* Контейнер для анимированной ленты фотографий */
+        .photo-strip-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        /* Анимированная лента фотографий */
+        .photo-strip {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            display: flex;
+            gap: 25px;
+            animation: scrollPhotos 50s linear infinite;
+            white-space: nowrap;
+        }
+        
+        /* Вторая лента для бесшовности */
+        .photo-strip.clone {
+            animation: scrollPhotos2 50s linear infinite;
+        }
+        
+        @keyframes scrollPhotos {
+            0% { transform: translateY(-50%) translateX(0); }
+            100% { transform: translateY(-50%) translateX(-50%); }
+        }
+        
+        @keyframes scrollPhotos2 {
+            0% { transform: translateY(-50%) translateX(50%); }
+            100% { transform: translateY(-50%) translateX(0); }
+        }
+        
+        /* Элемент фотографии в ленте */
+        .photo-item {
+            width: 320px;
+            height: 450px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transition: all 0.3s;
+            flex-shrink: 0;
+            opacity: 0.9;
+            border: 2px solid rgba(255, 0, 255, 0.3);
+        }
+        
+        .photo-item:hover {
+            transform: scale(1.05);
+            opacity: 1;
+            box-shadow: var(--shadow-glow);
+            border-color: var(--fuchsia);
+        }
+        
+        /* Затемнение фона для читаемости текста */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-content h1 {
+            font-size: 56px;
+            font-weight: 800;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            text-shadow: var(--neon-text-shadow);
+        }
+        
+        .hero-content p {
+            font-size: 20px;
+            color: var(--text-white);
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 0 0 2px rgba(0,0,0,0.5);
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary-landing {
+            background: var(--main-gradient);
+            color: white;
+            padding: 14px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(255, 0, 255, 0.3);
+        }
+        
+        .btn-primary-landing:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
+            border-color: var(--fuchsia);
+        }
+        
+        .btn-outline-landing {
+            background: transparent;
+            border: 2px solid var(--fuchsia);
+            color: var(--text-white);
+            padding: 12px 33px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-outline-landing:hover {
+            background: rgba(255, 0, 255, 0.15);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
+            border-color: var(--neon-purple);
+        }
+        
+        /* ========== ЗАЛЫ - КАРУСЕЛЬ ========== */
+        .section {
+            padding: 80px 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: var(--neon-text-shadow);
+        }
+        
+        .rooms-carousel {
+            background: rgba(30, 15, 40, 0.6);
+            padding: 60px 0;
+            border-top: 1px solid rgba(255, 0, 255, 0.2);
+            border-bottom: 1px solid rgba(255, 0, 255, 0.2);
+        }
+        
+        .rooms-swiper {
+            width: 100%;
+            padding: 20px 0 50px;
+        }
+        
+        .rooms-swiper .swiper-slide {
+            width: 280px;
+            background: rgba(30, 15, 40, 0.8);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 0, 255, 0.2);
+        }
+        
+        .rooms-swiper .swiper-slide:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-glow);
+            border-color: var(--fuchsia);
+        }
+        
+        .room-card {
+            background: transparent;
+            overflow: hidden;
+        }
+        
+        .room-image {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            transition: all 0.3s;
+        }
+        
+        /* Цвета залов в неоновой теме */
+        .room-white { background: linear-gradient(135deg, #ffffff20 0%, #f5f5f520 100%); }
+        .room-beige { background: linear-gradient(135deg, #f5e6d320 0%, #ecd9c620 100%); }
+        .room-red { background: linear-gradient(135deg, #dc262620 0%, #b91c1c20 100%); }
+        .room-white2 { background: linear-gradient(135deg, #ffffff20 0%, #e8e8e820 100%); }
+        .room-black { background: linear-gradient(135deg, #33333340 0%, #1a1a1a40 100%); }
+        .room-raspberry { background: linear-gradient(135deg, #e91e6320 0%, #c2185b20 100%); }
+        .room-lavender { background: linear-gradient(135deg, #e6e6fa20 0%, #d8b4e220 100%); }
+        .room-fuchsia { background: linear-gradient(135deg, #ff69b420 0%, #ff149320 100%); }
+        .room-mint { background: linear-gradient(135deg, #98ff9820 0%, #00fa9a20 100%); }
+        .room-peach { background: linear-gradient(135deg, #ffdab920 0%, #ffb34720 100%); }
+        .room-lilac { background: linear-gradient(135deg, #c8a2c820 0%, #dda0dd20 100%); }
+        .room-turquoise { background: linear-gradient(135deg, #40e0d020 0%, #00ced120 100%); }
+        .room-coral { background: linear-gradient(135deg, #ff7f5020 0%, #ff634720 100%); }
+        .room-skyblue { background: linear-gradient(135deg, #87ceeb20 0%, #00bfff20 100%); }
+        .room-mustard { background: linear-gradient(135deg, #ffdb5820 0%, #ffd70020 100%); }
+        .room-sage { background: linear-gradient(135deg, #9cae8820 0%, #8ba37220 100%); }
+        
+        .room-content {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .room-content h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: var(--text-white);
+        }
+        
+        .room-content p {
+            color: var(--text-white);
+            font-size: 13px;
+            opacity: 0.9;
+        }
+        
+        .room-location {
+            display: inline-block;
+            background: rgba(255, 0, 255, 0.15);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            margin-top: 8px;
+            color: var(--fuchsia-light);
+        }
+        
+        /* ========== ПРОЦЕСС СЪЕМКИ ========== */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .process-step {
+            padding: 30px;
+            background: rgba(30, 15, 40, 0.8);
+            border-radius: 20px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(255, 0, 255, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .process-step:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-glow);
+            border-color: var(--fuchsia);
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--main-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            box-shadow: var(--shadow-glow);
+        }
+        
+        .process-step h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--text-white);
+        }
+        
+        .process-step p {
+            color: var(--text-white);
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        
+        /* ========== КАРУСЕЛЬ УСЛУГ ========== */
+        .services-carousel {
+            padding: 60px 0;
+            background: rgba(30, 15, 40, 0.4);
+        }
+        
+        .swiper {
+            width: 100%;
+            padding: 20px 0 50px;
+        }
+        
+        .swiper-slide {
+            width: 320px;
+            background: rgba(30, 15, 40, 0.8);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+            position: relative;
+            border: 1px solid rgba(255, 0, 255, 0.2);
+        }
+        
+        .swiper-slide:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-glow);
+            border-color: var(--fuchsia);
+        }
+        
+        .card-flower {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0.15;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .card-flower-1 { top: 10px; right: 10px; animation: spinSlow 20s linear infinite; }
+        .card-flower-2 { bottom: 10px; left: 10px; animation: spinSlow 15s linear infinite reverse; }
+        .card-heart-1 { bottom: 20px; right: 15px; animation: pulseHeart 2s ease-in-out infinite; }
+        
+        @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulseHeart {
+            0%, 100% { transform: scale(1); opacity: 0.15; }
+            50% { transform: scale(1.2); opacity: 0.25; }
+        }
+        
+        .service-card {
+            position: relative;
+            background: transparent;
+            z-index: 2;
+        }
+        
+        .service-card-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--crimson) 0%, var(--fuchsia) 50%, var(--neon-purple) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translate(-30%, -30%) rotate(0deg); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: translate(30%, 30%) rotate(180deg); opacity: 0; }
+        }
+        
+        .service-card-content {
+            padding: 20px;
+        }
+        
+        .service-card-content h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--text-white);
+        }
+        
+        .service-card-content p {
+            color: var(--text-white);
+            font-size: 13px;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            opacity: 0.9;
+        }
+        
+        .service-price {
+            font-size: 22px;
+            font-weight: bold;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .service-duration {
+            float: right;
+            color: var(--text-white);
+            font-size: 13px;
+            margin-top: 5px;
+            opacity: 0.9;
+        }
+        
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: var(--fuchsia);
+            background: rgba(30, 15, 40, 0.8);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .swiper-button-next:after,
+        .swiper-button-prev:after {
+            font-size: 18px;
+        }
+        
+        .swiper-pagination-bullet {
+            background: rgba(255, 0, 255, 0.5);
+        }
+        
+        .swiper-pagination-bullet-active {
+            background: var(--fuchsia);
+        }
+        
+        /* ========== ЭФФЕКТЫ И ОБРАБОТКА ========== */
+        .effects-section {
+            padding: 60px 0;
+            background: rgba(30, 15, 40, 0.6);
+            border-top: 1px solid rgba(255, 0, 255, 0.2);
+            border-bottom: 1px solid rgba(255, 0, 255, 0.2);
+        }
+        
+        .effects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .effect-card {
+            background: rgba(30, 15, 40, 0.8);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 0, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .effect-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-glow);
+            border-color: var(--fuchsia);
+        }
+        
+        .effect-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 0, 255, 0.05) 0%, transparent 70%);
+            transition: all 0.5s;
+        }
+        
+        .effect-card:hover::before {
+            transform: scale(1.2);
+        }
+        
+        .effect-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        .effect-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-white);
+            margin-bottom: 10px;
+        }
+        
+        .effect-description {
+            font-size: 13px;
+            color: var(--text-white);
+            margin-bottom: 15px;
+            line-height: 1.4;
+            opacity: 0.9;
+        }
+        
+        .effect-price {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--fuchsia);
+            display: inline-block;
+            background: rgba(255, 0, 255, 0.15);
+            padding: 5px 15px;
+            border-radius: 30px;
+        }
+        
+        .effect-category {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            margin-bottom: 10px;
+        }
+        
+        .category-effect {
+            background: rgba(224, 231, 255, 0.2);
+            color: #a78bfa;
+        }
+        
+        .category-frame {
+            background: rgba(252, 231, 243, 0.2);
+            color: #f9a8d4;
+        }
+        
+        .category-filter {
+            background: rgba(209, 250, 229, 0.2);
+            color: #6ee7b7;
+        }
+        
+        /* ========== ПОДАРОЧНЫЕ СЕРТИФИКАТЫ ========== */
+        .certificates-section {
+            padding: 60px 0;
+            background: rgba(30, 15, 40, 0.4);
+        }
+        
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .certificate-card {
+            background: rgba(30, 15, 40, 0.8);
+            border-radius: 24px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255, 0, 255, 0.2);
+            box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(5px);
+        }
+        
+        .certificate-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-glow);
+            border-color: var(--fuchsia);
+        }
+        
+        .certificate-card::before {
+            content: '🎁';
+            position: absolute;
+            font-size: 120px;
+            opacity: 0.05;
+            bottom: -30px;
+            right: -30px;
+            pointer-events: none;
+        }
+        
+        .certificate-icon {
+            font-size: 64px;
+            margin-bottom: 15px;
+        }
+        
+        .certificate-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--text-white);
+            margin-bottom: 10px;
+        }
+        
+        .certificate-price {
+            font-size: 28px;
+            font-weight: bold;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 15px 0;
+        }
+        
+        .certificate-price small {
+            font-size: 14px;
+            font-weight: normal;
+            color: var(--text-white);
+            opacity: 0.8;
+        }
+        
+        .certificate-description {
+            font-size: 14px;
+            color: var(--text-white);
+            line-height: 1.5;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .certificate-buy-btn {
+            background: var(--main-gradient);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            border: 1px solid rgba(255, 0, 255, 0.3);
+        }
+        
+        .certificate-buy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-glow);
+            border-color: var(--fuchsia);
+        }
+        
+        /* Модальное окно для сертификата */
+        .certificate-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(8px);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        
+        .certificate-modal-content {
+            background: var(--bg-card);
+            border-radius: 30px;
+            max-width: 500px;
+            width: 90%;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            animation: modalFadeIn 0.3s ease;
+            border: 1px solid rgba(255, 0, 255, 0.3);
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .certificate-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--text-white);
+            transition: all 0.3s;
+            opacity: 0.7;
+        }
+        
+        .certificate-modal-close:hover {
+            color: var(--fuchsia);
+            opacity: 1;
+        }
+        
+        .certificate-modal-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+        
+        .certificate-modal-title {
+            font-size: 28px;
+            font-weight: bold;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+        
+        .certificate-modal-price {
+            font-size: 36px;
+            font-weight: bold;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 15px 0;
+        }
+        
+        .certificate-modal-description {
+            font-size: 16px;
+            color: var(--text-white);
+            line-height: 1.6;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+        
+        .certificate-modal-terms {
+            font-size: 12px;
+            color: var(--text-white);
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 0, 255, 0.2);
+            opacity: 0.7;
+        }
+        
+        /* ========== СТОИМОСТЬ ========== */
+        .pricing-card {
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(30, 15, 40, 0.8);
+            border-radius: 30px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 0, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+        
+        .pricing-card h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            background: var(--main-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 0, 255, 0.2);
+            font-size: 18px;
+            color: var(--text-white);
+        }
+        
+        .price-item span:last-child {
+            font-weight: bold;
+            color: var(--fuchsia);
+        }
+        
+        .price-note {
+            margin-top: 20px;
+            font-size: 14px;
+            color: var(--text-white);
+            font-style: italic;
+            opacity: 0.8;
+        }
+        
+        .pricing-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        /* ========== ФУТЕР ========== */
+        .footer {
+            background: linear-gradient(135deg, #1A0A2E 0%, #2D1B2E 100%);
+            color: var(--text-white);
+            padding: 40px 0;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            border-top: 1px solid rgba(255, 0, 255, 0.2);
+        }
+        
+        .footer a {
+            color: var(--fuchsia);
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-shadow: var(--neon-text-shadow);
+        }
+        
+        .footer p {
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 36px; }
+            .hero-content p { font-size: 16px; }
+            .section-title { font-size: 28px; }
+            .nav-links { display: none; }
+            .process-grid { grid-template-columns: 1fr; }
+            .pricing-card { padding: 25px; }
+            .price-item { font-size: 14px; }
+            .pricing-card h3 { font-size: 22px; }
+            .swiper-slide, .rooms-swiper .swiper-slide { width: 260px; }
+            .effects-grid { grid-template-columns: 1fr; }
+            .certificates-grid { grid-template-columns: 1fr; }
+            .photo-item { width: 240px; height: 340px; }
+        }
+        
+        @media (max-width: 480px) {
+            .photo-item { width: 180px; height: 260px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar-landing">
+        <div class="nav-content">
+            <div class="logo">📸 Фотостудия</div>
+            <div class="nav-links">
+                <a href="#rooms">Залы</a>
+                <a href="#process">Как проходит</a>
+                <a href="#services">Услуги</a>
+                <a href="#effects">Эффекты</a>
+                <a href="#certificates">Сертификаты</a>
+                <a href="#pricing">Стоимость</a>
+                <a href="pages/login.html" class="btn-login">Вход для сотрудников</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Герой секция с анимированной лентой фотографий -->
+    <section class="hero">
+        <div class="photo-strip-container">
+            <div class="photo-strip" id="photoStrip"></div>
+            <div class="photo-strip clone" id="photoStripClone"></div>
+        </div>
+        
+        <div class="hero-content animate-on-scroll visible">
+            <h1>Фотостудия автопортрета</h1>
+            <p>Профессиональные снимки без фотографа<br>от 3 000 ₽</p>
+            <div class="hero-buttons">
+                <a href="#pricing" class="btn-primary-landing">📸 Записаться на фотосессию</a>
+                <a href="#certificates" class="btn-outline-landing">🎁 Подарочные сертификаты</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Залы (карусель) -->
+    <section id="rooms" class="rooms-carousel">
+        <div class="container-landing">
+            <h2 class="section-title animate-on-scroll">Варианты залов</h2>
+            <div class="swiper rooms-swiper">
+                <div class="swiper-wrapper" id="roomsWrapper"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Как проходит съемка -->
+    <section id="process" class="section" style="background: rgba(30, 15, 40, 0.3);">
+        <div class="container-landing">
+            <h2 class="section-title animate-on-scroll">Как проходит съемка</h2>
+            <div class="process-grid">
+                <div class="process-step animate-on-scroll delay-1">
+                    <div class="step-number">01</div>
+                    <h3>Инструктаж</h3>
+                    <p>В зале вы проходите небольшой инструктаж от администратора</p>
+                </div>
+                <div class="process-step animate-on-scroll delay-2">
+                    <div class="step-number">02</div>
+                    <h3>Фотосессия</h3>
+                    <p>Настраиваетесь на съемку, включаете любимую музыку, выбираете момент и нажимаете на кнопку пульта</p>
+                </div>
+                <div class="process-step animate-on-scroll delay-3">
+                    <div class="step-number">03</div>
+                    <h3>Отправка фото</h3>
+                    <p>Фотографии обрабатываются автоматически в цвете и ЧБ и отправляются вам в течение 24 часов</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Услуги (карусель) -->
+    <section id="services" class="services-carousel">
+        <div class="container-landing">
+            <h2 class="section-title animate-on-scroll">Наши услуги</h2>
+            <div class="swiper services-swiper">
+                <div class="swiper-wrapper" id="servicesWrapper">
+                    <div class="swiper-slide">
+                        <div class="service-card">
+                            <div class="card-flower card-flower-1">🌸</div>
+                            <div class="card-flower card-flower-2">🌼</div>
+                            <div class="card-heart-1">💖</div>
+                            <div class="service-card-image">📸</div>
+                            <div class="service-card-content">
+                                <h3>Загрузка услуг...</h3>
+                                <p>Пожалуйста, подождите</p>
+                                <div class="service-price">— ₽</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Эффекты и обработка -->
+    <section id="effects" class="effects-section">
+        <div class="container-landing">
+            <h2 class="section-title animate-on-scroll">✨ Эффекты и обработка</h2>
+            <p style="text-align: center; color: var(--text-white); margin-bottom: 30px; opacity: 0.9;">Добавьте уникальные эффекты к вашим фотографиям</p>
+            <div class="effects-grid" id="effectsGrid">
+                <div style="text-align: center; padding: 40px; color: var(--text-white);">Загрузка эффектов...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подарочные сертификаты -->
+    <section id="certificates" class="certificates-section">
+        <div class="container-landing">
+            <h2 class="section-title animate-on-scroll">🎁 Подарочные сертификаты</h2>
+            <p style="text-align: center; color: var(--text-white); margin-bottom: 30px; opacity: 0.9;">Идеальный подарок для творческих людей</p>
+            <div class="certificates-grid" id="certificatesGrid">
+                <div style="text-align: center; padding: 40px; color: var(--text-white);">Загрузка сертификатов...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Стоимость -->
+    <section id="pricing" class="section">
+        <div class="container-landing">
+            <h2 class="section-title animate-on-scroll">Стоимость</h2>
+            
+            <div class="pricing-card animate-on-scroll delay-1">
+                <h3>📸 Слот: 50 минут съёмки на 1 фоне</h3>
+                <div class="price-item">
+                    <span>Будние дни до 17:30</span>
+                    <span>3 000 ₽</span>
+                </div>
+                <div class="price-item">
+                    <span>Будние дни с 17:30</span>
+                    <span>3 500 ₽</span>
+                </div>
+                <div class="price-item">
+                    <span>Выходные дни</span>
+                    <span>3 500 ₽</span>
+                </div>
+                <div class="price-note">
+                    * дополнительная смена фона во время съемки +500 ₽
+                </div>
+            </div>
+            
+            <div class="pricing-buttons animate-on-scroll delay-2">
+                <a href="pages/login.html?tab=register" class="btn-primary-landing">📸 Записаться на фотосессию</a>
+                <a href="#certificates" class="btn-outline-landing">🎁 Купить сертификат</a>
+            </div>
+            <p style="margin-top: 25px; font-size: 14px; color: var(--text-white); text-align: center; opacity: 0.8;" class="animate-on-scroll delay-3">
+                В течение 24 часов вы получите обработанные фотографии<br>в цветном и черно-белом варианте
+            </p>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container-landing">
+            <p>📸 Фотостудия автопортрета</p>
+            <p style="margin-top: 15px; font-size: 14px;">
+                <a href="pages/login.html">Вход для сотрудников</a>
+            </p>
+            <p style="margin-top: 15px; font-size: 12px; opacity: 0.7;">
+                © 2026 Фотостудия. Все права защищены.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Модальное окно для сертификата -->
+    <div id="certificateModal" class="certificate-modal">
+        <div class="certificate-modal-content">
+            <span class="certificate-modal-close" onclick="closeCertificateModal()">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
+    <script src="js/animations-light.js"></script>
+    <script>
+        const API_URL = 'https://localhost:7042/api';
+        let roomsSwiper = null;
+        let servicesSwiper = null;
+        
+        // Данные залов
+        const rooms = [
+            { name: "Белый зал", icon: "🤍", location: "Верхний этаж", capacity: "до 6 человек", colorClass: "room-white" },
+            { name: "Бежевый зал", icon: "🤎", location: "Нижний этаж", capacity: "до 6 человек", colorClass: "room-beige" },
+            { name: "Красный зал", icon: "❤️", location: "Верхний этаж", capacity: "до 6 человек", colorClass: "room-red" },
+            { name: "Белый 2.0", icon: "⬜", location: "Средний этаж", capacity: "до 6 человек", colorClass: "room-white2" },
+            { name: "Черный зал", icon: "🖤", location: "Верхний этаж", capacity: "до 6 человек", colorClass: "room-black" },
+            { name: "Малиновый зал", icon: "💖", location: "Верхний этаж", capacity: "до 8 человек", colorClass: "room-raspberry" },
+            { name: "Лавандовый зал", icon: "💜", location: "Нижний этаж", capacity: "до 6 человек", colorClass: "room-lavender" },
+            { name: "Фуксия", icon: "💗", location: "Верхний этаж", capacity: "до 8 человек", colorClass: "room-fuchsia" },
+            { name: "Мятный зал", icon: "🍃", location: "Средний этаж", capacity: "до 6 человек", colorClass: "room-mint" },
+            { name: "Персиковый зал", icon: "🍑", location: "Нижний этаж", capacity: "до 6 человек", colorClass: "room-peach" },
+            { name: "Сиреневый зал", icon: "🌸", location: "Верхний этаж", capacity: "до 8 человек", colorClass: "room-lilac" },
+            { name: "Бирюзовый зал", icon: "💙", location: "Средний этаж", capacity: "до 6 человек", colorClass: "room-turquoise" },
+            { name: "Коралловый зал", icon: "🧡", location: "Нижний этаж", capacity: "до 6 человек", colorClass: "room-coral" },
+            { name: "Небесный зал", icon: "☁️", location: "Верхний этаж", capacity: "до 8 человек", colorClass: "room-skyblue" },
+            { name: "Горчичный зал", icon: "⭐", location: "Средний этаж", capacity: "до 6 человек", colorClass: "room-mustard" },
+            { name: "Шалфейный зал", icon: "🌿", location: "Нижний этаж", capacity: "до 6 человек", colorClass: "room-sage" }
+        ];
+        
+        let certificates = [];
+        
+        const localPhotos = [
+            'images/2f73a70c85dfca69f0ca9e55ddeae09b.jpg',
+            'images/5.jpg',
+            'images/7f11400d91e34a412dfaaa8b9a8cfa75.jpg',
+            'images/12e2958b13ba239b4a10829ed6552807.jpg',
+            'images/62dc84becb836769caccab80adde4549.jpg',
+            'images/0897a17df5901f7cf1f30b7b1856ed52.jpg',
+            'images/9481b4080469e82ccbc28a528d2ae994.jpg',
+            'images/76436c070c969083d30e8473334877ab.jpg',
+            'images/e5ed2212908929ded87417c872fca318.jpg'
+        ];
+        
+        function createPhotoStrip() {
+            const photoStrip = document.getElementById('photoStrip');
+            const photoStripClone = document.getElementById('photoStripClone');
+            if (!photoStrip) return;
+            let photosHtml = '';
+            for (let repeat = 0; repeat < 4; repeat++) {
+                for (let i = 0; i < localPhotos.length; i++) {
+                    photosHtml += `<div class="photo-item" style="background-image: url('${localPhotos[i]}'); background-size: cover; background-position: center;"></div>`;
+                }
+            }
+            photoStrip.innerHTML = photosHtml;
+            photoStripClone.innerHTML = photosHtml;
+        }
+        
+        function getServiceIcon(name) {
+            const icons = { 'Портрет': '📸', 'Свадеб': '💍', 'Love': '💕', 'Семейн': '👨‍👩‍👧‍👦', 'Детск': '🧸', 'Беремен': '🤰', 'Предмет': '📦', 'Ретуш': '🎨', 'Аренд': '🏠', 'Видео': '🎥' };
+            for (const [key, icon] of Object.entries(icons)) {
+                if (name.includes(key)) return icon;
+            }
+            return '📷';
+        }
+        
+        function getCategoryClass(category) {
+            if (category === 'effect') return 'category-effect';
+            if (category === 'frame') return 'category-frame';
+            if (category === 'filter') return 'category-filter';
+            return 'category-effect';
+        }
+        
+        function getCategoryName(category) {
+            if (category === 'effect') return '✨ Эффект';
+            if (category === 'frame') return '🖼️ Рамка';
+            if (category === 'filter') return '🎨 Фильтр';
+            return '✨ Эффект';
+        }
+        
+        function addDecorations(cardElement) {
+            const flowers = ['🌸', '🌼', '🌻', '🌺', '🌷', '🌹', '💐'];
+            const hearts = ['❤️', '💖', '💗', '💓', '💕', '💝', '💞'];
+            if (!cardElement.querySelector('.card-flower-1')) {
+                const flower1 = document.createElement('div');
+                flower1.className = 'card-flower card-flower-1';
+                flower1.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+                cardElement.appendChild(flower1);
+            }
+            if (!cardElement.querySelector('.card-flower-2')) {
+                const flower2 = document.createElement('div');
+                flower2.className = 'card-flower card-flower-2';
+                flower2.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+                cardElement.appendChild(flower2);
+            }
+            if (!cardElement.querySelector('.card-heart-1')) {
+                const heart1 = document.createElement('div');
+                heart1.className = 'card-heart-1';
+                heart1.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                cardElement.appendChild(heart1);
+            }
+        }
+        
+        function loadRooms() {
+            const roomsWrapper = document.getElementById('roomsWrapper');
+            roomsWrapper.innerHTML = rooms.map(room => `
+                <div class="swiper-slide">
+                    <div class="room-card">
+                        <div class="room-image ${room.colorClass}">${room.icon}</div>
+                        <div class="room-content">
+                            <h3>${room.name}</h3>
+                            <p>${room.location} | Вместимость ${room.capacity}</p>
+                            <div class="room-location">📍 ${room.location}</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            if (roomsSwiper) roomsSwiper.destroy(true, true);
+            roomsSwiper = new Swiper('.rooms-swiper', {
+                slidesPerView: 1, spaceBetween: 20, loop: true,
+                pagination: { el: '.swiper-pagination', clickable: true },
+                navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+                breakpoints: { 480: { slidesPerView: 2 }, 768: { slidesPerView: 3 }, 1024: { slidesPerView: 4 } },
+                autoplay: { delay: 4000, disableOnInteraction: false }
+            });
+        }
+        
+        function loadEffects() {
+            const effectsGrid = document.getElementById('effectsGrid');
+            let effects = [];
+            const savedEffects = localStorage.getItem('photoStudioExtraOptions');
+            if (savedEffects) {
+                try { effects = JSON.parse(savedEffects); }
+                catch(e) { effects = getDefaultEffects(); }
+            } else {
+                effects = getDefaultEffects();
+                localStorage.setItem('photoStudioExtraOptions', JSON.stringify(effects));
+            }
+            const availableEffects = effects.filter(e => e.isAvailable !== false);
+            if (availableEffects.length === 0) {
+                effectsGrid.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--text-white);">Эффекты скоро появятся</div>';
+                return;
+            }
+            effectsGrid.innerHTML = availableEffects.map(effect => `
+                <div class="effect-card">
+                    <div class="effect-icon">${effect.icon || '✨'}</div>
+                    <span class="effect-category ${getCategoryClass(effect.category)}">${getCategoryName(effect.category)}</span>
+                    <div class="effect-name">${effect.name}</div>
+                    <div class="effect-description">${effect.description || 'Профессиональная обработка'}</div>
+                    <div class="effect-price">+${effect.price} ₽</div>
+                </div>
+            `).join('');
+        }
+        
+        function getDefaultEffects() {
+            return [
+                { id: 1, name: "Винтажный эффект", description: "Старение фото, пленочный эффект", price: 500, icon: "📷", category: "effect", isAvailable: true },
+                { id: 2, name: "Черно-белый", description: "Классическое черно-белое фото", price: 300, icon: "⚫", category: "effect", isAvailable: true },
+                { id: 3, name: "Цветокоррекция", description: "Профессиональная цветокоррекция", price: 800, icon: "🎨", category: "effect", isAvailable: true },
+                { id: 4, name: "Глянец", description: "Эффект глянцевой поверхности", price: 400, icon: "✨", category: "effect", isAvailable: true },
+                { id: 5, name: "Рамка", description: "Декоративная рамка для фото", price: 200, icon: "🖼️", category: "frame", isAvailable: true },
+                { id: 6, name: "Свечение", description: "Мягкое свечение вокруг объекта", price: 600, icon: "💫", category: "effect", isAvailable: true },
+                { id: 7, name: "Пленка", description: "Эффект старой пленки", price: 450, icon: "🎞️", category: "effect", isAvailable: true },
+                { id: 8, name: "Звездная пыль", description: "Эффект звездной пыли", price: 700, icon: "🌟", category: "effect", isAvailable: true },
+                { id: 9, name: "Розовая дымка", description: "Романтический розовый эффект", price: 550, icon: "💖", category: "effect", isAvailable: true },
+                { id: 10, name: "Акварель", description: "Эффект акварельного рисунка", price: 650, icon: "🎨", category: "effect", isAvailable: true }
+            ];
+        }
+        
+        async function loadCertificates() {
+            const certificatesGrid = document.getElementById('certificatesGrid');
+            try {
+                const response = await fetch(`${API_URL}/certificates`);
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data && data.length > 0) {
+                        certificates = data;
+                        localStorage.setItem('photoStudioCertificates', JSON.stringify(certificates));
+                    } else { loadCertificatesFromStorage(); }
+                } else { loadCertificatesFromStorage(); }
+            } catch (error) {
+                console.log('Бэкенд не доступен, загружаем из localStorage');
+                loadCertificatesFromStorage();
+            }
+            const activeCertificates = certificates.filter(c => c.isAvailable !== false);
+            if (activeCertificates.length === 0) {
+                certificatesGrid.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--text-white);">Сертификаты скоро появятся</div>';
+                return;
+            }
+            certificatesGrid.innerHTML = activeCertificates.map(cert => `
+                <div class="certificate-card" onclick="showCertificateModal(${cert.id})">
+                    <div class="certificate-icon">${cert.icon || '🎁'}</div>
+                    <div class="certificate-name">${cert.name}</div>
+                    <div class="certificate-price">${cert.price.toLocaleString()} ₽</div>
+                    <div class="certificate-description">${cert.description.substring(0, 80)}${cert.description.length > 80 ? '...' : ''}</div>
+                    <button class="certificate-buy-btn" onclick="event.stopPropagation(); buyCertificate(${cert.id})">🎁 Выбрать сертификат</button>
+                </div>
+            `).join('');
+        }
+        
+        function loadCertificatesFromStorage() {
+            const saved = localStorage.getItem('photoStudioCertificates');
+            if (saved) {
+                try { certificates = JSON.parse(saved); }
+                catch(e) { setDefaultCertificates(); }
+            } else { setDefaultCertificates(); }
+        }
+        
+        function setDefaultCertificates() {
+            certificates = [
+                { id: 1, name: "Светлая душа", price: 3000, icon: "✨", description: "Сертификат на 1 час фотосессии в любом зале. Включает 20 обработанных фото.", isAvailable: true },
+                { id: 2, name: "Творческий вдох", price: 5000, icon: "🎨", description: "Сертификат на 2 часа фотосессии + 2 дополнительных эффекта бесплатно.", isAvailable: true },
+                { id: 3, name: "Звездный час", price: 10000, icon: "⭐", description: "Сертификат на 3 часа фотосессии + все эффекты бесплатно + приоритетное бронирование.", isAvailable: true },
+                { id: 4, name: "Королевская съемка", price: 15000, icon: "👑", description: "VIP сертификат: 4 часа съемки, все эффекты, ретушь всех фото, альбом.", isAvailable: true }
+            ];
+            localStorage.setItem('photoStudioCertificates', JSON.stringify(certificates));
+        }
+        
+        window.showCertificateModal = function(certId) {
+            const cert = certificates.find(c => c.id === certId);
+            if (!cert) return;
+            const modal = document.getElementById('certificateModal');
+            const modalContent = document.getElementById('modalContent');
+            modalContent.innerHTML = `
+                <div class="certificate-modal-icon">${cert.icon || '🎁'}</div>
+                <div class="certificate-modal-title">${cert.name}</div>
+                <div class="certificate-modal-price">${cert.price.toLocaleString()} ₽</div>
+                <div class="certificate-modal-description">${cert.description}</div>
+                <button class="certificate-buy-btn" onclick="buyCertificate(${cert.id}); closeCertificateModal();">🎁 Приобрести сертификат</button>
+                <div class="certificate-modal-terms">
+                    ⏱ Срок действия: 12 месяцев<br>
+                    📍 Действует во всех залах студии<br>
+                    🔄 Сертификат можно передать другому лицу
+                </div>
+            `;
+            modal.style.display = 'flex';
+        };
+        
+        window.closeCertificateModal = function() { document.getElementById('certificateModal').style.display = 'none'; };
+        
+        window.buyCertificate = function(certId) {
+            const token = localStorage.getItem('token');
+            if (token) { window.location.href = `pages/buy-certificate.html?id=${certId}`; }
+            else {
+                if (confirm('Для покупки сертификата необходимо войти в аккаунт. Перейти на страницу входа?')) {
+                    window.location.href = `pages/login.html?redirect=buy-certificate&id=${certId}`;
+                }
+            }
+        };
+        
+        window.onclick = function(event) {
+            const modal = document.getElementById('certificateModal');
+            if (event.target === modal) modal.style.display = 'none';
+        };
+        
+        async function loadServices() {
+            const servicesWrapper = document.getElementById('servicesWrapper');
+            try {
+                const response = await fetch(`${API_URL}/services`);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const services = await response.json();
+                if (services && services.length > 0) {
+                    servicesWrapper.innerHTML = services.map(service => `
+                        <div class="swiper-slide">
+                            <div class="service-card">
+                                <div class="service-card-image">${getServiceIcon(service.name)}</div>
+                                <div class="service-card-content">
+                                    <h3>${service.name}</h3>
+                                    <p>${service.description || 'Профессиональная фотосъемка'}</p>
+                                    <div>
+                                        <span class="service-price">${service.price.toLocaleString()} ₽</span>
+                                        <span class="service-duration">⏱ ${service.durationMinutes} мин</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    servicesWrapper.innerHTML = `<div class="swiper-slide"><div class="service-card"><div class="service-card-image">📸</div><div class="service-card-content"><h3>Услуги скоро появятся</h3><p>Следите за обновлениями</p><div class="service-price">— ₽</div></div></div></div>`;
+                }
+                document.querySelectorAll('.service-card').forEach(addDecorations);
+                if (servicesSwiper) servicesSwiper.destroy(true, true);
+                servicesSwiper = new Swiper('.services-swiper', {
+                    slidesPerView: 1, spaceBetween: 20, loop: true,
+                    pagination: { el: '.swiper-pagination', clickable: true },
+                    navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+                    breakpoints: { 640: { slidesPerView: 2 }, 768: { slidesPerView: 3 }, 1024: { slidesPerView: 4 } },
+                    autoplay: { delay: 3000, disableOnInteraction: false }
+                });
+            } catch (error) {
+                console.error('Ошибка:', error);
+                servicesWrapper.innerHTML = `<div class="swiper-slide"><div class="service-card"><div class="service-card-image">⚠️</div><div class="service-card-content"><h3>Ошибка загрузки</h3><p>Бэкенд не отвечает на ${API_URL}/services</p><div class="service-price">— ₽</div></div></div></div>`;
+            }
+        }
+        
+        function initScrollAnimation() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+            }, { threshold: 0.1 });
+            elements.forEach(el => observer.observe(el));
+        }
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+        
+        initScrollAnimation();
+        loadRooms();
+        loadServices();
+        loadEffects();
+        loadCertificates();
+        createPhotoStrip();
+    </script>
+</body>
+</html>

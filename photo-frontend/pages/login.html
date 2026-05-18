@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход - PhotoStudio CRM</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Стили для переключателей в неоновой теме */
+        .auth-switch {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            background: rgba(30, 15, 40, 0.6);
+            padding: 5px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 0, 255, 0.2);
+        }
+        .auth-switch-btn {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 40px;
+            transition: all 0.3s;
+            color: var(--text-white-dim);
+        }
+        .auth-switch-btn.active {
+            background: var(--main-gradient);
+            color: white;
+            box-shadow: var(--shadow-glow);
+        }
+        .auth-switch-btn:hover:not(.active) {
+            background: rgba(255, 0, 255, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .auth-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid rgba(255, 0, 255, 0.2);
+        }
+        .auth-tab {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-white-dim);
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+        .auth-tab.active {
+            color: var(--fuchsia);
+            border-bottom-color: var(--fuchsia);
+            text-shadow: var(--neon-text-shadow);
+        }
+        .auth-tab:hover {
+            color: var(--fuchsia-light);
+            background: rgba(255, 0, 255, 0.05);
+        }
+        
+        .auth-form {
+            display: none;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .auth-form.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .password-hint {
+            font-size: 11px;
+            color: var(--text-white-dimmer);
+            margin-top: 5px;
+        }
+        
+        /* Кнопка по центру */
+        .btn-center {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .btn-primary {
+            min-width: 220px;
+            padding: 14px 28px;
+            background: var(--main-gradient);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+        .btn-primary:disabled {
+            opacity: 0.6;
+            transform: none;
+        }
+        
+        .register-success {
+            background: rgba(16, 185, 129, 0.2);
+            color: #6ee7b7;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 0, 255, 0.2);
+        }
+        .back-link a {
+            color: var(--fuchsia);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .back-link a:hover {
+            color: var(--fuchsia-light);
+            text-shadow: var(--neon-text-shadow);
+            text-decoration: underline;
+        }
+        
+        .info-text {
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-white-dim);
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 0, 255, 0.15);
+        }
+        
+        .alert {
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 13px;
+        }
+        .alert-error {
+            background: rgba(239, 68, 68, 0.2);
+            color: #fca5a5;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        .alert-success {
+            background: rgba(16, 185, 129, 0.2);
+            color: #6ee7b7;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        .hidden {
+            display: none;
+        }
+        
+        /* Переопределение стилей форм для неоновой темы */
+        .form-group label {
+            color: var(--text-white-dim);
+        }
+        
+        .form-group input {
+            background: rgba(30, 15, 40, 0.8);
+            border: 2px solid rgba(255, 0, 255, 0.3);
+            color: var(--text-white);
+        }
+        
+        .form-group input:focus {
+            border-color: var(--fuchsia);
+            box-shadow: 0 0 0 3px rgba(255, 0, 255, 0.2);
+        }
+        
+        .form-group input:hover {
+            border-color: var(--neon-purple);
+        }
+        
+        @media (max-width: 600px) {
+            .form-row { grid-template-columns: 1fr; }
+            .btn-primary { min-width: 180px; padding: 12px 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="logo">📸</div>
+            <h2>PhotoStudio CRM</h2>
+            <p class="subtitle">Система управления фотостудией</p>
+            
+            <!-- Переключатель между клиентом и сотрудником -->
+            <div class="auth-switch">
+                <div class="auth-switch-btn active" onclick="switchUserType('client')">👤 Клиент</div>
+                <div class="auth-switch-btn" onclick="switchUserType('staff')">👔 Сотрудник</div>
+            </div>
+            
+            <!-- Форма для КЛИЕНТА -->
+            <div id="clientForm" class="auth-form active">
+                <div class="auth-tabs">
+                    <div class="auth-tab active" onclick="switchClientTab('login')">🔐 Вход</div>
+                    <div class="auth-tab" onclick="switchClientTab('register')">📝 Регистрация</div>
+                </div>
+                
+                <!-- Вход клиента -->
+                <div id="clientLoginForm" class="auth-form active">
+                    <form id="clientLoginElement">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="clientEmail" required placeholder="client@test.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Пароль</label>
+                            <input type="password" id="clientPassword" required placeholder="••••••">
+                        </div>
+                        <div class="btn-center">
+                            <button type="submit" class="btn-primary">Войти как клиент</button>
+                        </div>
+                    </form>
+                    <div id="clientErrorMessage" class="alert alert-error hidden"></div>
+                </div>
+                
+                <!-- Регистрация клиента -->
+                <div id="clientRegisterForm" class="auth-form">
+                    <form id="clientRegisterElement">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Имя *</label>
+                                <input type="text" id="regFirstName" required placeholder="Иван">
+                            </div>
+                            <div class="form-group">
+                                <label>Фамилия *</label>
+                                <input type="text" id="regLastName" required placeholder="Петров">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input type="email" id="regEmail" required placeholder="ivan@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Телефон</label>
+                            <input type="tel" id="regPhone" placeholder="+7 (999) 123-45-67">
+                        </div>
+                        <div class="form-group">
+                            <label>Пароль *</label>
+                            <input type="password" id="regPassword" required placeholder="минимум 6 символов">
+                            <div class="password-hint">Пароль должен содержать минимум 6 символов</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Подтверждение пароля *</label>
+                            <input type="password" id="regConfirmPassword" required placeholder="повторите пароль">
+                        </div>
+                        <div class="btn-center">
+                            <button type="submit" class="btn-primary">📝 Зарегистрироваться</button>
+                        </div>
+                    </form>
+                    <div id="clientRegisterError" class="alert alert-error hidden"></div>
+                    <div id="clientRegisterSuccess" class="register-success hidden"></div>
+                </div>
+            </div>
+            
+            <!-- Форма для СОТРУДНИКА (админ, фотограф, бухгалтер) -->
+            <div id="staffForm" class="auth-form">
+                <form id="staffLoginElement">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="staffEmail" required placeholder="admin@photostudio.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Пароль</label>
+                        <input type="password" id="staffPassword" required placeholder="••••••">
+                    </div>
+                    <div class="btn-center">
+                        <button type="submit" class="btn-primary">Войти как сотрудник</button>
+                    </div>
+                </form>
+                <div id="staffErrorMessage" class="alert alert-error hidden"></div>
+                <div class="info-text">
+                    ℹ️ Только для сотрудников фотостудии (Администратор, Фотограф, Бухгалтер)
+                </div>
+            </div>
+            
+            <!-- Ссылка на главную -->
+            <div class="back-link">
+                <a href="../index.html">← На главную</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/animations-light.js"></script>
+    <script>
+        const API_URL = 'https://localhost:7042/api';
+        let clientTab = 'login';
+        
+        // Переключение между клиентом и сотрудником
+        function switchUserType(type) {
+            const clientBtn = document.querySelector('.auth-switch-btn:first-child');
+            const staffBtn = document.querySelector('.auth-switch-btn:last-child');
+            const clientForm = document.getElementById('clientForm');
+            const staffForm = document.getElementById('staffForm');
+            
+            if (type === 'client') {
+                clientBtn.classList.add('active');
+                staffBtn.classList.remove('active');
+                clientForm.classList.add('active');
+                staffForm.classList.remove('active');
+            } else {
+                clientBtn.classList.remove('active');
+                staffBtn.classList.add('active');
+                clientForm.classList.remove('active');
+                staffForm.classList.add('active');
+            }
+            
+            // Очищаем ошибки
+            document.getElementById('clientErrorMessage')?.classList.add('hidden');
+            document.getElementById('staffErrorMessage')?.classList.add('hidden');
+        }
+        
+        // Переключение вкладок для клиента
+        function switchClientTab(tab) {
+            clientTab = tab;
+            const tabs = document.querySelectorAll('#clientForm .auth-tab');
+            const loginForm = document.getElementById('clientLoginForm');
+            const registerForm = document.getElementById('clientRegisterForm');
+            
+            tabs.forEach(t => t.classList.remove('active'));
+            if (tab === 'login') {
+                tabs[0].classList.add('active');
+                loginForm.classList.add('active');
+                registerForm.classList.remove('active');
+            } else {
+                tabs[1].classList.add('active');
+                loginForm.classList.remove('active');
+                registerForm.classList.add('active');
+            }
+            
+            document.getElementById('clientErrorMessage').classList.add('hidden');
+            document.getElementById('clientRegisterError').classList.add('hidden');
+            document.getElementById('clientRegisterSuccess').classList.add('hidden');
+        }
+        
+        // Декодирование JWT токена
+        function decodeJWT(token) {
+            try {
+                const parts = token.split('.');
+                if (parts.length !== 3) return null;
+                const base64Url = parts[1];
+                const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
+                return JSON.parse(jsonPayload);
+            } catch (error) {
+                console.error('Ошибка декодирования:', error);
+                return null;
+            }
+        }
+        
+        function showError(elementId, message) {
+            const errorDiv = document.getElementById(elementId);
+            if (errorDiv) {
+                errorDiv.textContent = message;
+                errorDiv.classList.remove('hidden');
+                setTimeout(() => errorDiv.classList.add('hidden'), 5000);
+            }
+        }
+        
+        // ============ ВХОД ДЛЯ КЛИЕНТОВ ============
+        document.getElementById('clientLoginElement').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('clientEmail').value.trim();
+            const password = document.getElementById('clientPassword').value;
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            
+            if (!email || !password) {
+                showError('clientErrorMessage', 'Пожалуйста, заполните все поля');
+                return;
+            }
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Вход...';
+            
+            try {
+                const response = await fetch(`${API_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.token) {
+                    const payload = decodeJWT(data.token);
+                    let role = payload?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+                    if (!role) role = payload?.role;
+                    if (!role) role = 'Client';
+                    
+                    const firstName = payload?.FirstName || email.split('@')[0] || 'Пользователь';
+                    
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify({ email, firstName, role }));
+                    
+                    window.location.href = 'client-dashboard.html';
+                } else {
+                    showError('clientErrorMessage', data.message || 'Неверный email или пароль');
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
+                showError('clientErrorMessage', 'Ошибка подключения к серверу');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Войти как клиент';
+            }
+        });
+        
+        // ============ РЕГИСТРАЦИЯ КЛИЕНТА ============
+        document.getElementById('clientRegisterElement').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const firstName = document.getElementById('regFirstName').value.trim();
+            const lastName = document.getElementById('regLastName').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const phone = document.getElementById('regPhone').value.trim();
+            const password = document.getElementById('regPassword').value;
+            const confirmPassword = document.getElementById('regConfirmPassword').value;
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            
+            if (!firstName || !lastName || !email || !password) {
+                showError('clientRegisterError', 'Пожалуйста, заполните все обязательные поля');
+                return;
+            }
+            if (password.length < 6) {
+                showError('clientRegisterError', 'Пароль должен содержать минимум 6 символов');
+                return;
+            }
+            if (password !== confirmPassword) {
+                showError('clientRegisterError', 'Пароли не совпадают');
+                return;
+            }
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Регистрация...';
+            
+            try {
+                const response = await fetch(`${API_URL}/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password, firstName, lastName, phone, role: 'Client' })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    const successDiv = document.getElementById('clientRegisterSuccess');
+                    successDiv.innerHTML = '✅ ' + (data.message || 'Регистрация успешна! Теперь вы можете войти.');
+                    successDiv.classList.remove('hidden');
+                    
+                    document.getElementById('regFirstName').value = '';
+                    document.getElementById('regLastName').value = '';
+                    document.getElementById('regEmail').value = '';
+                    document.getElementById('regPhone').value = '';
+                    document.getElementById('regPassword').value = '';
+                    document.getElementById('regConfirmPassword').value = '';
+                    
+                    setTimeout(() => {
+                        switchClientTab('login');
+                        document.getElementById('clientEmail').value = email;
+                        const successMsg = document.getElementById('clientErrorMessage');
+                        successMsg.textContent = '✅ Регистрация успешна! Теперь вы можете войти.';
+                        successMsg.classList.remove('hidden');
+                        successMsg.style.background = 'rgba(16, 185, 129, 0.2)';
+                        successMsg.style.color = '#6ee7b7';
+                        successMsg.style.border = '1px solid rgba(16, 185, 129, 0.3)';
+                        setTimeout(() => successMsg.classList.add('hidden'), 5000);
+                    }, 2000);
+                } else {
+                    showError('clientRegisterError', data.message || 'Ошибка регистрации');
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
+                showError('clientRegisterError', 'Ошибка подключения к серверу');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Зарегистрироваться';
+            }
+        });
+        
+        // ============ ВХОД ДЛЯ СОТРУДНИКОВ ============
+        document.getElementById('staffLoginElement').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('staffEmail').value.trim();
+            const password = document.getElementById('staffPassword').value;
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            
+            if (!email || !password) {
+                showError('staffErrorMessage', 'Пожалуйста, заполните все поля');
+                return;
+            }
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Вход...';
+            
+            try {
+                const response = await fetch(`${API_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.token) {
+                    const payload = decodeJWT(data.token);
+                    console.log('Декодированный payload:', payload);
+                    
+                    // Получаем роль из токена (пробуем разные варианты)
+                    let role = payload?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+                    if (!role) role = payload?.role;
+                    if (!role) role = payload?.Role;
+                    if (!role) role = 'Client';
+                    
+                    const firstName = payload?.FirstName || email.split('@')[0] || 'Сотрудник';
+                    
+                    console.log('Определенная роль:', role);
+                    
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify({ email, firstName, role }));
+                    
+                    // Перенаправление по роли
+                    switch(role) {
+                        case 'Admin':
+                            console.log('Перенаправление в админ-панель');
+                            window.location.href = 'admin-dashboard.html';
+                            break;
+                        case 'Photographer':
+                            console.log('Перенаправление в панель фотографа');
+                            window.location.href = 'photographer-dashboard.html';
+                            break;
+                        case 'Accountant':
+                            console.log('Перенаправление в панель бухгалтера');
+                            window.location.href = 'accountant-dashboard.html';
+                            break;
+                        default:
+                            console.log('Перенаправление в панель клиента (роль не определена)');
+                            window.location.href = 'client-dashboard.html';
+                    }
+                } else {
+                    showError('staffErrorMessage', data.message || 'Неверный email или пароль');
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
+                showError('staffErrorMessage', 'Ошибка подключения к серверу');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Войти как сотрудник';
+            }
+        });
+        
+        // Проверка активной сессии
+        function checkExistingSession() {
+            const token = localStorage.getItem('token');
+            const userStr = localStorage.getItem('user');
+            
+            if (token && userStr) {
+                try {
+                    const user = JSON.parse(userStr);
+                    const payload = decodeJWT(token);
+                    if (payload && payload.exp && payload.exp * 1000 > Date.now()) {
+                        console.log('Активная сессия для:', user.email, 'роль:', user.role);
+                        switch(user.role) {
+                            case 'Admin':
+                                window.location.href = 'admin-dashboard.html';
+                                break;
+                            case 'Photographer':
+                                window.location.href = 'photographer-dashboard.html';
+                                break;
+                            case 'Accountant':
+                                window.location.href = 'accountant-dashboard.html';
+                                break;
+                            default:
+                                window.location.href = 'client-dashboard.html';
+                        }
+                    } else {
+                        console.log('Токен истек, очищаем');
+                        localStorage.clear();
+                    }
+                } catch(e) {
+                    console.error('Ошибка проверки сессии:', e);
+                    localStorage.clear();
+                }
+            }
+        }
+        
+        checkExistingSession();
+    </script>
+</body>
+</html>
