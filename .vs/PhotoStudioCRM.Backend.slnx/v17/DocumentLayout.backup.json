@@ -1,0 +1,249 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\228P\\Desktop\\\u041A\u0443\u0440\u0441\u043E\u0430\u044F\\PhotoStudioCRM\\PhotoStudioCRM.Backend\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\228P\\Desktop\\\u041A\u0443\u0440\u0441\u043E\u0430\u044F\\PhotoStudioCRM\\PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend\\Migrations_NewDB\\20260519123548_Create.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:PhotoStudioCRM.Backend\\Migrations_NewDB\\20260519123548_Create.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5815408-973A-125F-788C-1C76525325CA}|PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend.csproj|c:\\users\\228p\\desktop\\\u043A\u0443\u0440\u0441\u043E\u0430\u044F\\photostudiocrm\\photostudiocrm.backend\\photostudiocrm.backend\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5815408-973A-125F-788C-1C76525325CA}|PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend.csproj|solutionrelative:photostudiocrm.backend\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5815408-973A-125F-788C-1C76525325CA}|PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend.csproj|c:\\users\\228p\\desktop\\\u043A\u0443\u0440\u0441\u043E\u0430\u044F\\photostudiocrm\\photostudiocrm.backend\\photostudiocrm.backend\\models\\receipt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5815408-973A-125F-788C-1C76525325CA}|PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend.csproj|solutionrelative:photostudiocrm.backend\\models\\receipt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5815408-973A-125F-788C-1C76525325CA}|PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend.csproj|c:\\users\\228p\\desktop\\\u043A\u0443\u0440\u0441\u043E\u0430\u044F\\photostudiocrm\\photostudiocrm.backend\\photostudiocrm.backend\\controllers\\accountantcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5815408-973A-125F-788C-1C76525325CA}|PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend.csproj|solutionrelative:photostudiocrm.backend\\controllers\\accountantcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5815408-973A-125F-788C-1C76525325CA}|PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend.csproj|c:\\users\\228p\\desktop\\\u043A\u0443\u0440\u0441\u043E\u0430\u044F\\photostudiocrm\\photostudiocrm.backend\\photostudiocrm.backend\\models\\report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5815408-973A-125F-788C-1C76525325CA}|PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend.csproj|solutionrelative:photostudiocrm.backend\\models\\report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5815408-973A-125F-788C-1C76525325CA}|PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend.csproj|c:\\users\\228p\\desktop\\\u043A\u0443\u0440\u0441\u043E\u0430\u044F\\photostudiocrm\\photostudiocrm.backend\\photostudiocrm.backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C5815408-973A-125F-788C-1C76525325CA}|PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend.csproj|solutionrelative:photostudiocrm.backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5815408-973A-125F-788C-1C76525325CA}|PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend.csproj|c:\\users\\228p\\desktop\\\u043A\u0443\u0440\u0441\u043E\u0430\u044F\\photostudiocrm\\photostudiocrm.backend\\photostudiocrm.backend\\data\\seeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5815408-973A-125F-788C-1C76525325CA}|PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend.csproj|solutionrelative:photostudiocrm.backend\\data\\seeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5815408-973A-125F-788C-1C76525325CA}|PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend.csproj|c:\\users\\228p\\desktop\\\u043A\u0443\u0440\u0441\u043E\u0430\u044F\\photostudiocrm\\photostudiocrm.backend\\photostudiocrm.backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5815408-973A-125F-788C-1C76525325CA}|PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend.csproj|solutionrelative:photostudiocrm.backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5815408-973A-125F-788C-1C76525325CA}|PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend.csproj|c:\\users\\228p\\desktop\\\u043A\u0443\u0440\u0441\u043E\u0430\u044F\\photostudiocrm\\photostudiocrm.backend\\photostudiocrm.backend\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C5815408-973A-125F-788C-1C76525325CA}|PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend.csproj|solutionrelative:photostudiocrm.backend\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5815408-973A-125F-788C-1C76525325CA}|PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend.csproj|c:\\users\\228p\\desktop\\\u043A\u0443\u0440\u0441\u043E\u0430\u044F\\photostudiocrm\\photostudiocrm.backend\\photostudiocrm.backend\\models\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5815408-973A-125F-788C-1C76525325CA}|PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend.csproj|solutionrelative:photostudiocrm.backend\\models\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5815408-973A-125F-788C-1C76525325CA}|PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend.csproj|c:\\users\\228p\\desktop\\\u043A\u0443\u0440\u0441\u043E\u0430\u044F\\photostudiocrm\\photostudiocrm.backend\\photostudiocrm.backend\\migrations_newdb\\20260518075715_initialcreate_newdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5815408-973A-125F-788C-1C76525325CA}|PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend.csproj|solutionrelative:photostudiocrm.backend\\migrations_newdb\\20260518075715_initialcreate_newdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5815408-973A-125F-788C-1C76525325CA}|PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend.csproj|c:\\users\\228p\\desktop\\\u043A\u0443\u0440\u0441\u043E\u0430\u044F\\photostudiocrm\\photostudiocrm.backend\\photostudiocrm.backend\\migrations_test\\20260518075049_initialcreate_test.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5815408-973A-125F-788C-1C76525325CA}|PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend.csproj|solutionrelative:photostudiocrm.backend\\migrations_test\\20260518075049_initialcreate_test.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 7,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "20260519123548_Create.cs",
+              "DocumentMoniker": "C:\\Users\\228P\\Desktop\\\u041A\u0443\u0440\u0441\u043E\u0430\u044F\\PhotoStudioCRM\\PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend\\Migrations_NewDB\\20260519123548_Create.cs",
+              "RelativeDocumentMoniker": "PhotoStudioCRM.Backend\\Migrations_NewDB\\20260519123548_Create.cs",
+              "ToolTip": "C:\\Users\\228P\\Desktop\\\u041A\u0443\u0440\u0441\u043E\u0430\u044F\\PhotoStudioCRM\\PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend\\Migrations_NewDB\\20260519123548_Create.cs",
+              "RelativeToolTip": "PhotoStudioCRM.Backend\\Migrations_NewDB\\20260519123548_Create.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-19T12:35:48.486Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Receipt.cs",
+              "DocumentMoniker": "C:\\Users\\228P\\Desktop\\\u041A\u0443\u0440\u0441\u043E\u0430\u044F\\PhotoStudioCRM\\PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend\\Models\\Receipt.cs",
+              "RelativeDocumentMoniker": "PhotoStudioCRM.Backend\\Models\\Receipt.cs",
+              "ToolTip": "C:\\Users\\228P\\Desktop\\\u041A\u0443\u0440\u0441\u043E\u0430\u044F\\PhotoStudioCRM\\PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend\\Models\\Receipt.cs",
+              "RelativeToolTip": "PhotoStudioCRM.Backend\\Models\\Receipt.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAwwCUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-19T11:53:04.331Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Report.cs",
+              "DocumentMoniker": "C:\\Users\\228P\\Desktop\\\u041A\u0443\u0440\u0441\u043E\u0430\u044F\\PhotoStudioCRM\\PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend\\Models\\Report.cs",
+              "RelativeDocumentMoniker": "PhotoStudioCRM.Backend\\Models\\Report.cs",
+              "ToolTip": "C:\\Users\\228P\\Desktop\\\u041A\u0443\u0440\u0441\u043E\u0430\u044F\\PhotoStudioCRM\\PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend\\Models\\Report.cs",
+              "RelativeToolTip": "PhotoStudioCRM.Backend\\Models\\Report.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-19T11:52:41.697Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AccountantController.cs",
+              "DocumentMoniker": "C:\\Users\\228P\\Desktop\\\u041A\u0443\u0440\u0441\u043E\u0430\u044F\\PhotoStudioCRM\\PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend\\Controllers\\AccountantController.cs",
+              "RelativeDocumentMoniker": "PhotoStudioCRM.Backend\\Controllers\\AccountantController.cs",
+              "ToolTip": "C:\\Users\\228P\\Desktop\\\u041A\u0443\u0440\u0441\u043E\u0430\u044F\\PhotoStudioCRM\\PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend\\Controllers\\AccountantController.cs",
+              "RelativeToolTip": "PhotoStudioCRM.Backend\\Controllers\\AccountantController.cs",
+              "ViewState": "AgIAALkCAAAAAAAAAAAQwNcCAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-19T11:48:27.96Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SeedData.cs",
+              "DocumentMoniker": "C:\\Users\\228P\\Desktop\\\u041A\u0443\u0440\u0441\u043E\u0430\u044F\\PhotoStudioCRM\\PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend\\Data\\SeedData.cs",
+              "RelativeDocumentMoniker": "PhotoStudioCRM.Backend\\Data\\SeedData.cs",
+              "ToolTip": "C:\\Users\\228P\\Desktop\\\u041A\u0443\u0440\u0441\u043E\u0430\u044F\\PhotoStudioCRM\\PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend\\Data\\SeedData.cs",
+              "RelativeToolTip": "PhotoStudioCRM.Backend\\Data\\SeedData.cs",
+              "ViewState": "AgIAAGcAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T11:45:28.94Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\228P\\Desktop\\\u041A\u0443\u0440\u0441\u043E\u0430\u044F\\PhotoStudioCRM\\PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "PhotoStudioCRM.Backend\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\228P\\Desktop\\\u041A\u0443\u0440\u0441\u043E\u0430\u044F\\PhotoStudioCRM\\PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend\\Properties\\launchSettings.json",
+              "RelativeToolTip": "PhotoStudioCRM.Backend\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-05-18T11:30:44.641Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "20260518075715_InitialCreate_NewDB.cs",
+              "DocumentMoniker": "C:\\Users\\228P\\Desktop\\\u041A\u0443\u0440\u0441\u043E\u0430\u044F\\PhotoStudioCRM\\PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend\\Migrations_NewDB\\20260518075715_InitialCreate_NewDB.cs",
+              "RelativeDocumentMoniker": "PhotoStudioCRM.Backend\\Migrations_NewDB\\20260518075715_InitialCreate_NewDB.cs",
+              "ToolTip": "C:\\Users\\228P\\Desktop\\\u041A\u0443\u0440\u0441\u043E\u0430\u044F\\PhotoStudioCRM\\PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend\\Migrations_NewDB\\20260518075715_InitialCreate_NewDB.cs",
+              "RelativeToolTip": "PhotoStudioCRM.Backend\\Migrations_NewDB\\20260518075715_InitialCreate_NewDB.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T07:57:15.489Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\228P\\Desktop\\\u041A\u0443\u0440\u0441\u043E\u0430\u044F\\PhotoStudioCRM\\PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "PhotoStudioCRM.Backend\\Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\228P\\Desktop\\\u041A\u0443\u0440\u0441\u043E\u0430\u044F\\PhotoStudioCRM\\PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "PhotoStudioCRM.Backend\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAAHEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T07:55:25.144Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "20260518075049_InitialCreate_Test.cs",
+              "DocumentMoniker": "C:\\Users\\228P\\Desktop\\\u041A\u0443\u0440\u0441\u043E\u0430\u044F\\PhotoStudioCRM\\PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend\\Migrations_Test\\20260518075049_InitialCreate_Test.cs",
+              "RelativeDocumentMoniker": "PhotoStudioCRM.Backend\\Migrations_Test\\20260518075049_InitialCreate_Test.cs",
+              "ToolTip": "C:\\Users\\228P\\Desktop\\\u041A\u0443\u0440\u0441\u043E\u0430\u044F\\PhotoStudioCRM\\PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend\\Migrations_Test\\20260518075049_InitialCreate_Test.cs",
+              "RelativeToolTip": "PhotoStudioCRM.Backend\\Migrations_Test\\20260518075049_InitialCreate_Test.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T07:50:49.778Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\228P\\Desktop\\\u041A\u0443\u0440\u0441\u043E\u0430\u044F\\PhotoStudioCRM\\PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend\\Program.cs",
+              "RelativeDocumentMoniker": "PhotoStudioCRM.Backend\\Program.cs",
+              "ToolTip": "C:\\Users\\228P\\Desktop\\\u041A\u0443\u0440\u0441\u043E\u0430\u044F\\PhotoStudioCRM\\PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend\\Program.cs",
+              "RelativeToolTip": "PhotoStudioCRM.Backend\\Program.cs",
+              "ViewState": "AgIAAFsAAAAAAAAAAAAswH8AAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T07:48:52.229Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\228P\\Desktop\\\u041A\u0443\u0440\u0441\u043E\u0430\u044F\\PhotoStudioCRM\\PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend\\appsettings.json",
+              "RelativeDocumentMoniker": "PhotoStudioCRM.Backend\\appsettings.json",
+              "ToolTip": "C:\\Users\\228P\\Desktop\\\u041A\u0443\u0440\u0441\u043E\u0430\u044F\\PhotoStudioCRM\\PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend\\appsettings.json",
+              "RelativeToolTip": "PhotoStudioCRM.Backend\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAClAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-05-18T07:48:07.753Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "OrderService.cs",
+              "DocumentMoniker": "C:\\Users\\228P\\Desktop\\\u041A\u0443\u0440\u0441\u043E\u0430\u044F\\PhotoStudioCRM\\PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend\\Models\\OrderService.cs",
+              "RelativeDocumentMoniker": "PhotoStudioCRM.Backend\\Models\\OrderService.cs",
+              "ToolTip": "C:\\Users\\228P\\Desktop\\\u041A\u0443\u0440\u0441\u043E\u0430\u044F\\PhotoStudioCRM\\PhotoStudioCRM.Backend\\PhotoStudioCRM.Backend\\Models\\OrderService.cs",
+              "RelativeToolTip": "PhotoStudioCRM.Backend\\Models\\OrderService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T07:36:31.731Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -30,8 +30,16 @@
             overflow-y: auto;
             box-shadow: var(--shadow-xl);
             border: 1px solid rgba(255, 0, 255, 0.3);
-            color: var(--text-white);
+            color: white;
+            position: relative;
         }
+        
+        /* ВАЖНО: разрешаем содержимому выходить за пределы модального окна */
+        .modal-content {
+            overflow-x: visible;
+            overflow-y: auto;
+        }
+        
         .modal-content::-webkit-scrollbar {
             width: 6px;
         }
@@ -59,19 +67,20 @@
             border: none;
             font-weight: 600;
             transition: all 0.3s;
+            color: white;
         }
         .btn-small:hover {
             transform: translateY(-2px);
         }
-        .btn-edit { background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); color: white; }
-        .btn-delete { background: linear-gradient(135deg, #ef4444 0%, #f87171 100%); color: white; }
-        .btn-add { background: linear-gradient(135deg, #10b981 0%, #34d399 100%); color: white; margin-bottom: 20px; }
-        .btn-assign { background: var(--main-gradient); color: white; }
-        .btn-cancel { background: linear-gradient(135deg, #ef4444 0%, #f87171 100%); color: white; }
-        .btn-reassign { background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); color: white; }
-        .btn-mark-paid { background: linear-gradient(135deg, #10b981 0%, #34d399 100%); color: white; }
+        .btn-edit { background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5); }
+        .btn-delete { background: linear-gradient(135deg, #ef4444 0%, #f87171 100%); color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5); }
+        .btn-add { background: linear-gradient(135deg, #10b981 0%, #34d399 100%); color: white; margin-bottom: 20px; text-shadow: 0 0 2px rgba(0,0,0,0.5); }
+        .btn-assign { background: var(--main-gradient); color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5); }
+        .btn-cancel { background: linear-gradient(135deg, #ef4444 0%, #f87171 100%); color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5); }
+        .btn-reassign { background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5); }
+        .btn-mark-paid { background: linear-gradient(135deg, #10b981 0%, #34d399 100%); color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5); }
         
-        /* Стили для выбора эмодзи в неоновой теме */
+        /* Стили для выбора эмодзи - ИСПРАВЛЕННЫЕ (панель не обрезается) */
         .emoji-picker {
             position: relative;
             display: inline-block;
@@ -87,7 +96,7 @@
             border-radius: 28px;
             background: rgba(30, 15, 40, 0.8);
             transition: all 0.3s;
-            color: var(--text-white);
+            color: white;
         }
         .emoji-preview:hover {
             border-color: var(--fuchsia);
@@ -99,25 +108,26 @@
             font-size: 24px;
         }
         .emoji-preview span:last-child {
-            color: var(--text-white-dim);
+            color: rgba(255,255,255,0.7);
             font-size: 12px;
         }
-        .emoji-dropdown {
-            position: absolute;
-            background: rgba(30, 15, 40, 0.95);
+        
+        /* Дропдаун эмодзи - с фиксированным позиционированием относительно viewport */
+        .emoji-dropdown-global {
+            position: fixed !important;
+            background: rgba(30, 15, 40, 0.98);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 0, 255, 0.3);
             border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-            z-index: 1002;
-            max-height: 320px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            z-index: 10000;
+            max-height: 350px;
             overflow-y: auto;
             display: none;
-            min-width: 280px;
-            left: 0;
-            right: 0;
+            min-width: 320px;
+            width: 320px;
         }
-        .emoji-dropdown.show {
+        .emoji-dropdown-global.show {
             display: block;
             animation: fadeInUp 0.2s ease-out;
         }
@@ -126,7 +136,7 @@
             gap: 6px;
             padding: 12px;
             border-bottom: 1px solid rgba(255, 0, 255, 0.2);
-            background: rgba(45, 27, 46, 0.8);
+            background: rgba(45, 27, 46, 0.9);
             position: sticky;
             top: 0;
             flex-wrap: wrap;
@@ -141,22 +151,24 @@
             font-size: 12px;
             transition: all 0.3s;
             font-weight: 500;
-            color: var(--text-white-dim);
+            color: rgba(255,255,255,0.7);
         }
         .emoji-cat-btn:hover {
             background: rgba(255, 0, 255, 0.2);
             transform: translateY(-2px);
+            color: white;
         }
         .emoji-cat-btn.active {
             background: var(--main-gradient);
             color: white;
+            text-shadow: 0 0 3px rgba(0,0,0,0.5);
         }
         .emoji-list {
             display: grid;
             grid-template-columns: repeat(8, 1fr);
             gap: 6px;
             padding: 12px;
-            max-height: 220px;
+            max-height: 250px;
             overflow-y: auto;
         }
         .emoji-item {
@@ -185,37 +197,41 @@
         .payment-status-notpaid { background: rgba(239, 68, 68, 0.2); color: #fca5a5; padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; }
         
         .tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-        .tab { padding: 8px 20px; background: rgba(30, 15, 40, 0.6); border-radius: 40px; cursor: pointer; transition: all 0.3s; font-weight: 600; font-size: 13px; color: var(--text-white-dim); border: 1px solid rgba(255, 0, 255, 0.2); }
-        .tab:hover { background: rgba(255, 0, 255, 0.15); transform: translateY(-2px); color: var(--text-white); }
-        .tab.active { background: var(--main-gradient); color: white; border-color: transparent; box-shadow: var(--shadow-glow); }
+        .tab { padding: 8px 20px; background: rgba(30, 15, 40, 0.6); border-radius: 40px; cursor: pointer; transition: all 0.3s; font-weight: 600; font-size: 13px; color: white; border: 1px solid rgba(255, 0, 255, 0.2); text-shadow: 0 0 2px rgba(0,0,0,0.5); }
+        .tab:hover { background: rgba(255, 0, 255, 0.15); transform: translateY(-2px); text-shadow: 0 0 5px #FF00FF; }
+        .tab.active { background: var(--main-gradient); color: white; border-color: transparent; box-shadow: var(--shadow-glow); text-shadow: 0 0 3px rgba(0,0,0,0.5); }
         .count-badge { background: var(--fuchsia); color: white; border-radius: 50%; padding: 2px 8px; font-size: 11px; margin-left: 8px; }
         
         .order-table { width: 100%; border-collapse: collapse; }
-        .order-table th, .order-table td { padding: 12px; text-align: left; border-bottom: 1px solid rgba(255, 0, 255, 0.15); color: var(--text-white-dim); }
-        .order-table th { background: rgba(179, 68, 108, 0.3); font-weight: 700; color: var(--text-white); }
+        .order-table th, .order-table td { padding: 12px; text-align: left; border-bottom: 1px solid rgba(255, 0, 255, 0.15); color: white; white-space: nowrap; }
+        .order-table th { background: rgba(179, 68, 108, 0.3); font-weight: 700; color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5); }
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
         select.btn-small { 
             padding: 6px 12px; 
             background: rgba(30, 15, 40, 0.8); 
             border: 1px solid rgba(255, 0, 255, 0.3); 
             border-radius: 20px; 
-            color: var(--text-white);
+            color: white;
             cursor: pointer;
         }
         
-        .status-active { color: #6ee7b7; font-weight: 600; background: rgba(16,185,129,0.15); padding: 4px 12px; border-radius: 20px; display: inline-block; }
-        .status-inactive { color: #fca5a5; font-weight: 600; background: rgba(239,68,68,0.15); padding: 4px 12px; border-radius: 20px; display: inline-block; }
-        .role-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        .status-active { color: #6ee7b7; font-weight: 600; background: rgba(16,185,129,0.15); padding: 4px 12px; border-radius: 20px; display: inline-block; text-shadow: 0 0 2px rgba(0,0,0,0.5); }
+        .status-inactive { color: #fca5a5; font-weight: 600; background: rgba(239,68,68,0.15); padding: 4px 12px; border-radius: 20px; display: inline-block; text-shadow: 0 0 2px rgba(0,0,0,0.5); }
+        .role-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5); }
         
         .stats-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px; }
         .stat-summary-card { background: linear-gradient(135deg, rgba(179, 68, 108, 0.3) 0%, rgba(191, 0, 255, 0.3) 100%); padding: 15px; border-radius: 20px; text-align: center; border: 1px solid rgba(255, 0, 255, 0.2); backdrop-filter: blur(5px); }
-        .stat-summary-card .value { font-size: 28px; font-weight: bold; background: var(--main-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .stat-summary-card .label { font-size: 12px; color: var(--text-white-dim); }
+        .stat-summary-card .value { font-size: 28px; font-weight: bold; color: white; text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF; }
+        .stat-summary-card .label { font-size: 12px; color: rgba(255,255,255,0.8); }
         
         .filter-bar { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
-        .filter-select { padding: 8px 16px; border-radius: 30px; border: 1px solid rgba(255, 0, 255, 0.3); background: rgba(30, 15, 40, 0.8); cursor: pointer; color: var(--text-white); }
-        .search-input { padding: 8px 16px; border-radius: 30px; border: 1px solid rgba(255, 0, 255, 0.3); background: rgba(30, 15, 40, 0.8); width: 250px; color: var(--text-white); }
-        .search-input::placeholder { color: var(--text-white-dimmer); }
-        .total-count { margin-left: auto; font-size: 14px; color: var(--text-white-dim); }
+        .filter-select { padding: 8px 16px; border-radius: 30px; border: 1px solid rgba(255, 0, 255, 0.3); background: rgba(30, 15, 40, 0.8); cursor: pointer; color: white; }
+        .search-input { padding: 8px 16px; border-radius: 30px; border: 1px solid rgba(255, 0, 255, 0.3); background: rgba(30, 15, 40, 0.8); width: 250px; color: white; }
+        .search-input::placeholder { color: rgba(255,255,255,0.5); }
+        .total-count { margin-left: auto; font-size: 14px; color: rgba(255,255,255,0.7); }
         
         .options-grid {
             display: grid;
@@ -229,17 +245,47 @@
             padding: 15px;
             border: 1px solid rgba(255, 0, 255, 0.2);
             transition: all 0.3s;
-            color: var(--text-white);
+            color: white;
         }
         .option-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--fuchsia); }
         .option-icon { font-size: 40px; margin-bottom: 10px; }
-        .option-name { font-size: 16px; font-weight: bold; color: var(--text-white); }
-        .option-price { font-size: 18px; font-weight: bold; background: var(--main-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 8px 0; }
-        .option-description { font-size: 12px; color: var(--text-white-dim); }
+        .option-name { font-size: 16px; font-weight: bold; color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5); }
+        .option-price { font-size: 18px; font-weight: bold; color: #FF66FF; margin: 8px 0; text-shadow: 0 0 3px #FF00FF; }
+        .option-description { font-size: 12px; color: rgba(255,255,255,0.7); }
         .option-category { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 10px; margin-top: 8px; }
         .category-effect { background: rgba(224, 231, 255, 0.2); color: #a78bfa; }
         .category-frame { background: rgba(252, 231, 243, 0.2); color: #f9a8d4; }
         .category-filter { background: rgba(209, 250, 229, 0.2); color: #6ee7b7; }
+        
+        /* Заголовки карточек */
+        .card h2 {
+            color: white;
+            text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;
+        }
+        
+        .card p {
+            color: white;
+        }
+        
+        /* Навигация */
+        .navbar-logo {
+            color: white;
+            text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;
+        }
+        
+        .navbar-links a {
+            color: white;
+            text-shadow: 0 0 2px rgba(0,0,0,0.5);
+        }
+        
+        .navbar-links a:hover {
+            text-shadow: 0 0 5px #FF00FF;
+        }
+        
+        .user-name {
+            color: white;
+            text-shadow: 0 0 3px #FF00FF;
+        }
         
         @media (max-width: 768px) {
             .form-row { grid-template-columns: 1fr; }
@@ -247,6 +293,7 @@
             .filter-bar { flex-direction: column; align-items: stretch; }
             .filter-bar .total-count { margin-left: 0; text-align: center; }
             .search-input { width: 100%; }
+            .emoji-dropdown-global { width: 280px; min-width: 280px; right: 10px; left: auto; }
         }
     </style>
 </head>
@@ -281,57 +328,116 @@
             '🎨 Искусство': ['🎨','🖌️','🖍️','🖼️','🖌️','✏️','📝','📓','📔','📕','📖','📗','📘','📙','📚','📜','📄','📃','📑','📊','📈','📉','🗒️','🗓️','📆','📅','📇','🗃️','🗳️','🗄️','📁','📂','🗂️','📰','📓','📔','📒','📕','📗','📘','📙','📚','📖','🔖','🧾','🏷️','💰','💴','💵','💶','💷','💸','💳','🧾','✉️','📧','📨','📩','📤','📥','📦','📫','📪','📬','📭','📮','📯','📜','📃','📄','📑','📊','📈','📉','🗒️','🗓️','📆','📅','📇','🗃️','🗳️','🗄️','📁','📂','🗂️','🗞️','📰','📓','📔','📒','📕','📗','📘','📙','📚','📖','🔖','🧾','🏷️']
         };
         
+        // Глобальная переменная для хранения текущего активного пикера
+        let currentActivePicker = null;
+        
         // Функция для создания выпадающего списка эмодзи
         function createEmojiPicker(inputId, previewId) {
             return `
-                <div class="emoji-picker" id="emoji-picker-${previewId}">
-                    <div class="emoji-preview" onclick="toggleEmojiDropdown('${previewId}')">
+                <div class="emoji-picker" id="emoji-picker-${previewId}" data-input-id="${inputId}" data-preview-id="${previewId}">
+                    <div class="emoji-preview" onclick="openEmojiDropdownGlobal('${previewId}', '${inputId}')">
                         <span id="${previewId}_icon">🎁</span>
                         <span>▼ Выбрать эмодзи</span>
-                    </div>
-                    <div class="emoji-dropdown" id="${previewId}_dropdown">
-                        <div class="emoji-categories" id="${previewId}_categories"></div>
-                        <div class="emoji-list" id="${previewId}_list"></div>
                     </div>
                     <input type="hidden" id="${inputId}" value="🎁">
                 </div>
             `;
         }
         
-        function toggleEmojiDropdown(previewId) {
-            const dropdown = document.getElementById(`${previewId}_dropdown`);
-            document.querySelectorAll('.emoji-dropdown').forEach(d => {
-                if (d.id !== `${previewId}_dropdown`) {
-                    d.classList.remove('show');
-                }
-            });
-            dropdown.classList.toggle('show');
+        // Открытие глобального дропдауна с фиксированным позиционированием
+        function openEmojiDropdownGlobal(previewId, inputId) {
+            // Закрываем предыдущий дропдаун если есть
+            if (currentActivePicker) {
+                closeGlobalEmojiDropdown();
+            }
+            
+            const picker = document.getElementById(`emoji-picker-${previewId}`);
+            const preview = picker.querySelector('.emoji-preview');
+            const previewRect = preview.getBoundingClientRect();
+            
+            // Создаем глобальный дропдаун
+            const dropdown = document.createElement('div');
+            dropdown.id = `emoji-dropdown-global-${previewId}`;
+            dropdown.className = 'emoji-dropdown-global';
+            
+            // Заполняем содержимое
+            dropdown.innerHTML = `
+                <div class="emoji-categories" id="emoji-categories-global-${previewId}"></div>
+                <div class="emoji-list" id="emoji-list-global-${previewId}"></div>
+            `;
+            
+            document.body.appendChild(dropdown);
+            
+            // Позиционируем дропдаун
+            const spaceBelow = window.innerHeight - previewRect.bottom;
+            const dropdownHeight = 350;
+            
+            if (spaceBelow >= dropdownHeight) {
+                // Открываем вниз
+                dropdown.style.top = `${previewRect.bottom + 5}px`;
+                dropdown.style.left = `${previewRect.left}px`;
+                dropdown.style.bottom = 'auto';
+            } else {
+                // Открываем вверх
+                dropdown.style.bottom = `${window.innerHeight - previewRect.top + 5}px`;
+                dropdown.style.left = `${previewRect.left}px`;
+                dropdown.style.top = 'auto';
+            }
+            
+            dropdown.classList.add('show');
+            
+            // Сохраняем текущий активный пикер
+            currentActivePicker = {
+                dropdownId: dropdown.id,
+                previewId: previewId,
+                inputId: inputId
+            };
+            
+            // Инициализируем содержимое дропдауна
+            initGlobalEmojiPicker(previewId, inputId);
+            
+            // Закрытие при клике вне
+            setTimeout(() => {
+                document.addEventListener('click', function onClickOutside(e) {
+                    if (!dropdown.contains(e.target) && !preview.contains(e.target)) {
+                        closeGlobalEmojiDropdown();
+                        document.removeEventListener('click', onClickOutside);
+                    }
+                });
+            }, 10);
         }
         
-        function initEmojiPicker(previewId, inputId, currentEmoji = '🎁') {
-            const categoriesContainer = document.getElementById(`${previewId}_categories`);
-            const listContainer = document.getElementById(`${previewId}_list`);
+        function closeGlobalEmojiDropdown() {
+            if (currentActivePicker) {
+                const dropdown = document.getElementById(currentActivePicker.dropdownId);
+                if (dropdown) dropdown.remove();
+                currentActivePicker = null;
+            }
+        }
+        
+        function initGlobalEmojiPicker(previewId, inputId) {
+            const categoriesContainer = document.getElementById(`emoji-categories-global-${previewId}`);
+            const listContainer = document.getElementById(`emoji-list-global-${previewId}`);
             const previewSpan = document.getElementById(`${previewId}_icon`);
             const hiddenInput = document.getElementById(inputId);
             
             if (!categoriesContainer || !listContainer) return;
             
-            previewSpan.textContent = currentEmoji;
-            hiddenInput.value = currentEmoji;
+            const currentEmoji = previewSpan.textContent;
             
             const categoryNames = Object.keys(emojiCategories);
             categoriesContainer.innerHTML = categoryNames.map((cat, idx) => `
-                <button class="emoji-cat-btn ${idx === 0 ? 'active' : ''}" onclick="switchEmojiCategory('${previewId}', '${cat.replace(/'/g, "\\'")}')">${cat}</button>
+                <button class="emoji-cat-btn ${idx === 0 ? 'active' : ''}" onclick="switchGlobalEmojiCategory('${previewId}', '${cat.replace(/'/g, "\\'")}', '${inputId}')">${cat}</button>
             `).join('');
             
-            renderEmojiList(previewId, categoryNames[0], hiddenInput, previewSpan);
+            renderGlobalEmojiList(previewId, categoryNames[0], hiddenInput, previewSpan, inputId);
         }
         
-        function switchEmojiCategory(previewId, category) {
-            const hiddenInput = document.getElementById(previewId === 'certIcon_preview' ? 'certIcon' : 'optIcon');
+        function switchGlobalEmojiCategory(previewId, category, inputId) {
+            const hiddenInput = document.getElementById(inputId);
             const previewSpan = document.getElementById(`${previewId}_icon`);
             
-            const buttons = document.querySelectorAll(`#${previewId}_categories .emoji-cat-btn`);
+            const buttons = document.querySelectorAll(`#emoji-categories-global-${previewId} .emoji-cat-btn`);
             buttons.forEach(btn => {
                 btn.classList.remove('active');
                 if (btn.textContent === category) {
@@ -339,35 +445,36 @@
                 }
             });
             
-            renderEmojiList(previewId, category, hiddenInput, previewSpan);
+            renderGlobalEmojiList(previewId, category, hiddenInput, previewSpan, inputId);
         }
         
-        function renderEmojiList(previewId, category, hiddenInput, previewSpan) {
-            const listContainer = document.getElementById(`${previewId}_list`);
+        function renderGlobalEmojiList(previewId, category, hiddenInput, previewSpan, inputId) {
+            const listContainer = document.getElementById(`emoji-list-global-${previewId}`);
             const emojis = emojiCategories[category] || emojiCategories[Object.keys(emojiCategories)[0]];
             
             listContainer.innerHTML = emojis.map(emoji => `
-                <div class="emoji-item" onclick="selectEmoji('${previewId}', '${emoji}')">${emoji}</div>
+                <div class="emoji-item" onclick="selectGlobalEmoji('${previewId}', '${emoji}', '${inputId}')">${emoji}</div>
             `).join('');
         }
         
-        function selectEmoji(previewId, emoji) {
+        function selectGlobalEmoji(previewId, emoji, inputId) {
             const previewSpan = document.getElementById(`${previewId}_icon`);
-            const hiddenInput = document.getElementById(previewId === 'certIcon_preview' ? 'certIcon' : 'optIcon');
-            const dropdown = document.getElementById(`${previewId}_dropdown`);
+            const hiddenInput = document.getElementById(inputId);
             
             previewSpan.textContent = emoji;
             hiddenInput.value = emoji;
-            dropdown.classList.remove('show');
+            closeGlobalEmojiDropdown();
         }
         
-        document.addEventListener('click', function(event) {
-            if (!event.target.closest('.emoji-picker')) {
-                document.querySelectorAll('.emoji-dropdown').forEach(d => {
-                    d.classList.remove('show');
+        // Закрытие дропдауна при скролле
+        function closeEmojiDropdownOnScroll() {
+            const modalContent = document.querySelector('.modal-content');
+            if (modalContent) {
+                modalContent.addEventListener('scroll', function() {
+                    closeGlobalEmojiDropdown();
                 });
             }
-        });
+        }
         
         function loadExtraOptionsFromStorage() {
             const saved = localStorage.getItem('photoStudioExtraOptions');
@@ -494,18 +601,18 @@
             return `
                 <div class="navbar">
                     <div class="navbar-content">
-                        <div class="navbar-logo">📸 PhotoStudio CRM - Админ панель</div>
+                        <div class="navbar-logo" style="color: white; text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;">📸 PhotoStudio CRM - Админ панель</div>
                         <div class="navbar-links">
-                            <a onclick="loadServices()">✨ Услуги</a>
-                            <a onclick="loadExtraOptions()">🎨 Эффекты</a>
-                            <a onclick="loadCertificates()">🎁 Сертификаты</a>
-                            <a onclick="loadPhotographers()">📷 Фотографы</a>
-                            <a onclick="loadOrders()">📋 Заказы</a>
-                            <a onclick="loadUsers()">👥 Пользователи</a>
+                            <a onclick="loadServices()" style="color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5);">✨ Услуги</a>
+                            <a onclick="loadExtraOptions()" style="color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5);">🎨 Эффекты</a>
+                            <a onclick="loadCertificates()" style="color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5);">🎁 Сертификаты</a>
+                            <a onclick="loadPhotographers()" style="color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5);">📷 Фотографы</a>
+                            <a onclick="loadOrders()" style="color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5);">📋 Заказы</a>
+                            <a onclick="loadUsers()" style="color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5);">👥 Пользователи</a>
                         </div>
                         <div class="user-info">
-                            <span class="user-name">👑 ${currentUser.firstName} (Admin)</span>
-                            <button class="logout-btn" onclick="logout()">Выйти</button>
+                            <span class="user-name" style="color: white; text-shadow: 0 0 3px #FF00FF;">👑 ${currentUser.firstName} (Admin)</span>
+                            <button class="logout-btn" onclick="logout()" style="color: white;">Выйти</button>
                         </div>
                     </div>
                 </div>
@@ -564,7 +671,7 @@
                             </div>
                         `).join('')}
                     </div>
-                    <p style="margin-top: 20px; font-size: 12px; color: var(--text-white-dim);">* Эти эффекты будут доступны клиентам при выборе услуг</p>
+                    <p style="margin-top: 20px; font-size: 12px; color: rgba(255,255,255,0.7);">* Эти эффекты будут доступны клиентам при выборе услуг</p>
                 </div>
             `;
         }
@@ -596,8 +703,6 @@
                 </div>
             `;
             document.body.appendChild(modal);
-            
-            initEmojiPicker('optIcon_preview', 'optIcon', '✨');
             
             document.getElementById('addOptionForm').addEventListener('submit', (e) => {
                 e.preventDefault();
@@ -649,8 +754,6 @@
                 </div>
             `;
             document.body.appendChild(modal);
-            
-            initEmojiPicker('optIcon_preview', 'optIcon', option.icon);
             
             document.getElementById('editOptionForm').addEventListener('submit', (e) => {
                 e.preventDefault();
@@ -727,7 +830,7 @@
                             </div>
                         `).join('')}
                     </div>
-                    <p style="margin-top: 20px; font-size: 12px; color: var(--text-white-dim);">* Сертификаты сохраняются в localStorage и отображаются на главной странице</p>
+                    <p style="margin-top: 20px; font-size: 12px; color: rgba(255,255,255,0.7);">* Сертификаты сохраняются в localStorage и отображаются на главной странице</p>
                 </div>
             `;
         }
@@ -756,8 +859,6 @@
                 </div>
             `;
             document.body.appendChild(modal);
-            
-            initEmojiPicker('certIcon_preview', 'certIcon', '🎁');
             
             document.getElementById('addCertificateForm').addEventListener('submit', (e) => {
                 e.preventDefault();
@@ -807,8 +908,6 @@
             `;
             document.body.appendChild(modal);
             
-            initEmojiPicker('certIcon_preview', 'certIcon', cert.icon || '🎁');
-            
             document.getElementById('editCertificateForm').addEventListener('submit', (e) => {
                 e.preventDefault();
                 cert.name = document.getElementById('certName').value;
@@ -844,7 +943,7 @@
                 if (photographersList.length === 0) {
                     content.innerHTML = `<div class="card"><h2>📷 Управление фотографами</h2>
                     <button class="btn btn-add" onclick="showAddPhotographerModal()">+ Добавить фотографа</button>
-                    <p style="text-align:center;padding:40px; color: var(--text-white-dim);">Нет добавленных фотографов</p></div>`;
+                    <p style="text-align:center;padding:40px; color: rgba(255,255,255,0.7);">Нет добавленных фотографов</p></div>`;
                     return;
                 }
                 content.innerHTML = `<div class="card"><h2>📷 Управление фотографами</h2>
@@ -901,7 +1000,7 @@
         function renderOrdersTab() {
             const container = document.getElementById('ordersContainer');
             const orders = currentOrderTab === 'all' ? allOrders : pendingOrders;
-            if (!orders || orders.length === 0) { container.innerHTML = '<p style="text-align: center; padding: 20px; color: var(--text-white-dim);">Нет заказов</p>'; return; }
+            if (!orders || orders.length === 0) { container.innerHTML = '<p style="text-align: center; padding: 20px; color: rgba(255,255,255,0.7);">Нет заказов</p>'; return; }
             let html = `<div class="table-responsive"><table class="order-table"><thead><tr><th>ID</th><th>Клиент</th><th>Дата</th><th>Сумма</th><th>Способ оплаты</th><th>Статус оплаты</th><th>Фотограф</th><th>Статус заказа</th><th>Действия</th></tr></thead><tbody>`;
             orders.forEach(order => {
                 const canAssign = order.status === 0 && !order.photographerId;
@@ -923,7 +1022,7 @@
                     </td>
                 `;
             });
-            html += `</tbody></table></div>`;
+            html += `</tbody></tr></div>`;
             container.innerHTML = html;
         }
         
@@ -997,7 +1096,7 @@
                         <td><strong>${user.firstName} ${user.lastName}</strong></td>
                         <td>${user.email}</td>
                         <td>${user.phone || '—'}</td>
-                        <td><span class="role-badge" style="background:${getRoleColor(user.role)};color:white;">${getRoleIcon(user.role)} ${getRoleName(user.role)}</span></td>
+                        <td><span class="role-badge" style="background:${getRoleColor(user.role)};color:white; text-shadow: 0 0 2px rgba(0,0,0,0.5);">${getRoleIcon(user.role)} ${getRoleName(user.role)}</span></td>
                         <td>${user.createdAt ? new Date(user.createdAt).toLocaleDateString() : '—'}</td>
                         <td><span class="${user.isActive ? 'status-active' : 'status-inactive'}">${user.isActive ? '🟢 Активен' : '🔴 Неактивен'}</span></td>
                         <td><button class="btn-small ${user.isActive ? 'btn-delete' : 'btn-add'}" onclick="toggleUserStatus(${user.id}, ${!user.isActive})">${user.isActive ? '🔒 Заблокировать' : '✅ Активировать'}</button>
@@ -1138,15 +1237,16 @@
         // Инициализация
         loadExtraOptionsFromStorage();
         
-        window.toggleEmojiDropdown = toggleEmojiDropdown;
-        window.switchEmojiCategory = switchEmojiCategory;
-        window.selectEmoji = selectEmoji;
         window.loadServices = loadServices;
         window.loadExtraOptions = loadExtraOptions;
         window.loadCertificates = loadCertificates;
         window.loadPhotographers = loadPhotographers;
         window.loadOrders = loadOrders;
         window.loadUsers = loadUsers;
+        window.openEmojiDropdownGlobal = openEmojiDropdownGlobal;
+        window.switchGlobalEmojiCategory = switchGlobalEmojiCategory;
+        window.selectGlobalEmoji = selectGlobalEmoji;
+        window.closeGlobalEmojiDropdown = closeGlobalEmojiDropdown;
         
         if (checkAuth()) {
             document.getElementById('app').innerHTML = renderNavbar();

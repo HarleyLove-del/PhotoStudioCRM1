@@ -22,7 +22,7 @@
             border-left: 4px solid var(--fuchsia);
             border: 1px solid rgba(255, 0, 255, 0.2);
             backdrop-filter: blur(5px);
-            color: var(--text-white);
+            color: white;
         }
         .order-card:hover {
             transform: translateY(-5px);
@@ -34,15 +34,59 @@
         .order-card.progress { border-left-color: #3b82f6; background: rgba(59, 130, 246, 0.1); }
         .order-card.completed { border-left-color: #10b981; background: rgba(16, 185, 129, 0.05); opacity: 0.9; }
         
-        .order-title { font-size: 18px; font-weight: bold; margin-bottom: 10px; color: var(--text-white); }
-        .order-info { font-size: 14px; color: var(--text-white-dim); margin: 8px 0; }
+        .order-title { 
+            font-size: 18px; 
+            font-weight: bold; 
+            margin-bottom: 10px; 
+            color: white;
+            text-shadow: 0 0 3px #FF00FF, 0 0 5px #BF00FF;
+        }
+        .order-info { 
+            font-size: 14px; 
+            color: white; 
+            margin: 8px 0;
+            text-shadow: 0 0 2px rgba(0,0,0,0.5);
+        }
         
-        .services-list { margin: 10px 0; padding: 10px; background: rgba(30, 15, 40, 0.6); border-radius: 12px; border: 1px solid rgba(255, 0, 255, 0.15); }
-        .service-item { font-size: 12px; padding: 4px 0; display: flex; justify-content: space-between; color: var(--text-white-dim); }
-        .service-total { border-top: 1px solid rgba(255, 0, 255, 0.2); margin-top: 8px; padding-top: 8px; font-weight: bold; color: var(--text-white); }
+        .services-list { 
+            margin: 10px 0; 
+            padding: 10px; 
+            background: rgba(30, 15, 40, 0.6); 
+            border-radius: 12px; 
+            border: 1px solid rgba(255, 0, 255, 0.15); 
+        }
+        .service-item { 
+            font-size: 12px; 
+            padding: 4px 0; 
+            display: flex; 
+            justify-content: space-between; 
+            color: white;
+            text-shadow: 0 0 2px rgba(0,0,0,0.5);
+        }
+        .service-total { 
+            border-top: 1px solid rgba(255, 0, 255, 0.2); 
+            margin-top: 8px; 
+            padding-top: 8px; 
+            font-weight: bold; 
+            color: white;
+            text-shadow: 0 0 3px #FF00FF;
+        }
         
-        .options-list { margin: 10px 0; padding: 10px; background: rgba(255, 0, 255, 0.1); border-radius: 12px; border: 1px solid rgba(255, 0, 255, 0.2); }
-        .option-item { font-size: 12px; padding: 4px 0; display: flex; justify-content: space-between; color: var(--fuchsia-light); }
+        .options-list { 
+            margin: 10px 0; 
+            padding: 10px; 
+            background: rgba(255, 0, 255, 0.1); 
+            border-radius: 12px; 
+            border: 1px solid rgba(255, 0, 255, 0.2); 
+        }
+        .option-item { 
+            font-size: 12px; 
+            padding: 4px 0; 
+            display: flex; 
+            justify-content: space-between; 
+            color: #FF66FF;
+            text-shadow: 0 0 3px #FF00FF;
+        }
         
         .status-badge {
             display: inline-block;
@@ -71,12 +115,13 @@
             margin-top: 10px;
             width: 100%;
             transition: all 0.3s;
+            text-shadow: 0 0 3px rgba(0,0,0,0.5);
         }
         .btn-accept:hover { transform: translateY(-2px); box-shadow: var(--shadow-glow); }
         
         .btn-status {
             background: rgba(30, 15, 40, 0.8);
-            color: var(--text-white);
+            color: white;
             border: 1px solid rgba(255, 0, 255, 0.3);
             padding: 6px 12px;
             border-radius: 8px;
@@ -88,9 +133,24 @@
         .btn-status:hover { background: rgba(255, 0, 255, 0.15); border-color: var(--fuchsia); }
         
         .tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-        .tab { padding: 8px 20px; background: rgba(30, 15, 40, 0.6); border-radius: 40px; cursor: pointer; transition: all 0.3s; color: var(--text-white-dim); border: 1px solid rgba(255, 0, 255, 0.2); }
-        .tab:hover { background: rgba(255, 0, 255, 0.15); transform: translateY(-2px); }
-        .tab.active { background: var(--main-gradient); color: white; box-shadow: var(--shadow-glow); border-color: transparent; }
+        .tab { 
+            padding: 8px 20px; 
+            background: rgba(30, 15, 40, 0.6); 
+            border-radius: 40px; 
+            cursor: pointer; 
+            transition: all 0.3s; 
+            color: white;
+            border: 1px solid rgba(255, 0, 255, 0.2);
+            text-shadow: 0 0 2px rgba(0,0,0,0.5);
+        }
+        .tab:hover { background: rgba(255, 0, 255, 0.15); transform: translateY(-2px); text-shadow: 0 0 5px #FF00FF; }
+        .tab.active { 
+            background: var(--main-gradient); 
+            color: white; 
+            box-shadow: var(--shadow-glow); 
+            border-color: transparent;
+            text-shadow: 0 0 3px rgba(0,0,0,0.5);
+        }
         .count-badge { background: var(--fuchsia); color: white; border-radius: 50%; padding: 2px 8px; font-size: 11px; margin-left: 8px; }
         
         .detail-section {
@@ -101,8 +161,9 @@
         .detail-title {
             font-size: 12px;
             font-weight: 600;
-            color: var(--fuchsia);
+            color: #FF66FF;
             margin-bottom: 8px;
+            text-shadow: 0 0 3px #FF00FF;
         }
         .effect-tag {
             display: inline-block;
@@ -111,7 +172,7 @@
             border-radius: 12px;
             font-size: 11px;
             margin: 2px;
-            color: var(--fuchsia-light);
+            color: #FF66FF;
         }
         
         .photographer-assigned {
@@ -120,6 +181,7 @@
             border-radius: 8px;
             margin-bottom: 10px;
             border-left: 3px solid #3b82f6;
+            color: white;
         }
         
         .stats-grid {
@@ -144,28 +206,34 @@
         }
         .stat-card h3 {
             font-size: 14px;
-            color: var(--text-white-dim);
+            color: white;
             margin-bottom: 10px;
+            text-shadow: 0 0 3px #FF00FF;
         }
         .stat-card .value {
             font-size: 32px;
             font-weight: bold;
-            background: var(--main-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: white;
+            text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;
         }
         
         .modal-content {
             background: var(--bg-card);
             border: 1px solid rgba(255, 0, 255, 0.3);
-            color: var(--text-white);
+            color: white;
         }
         .modal-content h3 {
-            background: var(--main-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: white;
+            text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;
+        }
+        
+        .card h2 {
+            color: white;
+            text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;
+        }
+        
+        .alert-success, .alert-error, .alert-info {
+            color: white;
         }
         
         @media (max-width: 768px) {
@@ -250,14 +318,14 @@
             return `
                 <div class="navbar">
                     <div class="navbar-content">
-                        <div class="navbar-logo">📸 PhotoStudio CRM - Фотограф</div>
+                        <div class="navbar-logo" style="color: white; text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;">📸 PhotoStudio CRM - Фотограф</div>
                         <div class="navbar-links">
-                            <a onclick="loadDashboard()">🏠 Дашборд</a>
-                            <a onclick="loadMyOrders()">📷 Мои заказы</a>
-                            <a onclick="loadMySchedule()">📅 Расписание</a>
+                            <a onclick="loadDashboard()" style="color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5);">🏠 Дашборд</a>
+                            <a onclick="loadMyOrders()" style="color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5);">📷 Мои заказы</a>
+                            <a onclick="loadMySchedule()" style="color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5);">📅 Расписание</a>
                         </div>
                         <div class="user-info">
-                            <span class="user-name">📸 ${currentUser.firstName} ${currentUser.lastName}</span>
+                            <span class="user-name" style="color: white; text-shadow: 0 0 3px #FF00FF;">📸 ${currentUser.firstName} ${currentUser.lastName}</span>
                             <button class="logout-btn" onclick="logout()">Выйти</button>
                         </div>
                     </div>
@@ -377,7 +445,7 @@
                         <button class="btn-accept" onclick="acceptOrder(${order.id})">✅ Принять заказ</button>
                     ` : `
                         <div style="margin-top: 10px;">
-                            <select id="status_${order.id}" class="btn-status" style="padding: 6px; background: rgba(30, 15, 40, 0.8); color: var(--text-white); border: 1px solid rgba(255, 0, 255, 0.3);">
+                            <select id="status_${order.id}" class="btn-status" style="padding: 6px; background: rgba(30, 15, 40, 0.8); color: white; border: 1px solid rgba(255, 0, 255, 0.3);">
                                 <option value="1" ${order.status === 1 ? 'selected' : ''}>Подтвержден</option>
                                 <option value="2" ${order.status === 2 ? 'selected' : ''}>В работе</option>
                                 <option value="3" ${order.status === 3 ? 'selected' : ''}>Выполнен</option>
@@ -399,7 +467,10 @@
                 const pendingCount = dashboardData.pendingOrders?.length || 0;
                 const myOrdersCount = dashboardData.myOrders?.length || 0;
                 content.innerHTML = `
-                    <div style="margin-bottom:30px;"><h1>Добро пожаловать, ${currentUser.firstName}!</h1><p style="color: var(--text-white-dim);">Ваша панель управления заказами</p></div>
+                    <div style="margin-bottom:30px;">
+                        <h1 style="color: white; text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;">Добро пожаловать, ${currentUser.firstName}!</h1>
+                        <p style="color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5);">Ваша панель управления заказами</p>
+                    </div>
                     <div class="stats-grid">
                         <div class="stat-card"><h3>Новые заказы</h3><div class="value">${pendingCount}</div></div>
                         <div class="stat-card"><h3>Мои заказы</h3><div class="value">${myOrdersCount}</div></div>
@@ -419,12 +490,12 @@
             const container = document.getElementById('ordersContainer');
             if (currentTab === 'pending') {
                 const pendingOrders = dashboardData?.pendingOrders || [];
-                if (pendingOrders.length === 0) container.innerHTML = '<div class="card"><p style="text-align: center; color: var(--text-white-dim);">✨ Нет новых заказов. Отдыхайте!</p></div>';
-                else container.innerHTML = `<h2 style="color: var(--text-white);">📋 Новые заказы (требуют подтверждения)</h2><div class="orders-grid">${pendingOrders.map(order => renderOrderCard(order, true)).join('')}</div>`;
+                if (pendingOrders.length === 0) container.innerHTML = '<div class="card"><p style="text-align: center; color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5);">✨ Нет новых заказов. Отдыхайте!</p></div>';
+                else container.innerHTML = `<h2 style="color: white; text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;">📋 Новые заказы (требуют подтверждения)</h2><div class="orders-grid">${pendingOrders.map(order => renderOrderCard(order, true)).join('')}</div>`;
             } else {
                 const myOrders = dashboardData?.myOrders || [];
-                if (myOrders.length === 0) container.innerHTML = '<div class="card"><p style="text-align: center; color: var(--text-white-dim);">📷 У вас пока нет назначенных заказов</p></div>';
-                else container.innerHTML = `<h2 style="color: var(--text-white);">📷 Мои заказы</h2><div class="orders-grid">${myOrders.map(order => renderOrderCard(order, false)).join('')}</div>`;
+                if (myOrders.length === 0) container.innerHTML = '<div class="card"><p style="text-align: center; color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5);">📷 У вас пока нет назначенных заказов</p></div>';
+                else container.innerHTML = `<h2 style="color: white; text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;">📷 Мои заказы</h2><div class="orders-grid">${myOrders.map(order => renderOrderCard(order, false)).join('')}</div>`;
             }
         }
         
@@ -450,8 +521,8 @@
             try {
                 const response = await apiRequest('/photographer/assigned-orders');
                 const orders = await response.json();
-                if (orders.length === 0) content.innerHTML = '<div class="card"><p style="text-align: center; color: var(--text-white-dim);">📷 У вас пока нет назначенных заказов</p></div>';
-                else content.innerHTML = `<div class="card"><h2>📷 Мои назначенные заказы</h2><div class="orders-grid">${orders.map(order => renderOrderCard(order, false)).join('')}</div></div>`;
+                if (orders.length === 0) content.innerHTML = '<div class="card"><p style="text-align: center; color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5);">📷 У вас пока нет назначенных заказов</p></div>';
+                else content.innerHTML = `<div class="card"><h2 style="color: white; text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;">📷 Мои назначенные заказы</h2><div class="orders-grid">${orders.map(order => renderOrderCard(order, false)).join('')}</div></div>`;
             } catch (error) { content.innerHTML = `<div class="alert alert-error">❌ Ошибка: ${error.message}</div>`; }
         }
         
@@ -461,12 +532,12 @@
             try {
                 const response = await apiRequest('/photographer/schedule');
                 const schedule = await response.json();
-                content.innerHTML = `<div class="card"><h2>📅 Моё расписание</h2>
+                content.innerHTML = `<div class="card"><h2 style="color: white; text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;">📅 Моё расписание</h2>
                     <button class="btn btn-primary" onclick="showAddScheduleModal()" style="margin-bottom:20px;">+ Добавить слот</button>
-                    ${schedule.length === 0 ? '<p style="color: var(--text-white-dim);">Нет запланированных событий</p>' : `<div class="orders-grid">${schedule.map(slot => `
-                        <div class="order-card"><div class="order-title">📅 ${new Date(slot.startTime).toLocaleDateString()}</div>
-                        <div class="order-info">⏰ ${new Date(slot.startTime).toLocaleTimeString()} - ${new Date(slot.endTime).toLocaleTimeString()}</div>
-                        <div class="order-info">${slot.isAvailable ? '✓ Доступно' : '✗ Занято'}</div>
+                    ${schedule.length === 0 ? '<p style="color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5);">Нет запланированных событий</p>' : `<div class="orders-grid">${schedule.map(slot => `
+                        <div class="order-card"><div class="order-title" style="color: white; text-shadow: 0 0 3px #FF00FF;">📅 ${new Date(slot.startTime).toLocaleDateString()}</div>
+                        <div class="order-info" style="color: white;">⏰ ${new Date(slot.startTime).toLocaleTimeString()} - ${new Date(slot.endTime).toLocaleTimeString()}</div>
+                        <div class="order-info" style="color: white;">${slot.isAvailable ? '✓ Доступно' : '✗ Занято'}</div>
                         <button class="btn-status" onclick="deleteScheduleSlot(${slot.id})">🗑 Удалить</button></div>`).join('')}</div>`}</div>`;
             } catch (error) { content.innerHTML = `<div class="alert alert-error">❌ Ошибка: ${error.message}</div>`; }
         }
@@ -475,9 +546,9 @@
             const modal = document.createElement('div');
             modal.className = 'modal';
             modal.style.display = 'flex';
-            modal.innerHTML = `<div class="modal-content"><h3>➕ Добавить слот в расписание</h3>
-                <form id="addScheduleForm"><div class="form-group"><label>Дата и время начала</label><input type="datetime-local" id="startTime" required></div>
-                <div class="form-group"><label>Дата и время окончания</label><input type="datetime-local" id="endTime" required></div>
+            modal.innerHTML = `<div class="modal-content"><h3 style="color: white; text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;">➕ Добавить слот в расписание</h3>
+                <form id="addScheduleForm"><div class="form-group"><label style="color: white;">Дата и время начала</label><input type="datetime-local" id="startTime" required></div>
+                <div class="form-group"><label style="color: white;">Дата и время окончания</label><input type="datetime-local" id="endTime" required></div>
                 <div class="btn-group"><button type="submit" class="btn btn-primary">Сохранить</button>
                 <button type="button" class="btn btn-secondary" onclick="this.closest('.modal').remove()">Отмена</button></div></form></div>`;
             document.body.appendChild(modal);

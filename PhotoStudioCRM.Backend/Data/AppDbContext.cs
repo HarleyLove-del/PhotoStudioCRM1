@@ -18,6 +18,7 @@ namespace PhotoStudioCRM.Backend.Data
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Report> Reports { get; set; }
+        public DbSet<Receipt> Receipts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -55,6 +56,46 @@ namespace PhotoStudioCRM.Backend.Data
                 .HasOne(s => s.Photographer)
                 .WithMany()
                 .HasForeignKey(s => s.PhotographerId);
+
+            // Configure Receipt entity
+            modelBuilder.Entity<Receipt>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.ReceiptNumber)
+                    .HasMaxLength(50)
+                    .IsRequired();
+
+                entity.Property(e => e.PaymentMethod)
+                    .HasMaxLength(50)
+                    .IsRequired();
+
+                entity.Property(e => e.Amount)
+                    .HasPrecision(18, 2)
+                    .IsRequired();
+
+                entity.Property(e => e.CreatedDate)
+                    .IsRequired();
+
+                entity.Property(e => e.IsSent)
+                    .IsRequired();
+
+                // Configure relationship with Order
+                entity.HasOne(e => e.Order)
+                    .WithMany()
+                    .HasForeignKey(e => e.OrderId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                // Add indexes for better performance
+                entity.HasIndex(e => e.ReceiptNumber)
+                    .IsUnique();
+
+                entity.HasIndex(e => e.OrderId);
+
+                entity.HasIndex(e => e.CreatedDate);
+
+                entity.HasIndex(e => e.IsSent);
+            });
 
             // Configure decimal precision
             modelBuilder.Entity<Order>()

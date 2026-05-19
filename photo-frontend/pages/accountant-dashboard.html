@@ -34,24 +34,41 @@
             background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
         }
-        .report-stat .value { font-size: 24px; font-weight: bold; color: var(--text-white); }
-        .report-stat .label { font-size: 12px; color: var(--text-white-dim); }
+        .report-stat .value { font-size: 24px; font-weight: bold; color: white; text-shadow: 0 0 3px #FF00FF; }
+        .report-stat .label { font-size: 12px; color: rgba(255,255,255,0.8); }
         
         .payment-method {
             display: flex;
             justify-content: space-between;
             padding: 12px;
             border-bottom: 1px solid rgba(255, 0, 255, 0.15);
-            color: var(--text-white-dim);
+            color: rgba(255,255,255,0.8);
         }
         .payment-method strong {
-            color: var(--text-white);
+            color: white;
+            text-shadow: 0 0 2px rgba(0,0,0,0.5);
         }
         
         .btn-generate {
             background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
             color: white;
             margin-right: 10px;
+            text-shadow: 0 0 2px rgba(0,0,0,0.5);
+        }
+        
+        .btn-send-receipt {
+            background: linear-gradient(135deg, #8b5e9c 0%, #c084fc 100%);
+            color: white;
+            text-shadow: 0 0 2px rgba(0,0,0,0.5);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-send-receipt:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
         }
         
         .reports-list {
@@ -66,15 +83,15 @@
             cursor: pointer;
             transition: all 0.3s;
             border-left: 4px solid var(--fuchsia);
-            color: var(--text-white-dim);
+            color: rgba(255,255,255,0.8);
         }
         .report-item:hover {
             transform: translateX(5px);
             background: rgba(255, 0, 255, 0.15);
         }
-        .report-title { font-weight: bold; font-size: 16px; color: var(--text-white); }
-        .report-date { font-size: 12px; color: var(--text-white-dim); margin-top: 5px; }
-        .report-period { font-size: 12px; color: var(--fuchsia); margin-top: 5px; }
+        .report-title { font-weight: bold; font-size: 16px; color: white; text-shadow: 0 0 3px #FF00FF; }
+        .report-date { font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 5px; }
+        .report-period { font-size: 12px; color: #FF66FF; margin-top: 5px; text-shadow: 0 0 2px #FF00FF; }
         
         .date-range {
             display: grid;
@@ -97,11 +114,15 @@
             border: 1px solid rgba(255, 0, 255, 0.2);
         }
         .detail-section h4 {
-            background: var(--main-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: white;
+            text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;
             margin-bottom: 10px;
+        }
+        .detail-section p {
+            color: white;
+        }
+        .detail-section strong {
+            color: #FF66FF;
         }
         
         .photographer-performance {
@@ -110,6 +131,11 @@
             padding: 10px;
             background: rgba(30, 15, 40, 0.4);
             border-radius: 8px;
+            color: white;
+        }
+        .photographer-performance strong {
+            color: #FF66FF;
+            text-shadow: 0 0 2px #FF00FF;
         }
         
         /* Статусы оплаты в неоновой теме */
@@ -140,14 +166,12 @@
         .stat-summary-card .value {
             font-size: 28px;
             font-weight: bold;
-            background: var(--main-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: white;
+            text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;
         }
         .stat-summary-card .label {
             font-size: 12px;
-            color: var(--text-white-dim);
+            color: rgba(255,255,255,0.8);
             margin-top: 5px;
         }
         
@@ -173,16 +197,274 @@
         }
         .stat-card h3 {
             font-size: 14px;
-            color: var(--text-white-dim);
+            color: rgba(255,255,255,0.8);
             margin-bottom: 10px;
         }
         .stat-card .value {
             font-size: 32px;
             font-weight: bold;
+            color: white;
+            text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;
+        }
+        
+        /* Заголовки карточек */
+        .card h2 {
+            color: white;
+            text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;
+        }
+        
+        .card p {
+            color: white;
+        }
+        
+        .card strong {
+            color: #FF66FF;
+        }
+        
+        /* Навигация */
+        .navbar-logo {
+            color: white;
+            text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;
+        }
+        
+        .navbar-links a {
+            color: white;
+            text-shadow: 0 0 2px rgba(0,0,0,0.5);
+        }
+        
+        .navbar-links a:hover {
+            text-shadow: 0 0 5px #FF00FF;
+        }
+        
+        .user-name {
+            color: white;
+            text-shadow: 0 0 3px #FF00FF;
+        }
+        
+        /* Формы */
+        .form-group label {
+            color: white;
+        }
+        
+        .form-group input, .form-group select {
+            background: rgba(30, 15, 40, 0.8);
+            border: 1px solid rgba(255, 0, 255, 0.3);
+            color: white;
+            padding: 10px 12px;
+            border-radius: 8px;
+            width: 100%;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            border-color: #FF00FF;
+            box-shadow: 0 0 5px rgba(255,0,255,0.3);
+            outline: none;
+        }
+        
+        .btn-primary {
             background: var(--main-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: white;
+            text-shadow: 0 0 2px rgba(0,0,0,0.5);
+        }
+        
+        .btn-primary:hover {
+            box-shadow: var(--shadow-glow);
+        }
+        
+        .btn-secondary {
+            background: rgba(30, 15, 40, 0.8);
+            color: white;
+            border: 1px solid rgba(255, 0, 255, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 0, 255, 0.15);
+            border-color: #FF00FF;
+        }
+        
+        /* Таблицы в отчетах */
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .order-table th, .order-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 0, 255, 0.15);
+            color: white;
+        }
+        .order-table th {
+            background: rgba(179, 68, 108, 0.3);
+            font-weight: 700;
+        }
+        
+        /* Стили для чеков */
+        .receipts-container {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        .receipt-card {
+            background: rgba(30, 15, 40, 0.8);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 0, 255, 0.2);
+            transition: all 0.3s;
+        }
+        .receipt-card:hover {
+            transform: translateX(5px);
+            border-color: var(--fuchsia);
+        }
+        .receipt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 0, 255, 0.2);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .receipt-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: #FF66FF;
+            text-shadow: 0 0 2px #FF00FF;
+        }
+        .receipt-date {
+            font-size: 12px;
+            color: rgba(255,255,255,0.7);
+        }
+        .receipt-body {
+            display: grid;
+            gap: 10px;
+        }
+        .receipt-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .receipt-label {
+            color: rgba(255,255,255,0.7);
+            font-size: 13px;
+        }
+        .receipt-value {
+            color: white;
+            font-weight: 600;
+        }
+        .receipt-total {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 0, 255, 0.2);
+            font-size: 16px;
+        }
+        .receipt-total .receipt-label {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .receipt-total .receipt-value {
+            font-size: 20px;
+            color: #FF66FF;
+            text-shadow: 0 0 2px #FF00FF;
+        }
+        .receipt-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .receipt-status-sent {
+            background: rgba(16, 185, 129, 0.2);
+            color: #6ee7b7;
+        }
+        .receipt-status-pending {
+            background: rgba(245, 158, 11, 0.2);
+            color: #fcd34d;
+        }
+        
+        /* Стили для выбора клиента и заказа */
+        .client-order-selector {
+            background: rgba(30, 15, 40, 0.6);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .order-preview {
+            background: rgba(255, 0, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 0;
+            border: 1px solid rgba(255, 0, 255, 0.2);
+        }
+        
+        .order-preview-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .order-preview-row:last-child {
+            border-bottom: none;
+        }
+        
+        .order-preview-label {
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .order-preview-value {
+            color: white;
+            font-weight: 600;
+        }
+        
+        .order-preview-total {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 0, 255, 0.3);
+        }
+        
+        .order-preview-total .order-preview-value {
+            color: #FF66FF;
+            font-size: 18px;
+            text-shadow: 0 0 2px #FF00FF;
+        }
+        
+        /* Стили для загрузки */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255,0,255,0.3);
+            border-top: 3px solid #FF00FF;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .error-text {
+            color: #fca5a5;
+            font-size: 12px;
+            margin-top: 5px;
         }
         
         @media (max-width: 768px) {
@@ -194,6 +476,20 @@
             }
             .stats-summary {
                 grid-template-columns: 1fr 1fr;
+            }
+            .order-table {
+                font-size: 12px;
+            }
+            .order-table th, .order-table td {
+                padding: 6px;
+            }
+            .receipt-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .receipt-row {
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
     </style>
@@ -219,8 +515,22 @@
         }
         
         function getPaymentMethodText(method) {
-            const methods = { 'card': '💳 Карта', 'cash': '💰 Наличные', 'online': '🏦 Онлайн перевод', 'installment': '📅 Рассрочка' };
+            const methods = { 'card': '💳 Банковская карта', 'cash': '💰 Наличные', 'online': '🏦 Онлайн перевод', 'installment': '📅 Рассрочка' };
             return methods[method] || method || 'Не указан';
+        }
+        
+        function getStatusName(status) {
+            const statuses = { 0: 'Ожидает', 1: 'Подтвержден', 2: 'В работе', 3: 'Выполнен', 4: 'Отменен' };
+            return statuses[status] || 'Неизвестно';
+        }
+        
+        function getStatusClass(status) {
+            const classes = { 0: 'status-pending', 1: 'status-confirmed', 2: 'status-progress', 3: 'status-completed', 4: 'status-cancelled' };
+            return classes[status] || 'status-pending';
+        }
+        
+        function formatReceiptNumber(number) {
+            return `ЧЕК-${String(number).padStart(6, '0')}`;
         }
         
         function checkAuth() {
@@ -246,13 +556,47 @@
             window.location.href = 'login.html';
         }
         
+        // Функция для безопасного получения текста ошибки (исправляет проблему "body stream already read")
+        async function getErrorMessage(response) {
+            try {
+                const clonedResponse = response.clone();
+                const json = await clonedResponse.json();
+                return json.message || json.title || 'Неизвестная ошибка';
+            } catch (e) {
+                try {
+                    const text = await response.text();
+                    return text.substring(0, 200);
+                } catch (e2) {
+                    return `Ошибка ${response.status}: ${response.statusText}`;
+                }
+            }
+        }
+        
+        // Улучшенная функция apiRequest
         async function apiRequest(endpoint, options = {}) {
-            const response = await fetch(`${API_URL}${endpoint}`, {
-                ...options,
-                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${currentToken}`, ...options.headers }
-            });
-            if (response.status === 401) logout();
-            return response;
+            const url = `${API_URL}${endpoint}`;
+            console.log(`📡 Запрос: ${options.method || 'GET'} ${url}`);
+            
+            try {
+                const response = await fetch(url, {
+                    ...options,
+                    headers: { 
+                        'Content-Type': 'application/json', 
+                        'Authorization': `Bearer ${currentToken}`, 
+                        ...options.headers 
+                    }
+                });
+                
+                if (response.status === 401) {
+                    logout();
+                    return response;
+                }
+                
+                return response;
+            } catch (error) {
+                console.error(`❌ Ошибка сети: ${error.message}`);
+                throw error;
+            }
         }
         
         function showAlert(message, type = 'success') {
@@ -265,24 +609,46 @@
             alertDiv.style.zIndex = '9999';
             alertDiv.style.padding = '15px';
             alertDiv.style.borderRadius = '10px';
+            if (type === 'error') {
+                alertDiv.style.background = 'rgba(239, 68, 68, 0.9)';
+            } else if (type === 'warning') {
+                alertDiv.style.background = 'rgba(245, 158, 11, 0.9)';
+            } else {
+                alertDiv.style.background = 'rgba(16, 185, 129, 0.9)';
+            }
+            alertDiv.style.color = 'white';
             document.body.appendChild(alertDiv);
-            setTimeout(() => alertDiv.remove(), 3000);
+            setTimeout(() => alertDiv.remove(), 4000);
+        }
+        
+        function showLoading() {
+            const overlay = document.createElement('div');
+            overlay.className = 'loading-overlay';
+            overlay.id = 'loadingOverlay';
+            overlay.innerHTML = '<div class="loading-spinner"></div>';
+            document.body.appendChild(overlay);
+        }
+        
+        function hideLoading() {
+            const overlay = document.getElementById('loadingOverlay');
+            if (overlay) overlay.remove();
         }
         
         function renderNavbar() {
             return `
                 <div class="navbar">
                     <div class="navbar-content">
-                        <div class="navbar-logo">📸 PhotoStudio CRM - Бухгалтерия</div>
+                        <div class="navbar-logo" style="color: white; text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;">📸 PhotoStudio CRM - Бухгалтерия</div>
                         <div class="navbar-links">
-                            <a onclick="loadFinancialSummary()">💰 Финансы</a>
-                            <a onclick="loadReports()">📄 Отчеты</a>
-                            <a onclick="loadRevenueReportForm()">📊 Доходы</a>
-                            <a onclick="loadPhotographerReportForm()">📷 Фотографы</a>
+                            <a onclick="loadFinancialSummary()" style="color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5);">💰 Финансы</a>
+                            <a onclick="loadReceipts()" style="color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5);">🧾 Чеки</a>
+                            <a onclick="loadReports()" style="color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5);">📄 Отчеты</a>
+                            <a onclick="loadRevenueReportForm()" style="color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5);">📊 Доходы</a>
+                            <a onclick="loadPhotographerReportForm()" style="color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5);">📷 Фотографы</a>
                         </div>
                         <div class="user-info">
-                            <span class="user-name">💰 ${currentUser.firstName} ${currentUser.lastName}</span>
-                            <button class="logout-btn" onclick="logout()">Выйти</button>
+                            <span class="user-name" style="color: white; text-shadow: 0 0 3px #FF00FF;">💰 ${currentUser.firstName} ${currentUser.lastName}</span>
+                            <button class="logout-btn" onclick="logout()" style="color: white;">Выйти</button>
                         </div>
                     </div>
                 </div>
@@ -290,7 +656,7 @@
             `;
         }
         
-        // ============ ФИНАНСОВАЯ СВОДКА С ОПЛАТАМИ ============
+        // ============ ФИНАНСОВАЯ СВОДКА ============
         
         async function loadFinancialSummary() {
             const content = document.getElementById('pageContent');
@@ -301,8 +667,8 @@
                 
                 content.innerHTML = `
                     <div style="margin-bottom:30px;">
-                        <h1>Финансовая сводка</h1>
-                        <p style="color: var(--text-white-dim);">Актуальные финансовые показатели</p>
+                        <h1 style="color: white; text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;">Финансовая сводка</h1>
+                        <p style="color: rgba(255,255,255,0.8);">Актуальные финансовые показатели</p>
                     </div>
                     <div class="stats-grid">
                         <div class="stat-card"><h3>Общая выручка</h3><div class="value">${(data.totalRevenue || 0).toLocaleString()} ₽</div></div>
@@ -319,23 +685,266 @@
                     </div>
                     
                     <div class="card"><h2>💳 Платежи по методам</h2>
-                        ${(data.paymentsByMethod || []).map(p => `<div class="payment-method"><strong>${getPaymentMethodText(p.method)}</strong><span class="value">${p.total.toLocaleString()} ₽</span></div>`).join('') || '<p>Нет данных</p>'}
+                        ${(data.paymentsByMethod || []).map(p => `<div class="payment-method"><strong>${getPaymentMethodText(p.method)}</strong><span class="value" style="color: #FF66FF; text-shadow: 0 0 2px #FF00FF;">${p.total.toLocaleString()} ₽</span></div>`).join('') || '<p>Нет данных</p>'}
                     </div>
                     
                     <div class="card"><h2>📅 Информация о периоде</h2>
-                        <p><strong>Период:</strong> ${new Date(data.startDate).toLocaleDateString()} - ${new Date(data.endDate).toLocaleDateString()}</p>
-                        <p><strong>Всего заказов:</strong> ${data.totalOrdersCount || 0}</p>
+                        <p><strong style="color: #FF66FF;">Период:</strong> ${new Date(data.startDate).toLocaleDateString()} - ${new Date(data.endDate).toLocaleDateString()}</p>
+                        <p><strong style="color: #FF66FF;">Всего заказов:</strong> ${data.totalOrdersCount || 0}</p>
                     </div>
                 `;
-            } catch (error) { content.innerHTML = `<div class="alert alert-error">❌ Ошибка: ${error.message}</div>`; }
+            } catch (error) { 
+                content.innerHTML = `<div class="alert alert-error">❌ Ошибка: ${error.message}</div>`; 
+            }
         }
         
-        function renderPaymentMethods(payments) {
-            if (!payments || payments.length === 0) return '<p>Нет данных о платежах</p>';
-            return payments.map(p => `<div class="payment-method"><strong>${getPaymentMethodText(p.method)}</strong><span>${p.total.toLocaleString()} ₽</span></div>`).join('');
+        // ============ УПРАВЛЕНИЕ ЧЕКАМИ ============
+        
+        let receipts = [];
+        let clientsList = [];
+        
+        async function loadClients() {
+            console.log('🔄 Загрузка клиентов...');
+            
+            try {
+                const response = await apiRequest('/accountant/clients');
+                if (response.ok) {
+                    clientsList = await response.json();
+                    console.log(`✅ Клиенты загружены: ${clientsList.length}`);
+                    return;
+                }
+            } catch (error) {
+                console.log('Ошибка загрузки клиентов:', error.message);
+            }
+            
+            // Демо-данные
+            console.log('⚠️ Используем демо-данные клиентов');
+            clientsList = [
+                { id: 1, firstName: 'Анна', lastName: 'Смирнова', email: 'anna@example.com' },
+                { id: 2, firstName: 'Дмитрий', lastName: 'Орлов', email: 'dmitry@example.com' },
+                { id: 3, firstName: 'Елена', lastName: 'Ветрова', email: 'elena@example.com' },
+                { id: 4, firstName: 'Иван', lastName: 'Ковалёв', email: 'ivan@example.com' },
+                { id: 5, firstName: 'Мария', lastName: 'Петрова', email: 'maria@example.com' },
+            ];
         }
         
-        // ============ СПИСОК ОТЧЕТОВ ============
+        async function loadClientOrders(clientId) {
+            console.log(`🔄 Загрузка заказов для клиента ${clientId}...`);
+            
+            try {
+                const response = await apiRequest(`/accountant/clients/${clientId}/orders`);
+                if (response.ok) {
+                    return await response.json();
+                }
+            } catch (error) {
+                console.log('Ошибка загрузки заказов:', error.message);
+            }
+            
+            // Демо-данные
+            return [
+                { id: 1001, orderDate: new Date().toISOString(), totalAmount: 15000, status: 3, paymentStatus: 2 },
+                { id: 1002, orderDate: new Date(Date.now() - 7*86400000).toISOString(), totalAmount: 8500, status: 2, paymentStatus: 1 }
+            ];
+        }
+        
+        async function loadReceipts() {
+            const content = document.getElementById('pageContent');
+            content.innerHTML = '<div class="spinner"></div>';
+            try {
+                await loadClients();
+                
+                const response = await apiRequest('/accountant/receipts');
+                if (response.ok) {
+                    receipts = await response.json();
+                } else {
+                    receipts = [];
+                }
+                
+                const sentReceipts = receipts.filter(r => r.isSent);
+                const pendingReceipts = receipts.filter(r => !r.isSent);
+                
+                content.innerHTML = `
+                    <div class="card">
+                        <h2>🧾 Электронные чеки</h2>
+                        <p style="color: rgba(255,255,255,0.7); margin-bottom: 20px;">Здесь отображаются все созданные чеки.</p>
+                        
+                        <div class="stats-summary" style="margin-bottom: 20px;">
+                            <div class="stat-summary-card"><div class="value">${receipts.length}</div><div class="label">📄 Всего чеков</div></div>
+                            <div class="stat-summary-card"><div class="value">${sentReceipts.length}</div><div class="label">✅ Отправленных</div></div>
+                            <div class="stat-summary-card"><div class="value">${pendingReceipts.length}</div><div class="label">⏳ Ожидают</div></div>
+                        </div>
+                        
+                        <div class="receipts-container">${renderReceiptsList()}</div>
+                        
+                        <div style="margin-top: 20px;">
+                            <button class="btn btn-primary" onclick="showCreateReceiptModalWithClientSelect()" style="margin-right: 10px;">+ Создать чек (выбор клиента)</button>
+                            <button class="btn btn-generate" onclick="showCreateReceiptModal()">+ Создать чек (по ID заказа)</button>
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                content.innerHTML = `<div class="alert alert-error">❌ Ошибка: ${error.message}</div>`;
+            }
+        }
+        
+        function renderReceiptsList() {
+            if (!receipts || receipts.length === 0) {
+                return '<p style="text-align: center; padding: 40px;">Нет созданных чеков</p>';
+            }
+            
+            return receipts.map(receipt => `
+                <div class="receipt-card">
+                    <div class="receipt-header">
+                        <div class="receipt-number">${formatReceiptNumber(receipt.id)}</div>
+                        <div class="receipt-date">📅 ${new Date(receipt.createdDate).toLocaleString()}</div>
+                        <span class="receipt-status ${receipt.isSent ? 'receipt-status-sent' : 'receipt-status-pending'}">
+                            ${receipt.isSent ? '✅ Отправлен' : '⏳ Ожидает отправки'}
+                        </span>
+                    </div>
+                    <div class="receipt-body">
+                        <div class="receipt-row"><span class="receipt-label">👤 Клиент:</span><span class="receipt-value">${receipt.clientName || 'Не указан'}</span></div>
+                        <div class="receipt-row"><span class="receipt-label">📧 Email:</span><span class="receipt-value">${receipt.clientEmail || 'Не указан'}</span></div>
+                        <div class="receipt-row"><span class="receipt-label">📝 Заказ #:</span><span class="receipt-value">${receipt.orderId}</span></div>
+                        <div class="receipt-row"><span class="receipt-label">💳 Способ оплаты:</span><span class="receipt-value">${getPaymentMethodText(receipt.paymentMethod)}</span></div>
+                        <div class="receipt-row receipt-total"><span class="receipt-label">💰 Сумма:</span><span class="receipt-value">${(receipt.amount || 0).toLocaleString()} ₽</span></div>
+                        ${receipt.isSent ? `
+                            <div class="receipt-row"><span class="receipt-label">📨 Отправлен:</span><span class="receipt-value">${new Date(receipt.sentDate).toLocaleString()}</span></div>
+                        ` : `<button class="btn-send-receipt" onclick="sendReceipt(${receipt.id})">📧 Отправить чек</button>`}
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        window.sendReceipt = async function(receiptId) {
+            showLoading();
+            try {
+                const response = await apiRequest(`/accountant/receipts/${receiptId}/send`, { method: 'POST' });
+                if (response.ok) {
+                    showAlert('✅ Чек отправлен!');
+                    loadReceipts();
+                } else {
+                    const error = await getErrorMessage(response);
+                    showAlert('❌ Ошибка: ' + error, 'error');
+                }
+            } catch (error) {
+                showAlert('❌ Ошибка: ' + error.message, 'error');
+            } finally {
+                hideLoading();
+            }
+        };
+        
+        function showCreateReceiptModalWithClientSelect() {
+            if (clientsList.length === 0) {
+                showAlert('⚠️ Нет клиентов', 'warning');
+                return;
+            }
+            
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'flex';
+            modal.innerHTML = `
+                <div class="modal-content" style="max-width: 550px;">
+                    <h3 style="color: white;">🧾 Создать чек</h3>
+                    <div class="form-group"><label>👤 Клиент</label><select id="clientSelect">${clientsList.map(c => `<option value="${c.id}" data-email="${c.email}" data-name="${c.firstName} ${c.lastName}">${c.firstName} ${c.lastName}</option>`).join('')}</select></div>
+                    <div class="form-group"><label>📦 Заказ</label><select id="orderSelect" disabled><option>Сначала выберите клиента</option></select></div>
+                    <div id="preview" style="display:none;" class="order-preview"></div>
+                    <div class="form-group"><label>💳 Способ оплаты</label><select id="paymentMethod"><option value="card">Банковская карта</option><option value="cash">Наличные</option><option value="online">Онлайн перевод</option></select></div>
+                    <div class="form-group"><label>💰 Сумма</label><input type="number" id="amount" placeholder="Сумма"></div>
+                    <div class="btn-group"><button class="btn btn-primary" id="createBtn">Создать</button><button class="btn btn-secondary" onclick="this.closest('.modal').remove()">Отмена</button></div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            
+            const clientSelect = document.getElementById('clientSelect');
+            const orderSelect = document.getElementById('orderSelect');
+            const preview = document.getElementById('preview');
+            const createBtn = document.getElementById('createBtn');
+            let selectedOrder = null;
+            
+            clientSelect.onchange = async () => {
+                const clientId = clientSelect.value;
+                const orders = await loadClientOrders(clientId);
+                orderSelect.disabled = false;
+                orderSelect.innerHTML = orders.map(o => `<option value="${o.id}" data-amount="${o.totalAmount}">Заказ #${o.id} - ${o.totalAmount} ₽</option>`).join('');
+            };
+            
+            orderSelect.onchange = () => {
+                const opt = orderSelect.options[orderSelect.selectedIndex];
+                selectedOrder = { id: orderSelect.value, totalAmount: opt.dataset.amount };
+                preview.innerHTML = `<div class="order-preview-row"><span>Заказ #${selectedOrder.id}</span><span>${parseInt(selectedOrder.totalAmount).toLocaleString()} ₽</span></div>`;
+                preview.style.display = 'block';
+                document.getElementById('amount').value = selectedOrder.totalAmount;
+            };
+            
+            createBtn.onclick = async () => {
+                const amount = parseFloat(document.getElementById('amount').value);
+                if (!selectedOrder || !amount) { showAlert('Заполните все поля', 'error'); return; }
+                
+                createBtn.disabled = true;
+                showLoading();
+                try {
+                    const response = await apiRequest('/accountant/receipts', {
+                        method: 'POST',
+                        body: JSON.stringify({ orderId: parseInt(selectedOrder.id), amount, paymentMethod: document.getElementById('paymentMethod').value })
+                    });
+                    if (response.ok) {
+                        showAlert('✅ Чек создан!');
+                        modal.remove();
+                        loadReceipts();
+                    } else {
+                        showAlert('❌ Ошибка: ' + await getErrorMessage(response), 'error');
+                    }
+                } catch (error) {
+                    showAlert('❌ Ошибка: ' + error.message, 'error');
+                } finally {
+                    hideLoading();
+                    createBtn.disabled = false;
+                }
+            };
+        }
+        
+        function showCreateReceiptModal() {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'flex';
+            modal.innerHTML = `
+                <div class="modal-content" style="max-width: 450px;">
+                    <h3 style="color: white;">🧾 Создать чек по ID заказа</h3>
+                    <div class="form-group"><label>ID заказа</label><input type="number" id="orderId"></div>
+                    <div class="form-group"><label>Сумма</label><input type="number" id="amount"></div>
+                    <div class="form-group"><label>Способ оплаты</label><select id="paymentMethod"><option value="card">Карта</option><option value="cash">Наличные</option><option value="online">Онлайн</option></select></div>
+                    <div class="btn-group"><button class="btn btn-primary" id="createBtn">Создать</button><button class="btn btn-secondary" onclick="this.closest('.modal').remove()">Отмена</button></div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            
+            document.getElementById('createBtn').onclick = async () => {
+                const orderId = parseInt(document.getElementById('orderId').value);
+                const amount = parseFloat(document.getElementById('amount').value);
+                if (!orderId || !amount) { showAlert('Заполните поля', 'error'); return; }
+                
+                showLoading();
+                try {
+                    const response = await apiRequest('/accountant/receipts', {
+                        method: 'POST',
+                        body: JSON.stringify({ orderId, amount, paymentMethod: document.getElementById('paymentMethod').value })
+                    });
+                    if (response.ok) {
+                        showAlert('✅ Чек создан!');
+                        modal.remove();
+                        loadReceipts();
+                    } else {
+                        showAlert('❌ Ошибка: ' + await getErrorMessage(response), 'error');
+                    }
+                } catch (error) {
+                    showAlert('❌ Ошибка: ' + error.message, 'error');
+                } finally {
+                    hideLoading();
+                }
+            };
+        }
+        
+        // ============ ОТЧЕТЫ ============
         
         async function loadReports() {
             const content = document.getElementById('pageContent');
@@ -343,139 +952,88 @@
             try {
                 const response = await apiRequest('/accountant/reports');
                 const reports = await response.json();
-                if (!reports || reports.length === 0) {
-                    content.innerHTML = `<div class="card"><h2>📄 Сгенерированные отчеты</h2><p>Нет созданных отчетов</p>
-                        <button class="btn btn-generate" onclick="loadRevenueReportForm()">+ Создать отчет по доходам</button>
-                        <button class="btn btn-primary" onclick="loadPhotographerReportForm()" style="margin-left:10px;">+ Создать отчет по фотографам</button></div>`;
-                    return;
-                }
-                content.innerHTML = `<div class="card"><h2>📄 Сгенерированные отчеты</h2>
-                    <div style="margin-bottom:20px;">
-                        <button class="btn btn-generate" onclick="loadRevenueReportForm()">+ Создать отчет по доходам</button>
-                        <button class="btn btn-primary" onclick="loadPhotographerReportForm()" style="margin-left:10px;">+ Создать отчет по фотографам</button>
+                content.innerHTML = `
+                    <div class="card">
+                        <h2>📄 Отчеты</h2>
+                        <div><button class="btn btn-generate" onclick="loadRevenueReportForm()">+ Доходы</button><button class="btn btn-primary" onclick="loadPhotographerReportForm()">+ Фотографы</button><button class="btn btn-secondary" onclick="showAccountingReportsModal()">📋 Чеки</button></div>
+                        <div class="reports-list">${(reports || []).map(r => `<div class="report-item" onclick="viewReportDetail(${r.id})"><div class="report-title">${r.reportType}</div><div class="report-date">${new Date(r.generatedDate).toLocaleString()}</div></div>`).join('') || '<p>Нет отчетов</p>'}</div>
                     </div>
-                    <div class="reports-list">${reports.map(report => `
-                        <div class="report-item" onclick="viewReportDetail(${report.id})">
-                            <div class="report-title">📊 ${report.reportType}</div>
-                            <div class="report-date">📅 Создан: ${new Date(report.generatedDate).toLocaleString()}</div>
-                            <div class="report-period">📆 Период: ${new Date(report.startDate).toLocaleDateString()} - ${new Date(report.endDate).toLocaleDateString()}</div>
-                            <div><span style="color: var(--fuchsia);">👆 Нажмите для просмотра</span></div>
-                        </div>`).join('')}</div></div>`;
-            } catch (error) { content.innerHTML = `<div class="alert alert-error">❌ Ошибка: ${error.message}</div>`; }
+                `;
+            } catch (error) { content.innerHTML = `<div class="alert alert-error">${error.message}</div>`; }
         }
         
-        // ============ ПРОСМОТР ДЕТАЛЕЙ ОТЧЕТА ============
+        window.showAccountingReportsModal = function() {
+            const reports = JSON.parse(localStorage.getItem('accountingReports') || '[]');
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'flex';
+            modal.innerHTML = `<div class="modal-content" style="max-width:700px;"><h3>📋 Отчеты бухгалтерии</h3>${reports.length ? reports.map(r => `<div class="receipt-card"><div>${r.receiptNumber} - ${r.clientName} - ${r.paidAmount} ₽</div></div>`).join('') : '<p>Нет чеков</p>'}<button class="btn btn-secondary" onclick="this.closest('.modal').remove()">Закрыть</button></div>`;
+            document.body.appendChild(modal);
+        };
         
-        window.viewReportDetail = async function(reportId) {
+        window.viewReportDetail = async function(id) {
             try {
-                const response = await apiRequest(`/accountant/reports/${reportId}`);
+                const response = await apiRequest(`/accountant/reports/${id}`);
                 const report = await response.json();
-                let detailHtml = '';
-                let reportData = null;
-                try { reportData = JSON.parse(report.data); } catch(e) { reportData = report.data; }
-                if (report.reportType === 'Revenue Report') {
-                    detailHtml = `<div class="detail-section"><h4>💰 Общая информация</h4><p><strong>Общая выручка:</strong> ${reportData.totalRevenue?.toLocaleString() || 0} ₽</p>
-                        <p><strong>Всего платежей:</strong> ${reportData.totalPayments?.toLocaleString() || 0} ₽</p><p><strong>Количество заказов:</strong> ${reportData.ordersCount || 0}</p></div>
-                        <div class="detail-section"><h4>📋 Заказы за период</h4>${reportData.orders?.length > 0 ? `<table><thead><tr><th>№</th><th>Дата</th><th>Сумма</th></tr></thead><tbody>${reportData.orders.map(order => `<tr><td>${order.id}</td><td>${new Date(order.orderDate).toLocaleDateString()}</td><td>${order.totalAmount} ₽</td>`).join('')}</tbody></table>` : '<p>Нет данных о заказах</p>'}</div>`;
-                } else if (report.reportType === 'Photographer Performance Report') {
-                    detailHtml = `<div class="detail-section"><h4>📸 Эффективность фотографов</h4>${reportData && Array.isArray(reportData) ? reportData.map(p => `<div class="photographer-performance"><strong>${p.PhotographerName}</strong><br>📷 Всего заказов: ${p.TotalOrders}<br>✅ Выполнено: ${p.CompletedOrders}<br>💰 Выручка: ${p.TotalRevenue?.toLocaleString() || 0} ₽</div>`).join('') : '<p>Нет данных о фотографах</p>'}</div>`;
-                } else { detailHtml = `<div class="detail-section"><pre>${JSON.stringify(reportData, null, 2)}</pre></div>`; }
-                
-                showModal(`
-                    <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                        <h3 style="background: var(--main-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">📄 ${report.reportType}</h3>
-                        <button class="close-modal" onclick="closeModal()" style="background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-white);">&times;</button>
-                    </div>
-                    <div>
-                        <p><strong>📅 Период:</strong> ${new Date(report.startDate).toLocaleDateString()} - ${new Date(report.endDate).toLocaleDateString()}</p>
-                        <p><strong>🕐 Создан:</strong> ${new Date(report.generatedDate).toLocaleString()}</p>
-                        <p><strong>👤 Кем создан:</strong> ${report.generatedByUser?.firstName || 'Бухгалтер'}</p>
-                    </div>
-                    ${detailHtml}
-                `);
-            } catch (error) { showAlert('❌ Ошибка загрузки отчета: ' + error.message, 'error'); }
+                showModal(`<h3>${report.reportType}</h3><pre style="color:white;">${JSON.stringify(JSON.parse(report.data), null, 2)}</pre><button onclick="closeModal()">Закрыть</button>`);
+            } catch(e) { showAlert('Ошибка', 'error'); }
         };
         
         function showModal(content) {
             const modal = document.createElement('div');
             modal.className = 'modal';
             modal.style.display = 'flex';
-            modal.innerHTML = `<div class="modal-content report-detail-modal" style="background: var(--bg-card); border: 1px solid rgba(255, 0, 255, 0.3);">${content}</div>`;
+            modal.innerHTML = `<div class="modal-content">${content}</div>`;
             document.body.appendChild(modal);
         }
         
-        window.closeModal = function() { const modal = document.querySelector('.modal'); if (modal) modal.remove(); };
-        
-        // ============ ФОРМА СОЗДАНИЯ ОТЧЕТА ПО ДОХОДАМ ============
+        window.closeModal = () => { const m = document.querySelector('.modal'); if(m) m.remove(); };
         
         async function loadRevenueReportForm() {
             const content = document.getElementById('pageContent');
-            content.innerHTML = `<div class="card"><h2>📊 Создание отчета по доходам</h2>
-                <div class="date-range">
-                    <div class="form-group"><label>Начальная дата</label><input type="date" id="startDate" value="${new Date(new Date().getFullYear(), 0, 1).toISOString().split('T')[0]}"></div>
-                    <div class="form-group"><label>Конечная дата</label><input type="date" id="endDate" value="${new Date().toISOString().split('T')[0]}"></div>
-                </div>
-                <button class="btn btn-generate" onclick="generateRevenueReport()">📈 Сформировать отчет</button>
-                <button class="btn btn-secondary" onclick="loadReports()" style="margin-left:10px;">◀ К списку отчетов</button>
-                <div id="reportResult" style="margin-top:20px;"></div></div>`;
+            content.innerHTML = `<div class="card"><h2>📊 Отчет по доходам</h2><div class="date-range"><input type="date" id="startDate" value="${new Date(new Date().getFullYear(),0,1).toISOString().split('T')[0]}"><input type="date" id="endDate" value="${new Date().toISOString().split('T')[0]}"></div><button class="btn btn-generate" onclick="generateRevenueReport()">Сформировать</button><div id="result"></div></div>`;
         }
         
         window.generateRevenueReport = async function() {
-            const startDate = document.getElementById('startDate').value;
-            const endDate = document.getElementById('endDate').value;
-            const resultDiv = document.getElementById('reportResult');
-            resultDiv.innerHTML = '<div class="spinner"></div>';
+            const start = document.getElementById('startDate').value, end = document.getElementById('endDate').value;
+            showLoading();
             try {
-                const response = await apiRequest(`/accountant/reports/revenue?startDate=${startDate}&endDate=${endDate}`);
-                if (response.ok) {
-                    const report = await response.json();
-                    resultDiv.innerHTML = `<div class="report-card" onclick="viewReportDetail(${report.id})"><h3>✅ Отчет создан!</h3><div class="report-stats">
-                        <div class="report-stat"><div class="value">${new Date(report.startDate).toLocaleDateString()}</div><div class="label">Начало периода</div></div>
-                        <div class="report-stat"><div class="value">${new Date(report.endDate).toLocaleDateString()}</div><div class="label">Конец периода</div></div>
-                        <div class="report-stat"><div class="value">${new Date(report.generatedDate).toLocaleString()}</div><div class="label">Дата создания</div></div></div></div>
-                        <p style="margin-top:15px;">✅ Отчет сохранен. <a href="#" onclick="loadReports(); return false;" style="color: var(--fuchsia);">Перейти к списку отчетов</a></p>`;
-                    showAlert('✅ Отчет успешно создан!', 'success');
-                } else { resultDiv.innerHTML = '<div class="alert alert-error">❌ Ошибка создания отчета</div>'; }
-            } catch (error) { resultDiv.innerHTML = `<div class="alert alert-error">❌ Ошибка: ${error.message}</div>`; }
+                const response = await apiRequest(`/accountant/reports/revenue?startDate=${start}&endDate=${end}`);
+                if(response.ok) showAlert('Отчет создан');
+                else showAlert('Ошибка', 'error');
+                loadReports();
+            } catch(e) { showAlert(e.message, 'error'); }
+            finally { hideLoading(); }
         };
-        
-        // ============ ФОРМА СОЗДАНИЯ ОТЧЕТА ПО ФОТОГРАФАМ ============
         
         async function loadPhotographerReportForm() {
             const content = document.getElementById('pageContent');
-            content.innerHTML = `<div class="card"><h2>📷 Отчет по эффективности фотографов</h2>
-                <div class="date-range">
-                    <div class="form-group"><label>Начальная дата</label><input type="date" id="startDatePhoto" value="${new Date(new Date().getFullYear(), 0, 1).toISOString().split('T')[0]}"></div>
-                    <div class="form-group"><label>Конечная дата</label><input type="date" id="endDatePhoto" value="${new Date().toISOString().split('T')[0]}"></div>
-                </div>
-                <button class="btn btn-generate" onclick="generatePhotographerReport()">📊 Сформировать отчет</button>
-                <button class="btn btn-secondary" onclick="loadReports()" style="margin-left:10px;">◀ К списку отчетов</button>
-                <div id="reportPhotoResult" style="margin-top:20px;"></div></div>`;
+            content.innerHTML = `<div class="card"><h2>📷 Отчет по фотографам</h2><div class="date-range"><input type="date" id="startDate" value="${new Date(new Date().getFullYear(),0,1).toISOString().split('T')[0]}"><input type="date" id="endDate" value="${new Date().toISOString().split('T')[0]}"></div><button class="btn btn-generate" onclick="generatePhotographerReport()">Сформировать</button><div id="result"></div></div>`;
         }
         
         window.generatePhotographerReport = async function() {
-            const startDate = document.getElementById('startDatePhoto').value;
-            const endDate = document.getElementById('endDatePhoto').value;
-            const resultDiv = document.getElementById('reportPhotoResult');
-            resultDiv.innerHTML = '<div class="spinner"></div>';
+            const start = document.getElementById('startDate').value, end = document.getElementById('endDate').value;
+            showLoading();
             try {
-                const response = await apiRequest(`/accountant/reports/photographer-performance?startDate=${startDate}&endDate=${endDate}`);
-                if (response.ok) {
-                    const report = await response.json();
-                    resultDiv.innerHTML = `<div class="report-card" onclick="viewReportDetail(${report.id})"><h3>✅ Отчет создан!</h3><div class="report-stats">
-                        <div class="report-stat"><div class="value">${new Date(report.startDate).toLocaleDateString()}</div><div class="label">Начало периода</div></div>
-                        <div class="report-stat"><div class="value">${new Date(report.endDate).toLocaleDateString()}</div><div class="label">Конец периода</div></div></div></div>
-                        <p style="margin-top:15px;">✅ Отчет сохранен. <a href="#" onclick="loadReports(); return false;" style="color: var(--fuchsia);">Перейти к списку отчетов</a></p>`;
-                    showAlert('✅ Отчет успешно создан!', 'success');
-                } else { resultDiv.innerHTML = '<div class="alert alert-error">❌ Ошибка создания отчета</div>'; }
-            } catch (error) { resultDiv.innerHTML = `<div class="alert alert-error">❌ Ошибка: ${error.message}</div>`; }
+                const response = await apiRequest(`/accountant/reports/photographer-performance?startDate=${start}&endDate=${end}`);
+                if(response.ok) showAlert('Отчет создан');
+                else showAlert('Ошибка', 'error');
+                loadReports();
+            } catch(e) { showAlert(e.message, 'error'); }
+            finally { hideLoading(); }
         };
         
+        // Экспорт функций
         window.loadFinancialSummary = loadFinancialSummary;
+        window.loadReceipts = loadReceipts;
         window.loadReports = loadReports;
         window.loadRevenueReportForm = loadRevenueReportForm;
         window.loadPhotographerReportForm = loadPhotographerReportForm;
+        window.showCreateReceiptModalWithClientSelect = showCreateReceiptModalWithClientSelect;
+        window.showCreateReceiptModal = showCreateReceiptModal;
+        window.showAccountingReportsModal = showAccountingReportsModal;
         
+        // Запуск
         if (checkAuth()) {
             document.getElementById('app').innerHTML = renderNavbar();
             loadFinancialSummary();

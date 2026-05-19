@@ -85,11 +85,9 @@
         .logo {
             font-size: 24px;
             font-weight: bold;
-            background: var(--main-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: white;
             cursor: pointer;
-            text-shadow: var(--neon-text-shadow);
+            text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF, 0 0 20px #FF00FF;
         }
         
         .nav-links {
@@ -100,15 +98,16 @@
         
         .nav-links a {
             text-decoration: none;
-            color: var(--text-white);
+            color: white;
             transition: all 0.3s;
             cursor: pointer;
             font-weight: 600;
+            text-shadow: 0 0 3px rgba(255,0,255,0.5);
         }
         
         .nav-links a:hover {
-            color: var(--fuchsia);
-            text-shadow: var(--neon-text-shadow);
+            color: #FF66FF;
+            text-shadow: 0 0 10px #FF00FF, 0 0 20px #BF00FF;
         }
         
         .btn-login {
@@ -119,6 +118,7 @@
             text-decoration: none;
             transition: all 0.3s;
             border: 1px solid rgba(255, 0, 255, 0.3);
+            text-shadow: 0 0 3px rgba(0,0,0,0.5);
         }
         
         .btn-login:hover {
@@ -222,21 +222,19 @@
         .hero-content h1 {
             font-size: 56px;
             font-weight: 800;
-            background: var(--main-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: white;
             margin-bottom: 20px;
-            text-shadow: var(--neon-text-shadow);
+            text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF, 0 0 20px #FF00FF, 0 0 30px #BF00FF;
         }
         
         .hero-content p {
             font-size: 20px;
-            color: var(--text-white);
+            color: white;
             margin-bottom: 30px;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-            text-shadow: 0 0 2px rgba(0,0,0,0.5);
+            text-shadow: 0 0 3px #FF00FF, 0 0 5px #BF00FF;
         }
         
         .hero-buttons {
@@ -259,6 +257,7 @@
             cursor: pointer;
             box-shadow: var(--shadow-sm);
             border: 1px solid rgba(255, 0, 255, 0.3);
+            text-shadow: 0 0 3px rgba(0,0,0,0.5);
         }
         
         .btn-primary-landing:hover {
@@ -270,12 +269,13 @@
         .btn-outline-landing {
             background: transparent;
             border: 2px solid var(--fuchsia);
-            color: var(--text-white);
+            color: white;
             padding: 12px 33px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s;
+            text-shadow: 0 0 3px rgba(0,0,0,0.5);
         }
         
         .btn-outline-landing:hover {
@@ -296,11 +296,8 @@
             text-align: center;
             font-size: 36px;
             margin-bottom: 50px;
-            background: var(--main-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: var(--neon-text-shadow);
+            color: white;
+            text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF, 0 0 20px #FF00FF;
         }
         
         .rooms-carousel {
@@ -371,13 +368,15 @@
         .room-content h3 {
             font-size: 20px;
             margin-bottom: 8px;
-            color: var(--text-white);
+            color: white;
+            text-shadow: 0 0 3px #FF00FF;
         }
         
         .room-content p {
-            color: var(--text-white);
+            color: white;
             font-size: 13px;
             opacity: 0.9;
+            text-shadow: 0 0 2px rgba(0,0,0,0.5);
         }
         
         .room-location {
@@ -387,7 +386,7 @@
             border-radius: 20px;
             font-size: 11px;
             margin-top: 8px;
-            color: var(--fuchsia-light);
+            color: #FF66FF;
         }
         
         /* ========== ПРОЦЕСС СЪЕМКИ ========== */
@@ -431,13 +430,15 @@
         .process-step h3 {
             font-size: 20px;
             margin-bottom: 15px;
-            color: var(--text-white);
+            color: white;
+            text-shadow: 0 0 3px #FF00FF;
         }
         
         .process-step p {
-            color: var(--text-white);
+            color: white;
             line-height: 1.6;
             opacity: 0.9;
+            text-shadow: 0 0 2px rgba(0,0,0,0.5);
         }
         
         /* ========== КАРУСЕЛЬ УСЛУГ ========== */
@@ -531,29 +532,29 @@
         .service-card-content h3 {
             font-size: 18px;
             margin-bottom: 10px;
-            color: var(--text-white);
+            color: white;
+            text-shadow: 0 0 3px #FF00FF;
         }
         
         .service-card-content p {
-            color: var(--text-white);
+            color: white;
             font-size: 13px;
             margin-bottom: 15px;
             line-height: 1.4;
             opacity: 0.9;
+            text-shadow: 0 0 2px rgba(0,0,0,0.5);
         }
         
         .service-price {
             font-size: 22px;
             font-weight: bold;
-            background: var(--main-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #FF66FF;
+            text-shadow: 0 0 3px #FF00FF;
         }
         
         .service-duration {
             float: right;
-            color: var(--text-white);
+            color: white;
             font-size: 13px;
             margin-top: 5px;
             opacity: 0.9;
@@ -637,13 +638,14 @@
         .effect-name {
             font-size: 18px;
             font-weight: 600;
-            color: var(--text-white);
+            color: white;
             margin-bottom: 10px;
+            text-shadow: 0 0 3px #FF00FF;
         }
         
         .effect-description {
             font-size: 13px;
-            color: var(--text-white);
+            color: white;
             margin-bottom: 15px;
             line-height: 1.4;
             opacity: 0.9;
@@ -652,11 +654,12 @@
         .effect-price {
             font-size: 20px;
             font-weight: bold;
-            color: var(--fuchsia);
+            color: #FF66FF;
             display: inline-block;
             background: rgba(255, 0, 255, 0.15);
             padding: 5px 15px;
             border-radius: 30px;
+            text-shadow: 0 0 3px #FF00FF;
         }
         
         .effect-category {
@@ -733,30 +736,29 @@
         .certificate-name {
             font-size: 24px;
             font-weight: bold;
-            color: var(--text-white);
+            color: white;
             margin-bottom: 10px;
+            text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;
         }
         
         .certificate-price {
             font-size: 28px;
             font-weight: bold;
-            background: var(--main-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #FF66FF;
             margin: 15px 0;
+            text-shadow: 0 0 3px #FF00FF;
         }
         
         .certificate-price small {
             font-size: 14px;
             font-weight: normal;
-            color: var(--text-white);
+            color: white;
             opacity: 0.8;
         }
         
         .certificate-description {
             font-size: 14px;
-            color: var(--text-white);
+            color: white;
             line-height: 1.5;
             margin-bottom: 20px;
             opacity: 0.9;
@@ -774,6 +776,7 @@
             border: none;
             cursor: pointer;
             border: 1px solid rgba(255, 0, 255, 0.3);
+            text-shadow: 0 0 3px rgba(0,0,0,0.5);
         }
         
         .certificate-buy-btn:hover {
@@ -826,13 +829,14 @@
             right: 25px;
             font-size: 28px;
             cursor: pointer;
-            color: var(--text-white);
+            color: white;
             transition: all 0.3s;
             opacity: 0.7;
+            text-shadow: 0 0 3px #FF00FF;
         }
         
         .certificate-modal-close:hover {
-            color: var(--fuchsia);
+            color: #FF66FF;
             opacity: 1;
         }
         
@@ -844,26 +848,22 @@
         .certificate-modal-title {
             font-size: 28px;
             font-weight: bold;
-            background: var(--main-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: white;
             margin-bottom: 15px;
+            text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;
         }
         
         .certificate-modal-price {
             font-size: 36px;
             font-weight: bold;
-            background: var(--main-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #FF66FF;
             margin: 15px 0;
+            text-shadow: 0 0 3px #FF00FF;
         }
         
         .certificate-modal-description {
             font-size: 16px;
-            color: var(--text-white);
+            color: white;
             line-height: 1.6;
             margin-bottom: 25px;
             opacity: 0.9;
@@ -871,7 +871,7 @@
         
         .certificate-modal-terms {
             font-size: 12px;
-            color: var(--text-white);
+            color: white;
             margin-top: 20px;
             padding-top: 15px;
             border-top: 1px solid rgba(255, 0, 255, 0.2);
@@ -894,10 +894,8 @@
         .pricing-card h3 {
             font-size: 28px;
             margin-bottom: 20px;
-            background: var(--main-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: white;
+            text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;
         }
         
         .price-item {
@@ -906,18 +904,18 @@
             padding: 15px 0;
             border-bottom: 1px solid rgba(255, 0, 255, 0.2);
             font-size: 18px;
-            color: var(--text-white);
+            color: white;
         }
         
         .price-item span:last-child {
             font-weight: bold;
-            color: var(--fuchsia);
+            color: #FF66FF;
         }
         
         .price-note {
             margin-top: 20px;
             font-size: 14px;
-            color: var(--text-white);
+            color: white;
             font-style: italic;
             opacity: 0.8;
         }
@@ -933,7 +931,7 @@
         /* ========== ФУТЕР ========== */
         .footer {
             background: linear-gradient(135deg, #1A0A2E 0%, #2D1B2E 100%);
-            color: var(--text-white);
+            color: white;
             padding: 40px 0;
             text-align: center;
             position: relative;
@@ -942,12 +940,13 @@
         }
         
         .footer a {
-            color: var(--fuchsia);
+            color: #FF66FF;
             text-decoration: none;
+            text-shadow: 0 0 3px #FF00FF;
         }
         
         .footer a:hover {
-            text-shadow: var(--neon-text-shadow);
+            text-shadow: 0 0 10px #FF00FF, 0 0 20px #BF00FF;
         }
         
         .footer p {
@@ -1076,9 +1075,9 @@
     <section id="effects" class="effects-section">
         <div class="container-landing">
             <h2 class="section-title animate-on-scroll">✨ Эффекты и обработка</h2>
-            <p style="text-align: center; color: var(--text-white); margin-bottom: 30px; opacity: 0.9;">Добавьте уникальные эффекты к вашим фотографиям</p>
+            <p style="text-align: center; color: white; margin-bottom: 30px; opacity: 0.9; text-shadow: 0 0 3px #FF00FF;">Добавьте уникальные эффекты к вашим фотографиям</p>
             <div class="effects-grid" id="effectsGrid">
-                <div style="text-align: center; padding: 40px; color: var(--text-white);">Загрузка эффектов...</div>
+                <div style="text-align: center; padding: 40px; color: white;">Загрузка эффектов...</div>
             </div>
         </div>
     </section>
@@ -1087,9 +1086,9 @@
     <section id="certificates" class="certificates-section">
         <div class="container-landing">
             <h2 class="section-title animate-on-scroll">🎁 Подарочные сертификаты</h2>
-            <p style="text-align: center; color: var(--text-white); margin-bottom: 30px; opacity: 0.9;">Идеальный подарок для творческих людей</p>
+            <p style="text-align: center; color: white; margin-bottom: 30px; opacity: 0.9; text-shadow: 0 0 3px #FF00FF;">Идеальный подарок для творческих людей</p>
             <div class="certificates-grid" id="certificatesGrid">
-                <div style="text-align: center; padding: 40px; color: var(--text-white);">Загрузка сертификатов...</div>
+                <div style="text-align: center; padding: 40px; color: white;">Загрузка сертификатов...</div>
             </div>
         </div>
     </section>
@@ -1122,7 +1121,7 @@
                 <a href="pages/login.html?tab=register" class="btn-primary-landing">📸 Записаться на фотосессию</a>
                 <a href="#certificates" class="btn-outline-landing">🎁 Купить сертификат</a>
             </div>
-            <p style="margin-top: 25px; font-size: 14px; color: var(--text-white); text-align: center; opacity: 0.8;" class="animate-on-scroll delay-3">
+            <p style="margin-top: 25px; font-size: 14px; color: white; text-align: center; opacity: 0.8; text-shadow: 0 0 3px #FF00FF;" class="animate-on-scroll delay-3">
                 В течение 24 часов вы получите обработанные фотографии<br>в цветном и черно-белом варианте
             </p>
         </div>
@@ -1286,7 +1285,7 @@
             }
             const availableEffects = effects.filter(e => e.isAvailable !== false);
             if (availableEffects.length === 0) {
-                effectsGrid.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--text-white);">Эффекты скоро появятся</div>';
+                effectsGrid.innerHTML = '<div style="text-align: center; padding: 40px; color: white;">Эффекты скоро появятся</div>';
                 return;
             }
             effectsGrid.innerHTML = availableEffects.map(effect => `
@@ -1332,7 +1331,7 @@
             }
             const activeCertificates = certificates.filter(c => c.isAvailable !== false);
             if (activeCertificates.length === 0) {
-                certificatesGrid.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--text-white);">Сертификаты скоро появятся</div>';
+                certificatesGrid.innerHTML = '<div style="text-align: center; padding: 40px; color: white;">Сертификаты скоро появятся</div>';
                 return;
             }
             certificatesGrid.innerHTML = activeCertificates.map(cert => `

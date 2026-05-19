@@ -24,16 +24,19 @@
             font-weight: 600;
             border-radius: 40px;
             transition: all 0.3s;
-            color: var(--text-white-dim);
+            color: white;
+            text-shadow: 0 0 2px rgba(0,0,0,0.5);
         }
         .auth-switch-btn.active {
             background: var(--main-gradient);
             color: white;
             box-shadow: var(--shadow-glow);
+            text-shadow: 0 0 3px rgba(0,0,0,0.5);
         }
         .auth-switch-btn:hover:not(.active) {
             background: rgba(255, 0, 255, 0.15);
             transform: translateY(-2px);
+            text-shadow: 0 0 5px #FF00FF;
         }
         
         .auth-tabs {
@@ -48,18 +51,20 @@
             padding: 12px;
             cursor: pointer;
             font-weight: 600;
-            color: var(--text-white-dim);
+            color: white;
             transition: all 0.3s;
             border-bottom: 3px solid transparent;
+            text-shadow: 0 0 2px rgba(0,0,0,0.5);
         }
         .auth-tab.active {
-            color: var(--fuchsia);
-            border-bottom-color: var(--fuchsia);
-            text-shadow: var(--neon-text-shadow);
+            color: #FF66FF;
+            border-bottom-color: #FF00FF;
+            text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;
         }
         .auth-tab:hover {
-            color: var(--fuchsia-light);
+            color: #FF66FF;
             background: rgba(255, 0, 255, 0.05);
+            text-shadow: 0 0 5px #FF00FF;
         }
         
         .auth-form {
@@ -76,7 +81,7 @@
         
         .password-hint {
             font-size: 11px;
-            color: var(--text-white-dimmer);
+            color: rgba(255, 255, 255, 0.6);
             margin-top: 5px;
         }
         
@@ -98,6 +103,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
+            text-shadow: 0 0 3px rgba(0,0,0,0.5);
         }
         .btn-primary:hover {
             transform: translateY(-2px);
@@ -116,6 +122,7 @@
             margin-bottom: 20px;
             text-align: center;
             border: 1px solid rgba(16, 185, 129, 0.3);
+            text-shadow: 0 0 2px rgba(0,0,0,0.5);
         }
         
         .form-row {
@@ -131,24 +138,26 @@
             border-top: 1px solid rgba(255, 0, 255, 0.2);
         }
         .back-link a {
-            color: var(--fuchsia);
+            color: #FF66FF;
             text-decoration: none;
             font-size: 14px;
             transition: all 0.3s;
+            text-shadow: 0 0 3px #FF00FF;
         }
         .back-link a:hover {
-            color: var(--fuchsia-light);
-            text-shadow: var(--neon-text-shadow);
+            color: #FF88FF;
+            text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;
             text-decoration: underline;
         }
         
         .info-text {
             text-align: center;
             font-size: 12px;
-            color: var(--text-white-dim);
+            color: white;
             margin-top: 20px;
             padding-top: 15px;
             border-top: 1px solid rgba(255, 0, 255, 0.15);
+            text-shadow: 0 0 2px rgba(0,0,0,0.5);
         }
         
         .alert {
@@ -174,13 +183,14 @@
         
         /* Переопределение стилей форм для неоновой темы */
         .form-group label {
-            color: var(--text-white-dim);
+            color: white;
+            text-shadow: 0 0 2px rgba(0,0,0,0.5);
         }
         
         .form-group input {
             background: rgba(30, 15, 40, 0.8);
             border: 2px solid rgba(255, 0, 255, 0.3);
-            color: var(--text-white);
+            color: white;
         }
         
         .form-group input:focus {
@@ -190,6 +200,31 @@
         
         .form-group input:hover {
             border-color: var(--neon-purple);
+        }
+        
+        /* Стили для заголовков внутри auth-card */
+        .auth-card .logo {
+            font-size: 64px;
+            text-align: center;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px #FF00FF);
+        }
+        
+        .auth-card h2 {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 10px;
+            text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF, 0 0 20px #FF00FF;
+        }
+        
+        .auth-card .subtitle {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            font-size: 14px;
+            text-shadow: 0 0 3px #FF00FF;
         }
         
         @media (max-width: 600px) {
