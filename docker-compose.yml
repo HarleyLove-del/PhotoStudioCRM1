@@ -5,7 +5,7 @@ services:
     container_name: photostudio-db
     environment:
       ACCEPT_EULA: "Y"
-      MSSQL_SA_PASSWORD: "Admin@123456"
+      MSSQL_SA_PASSWORD: "P@ssw0rd2024!"
       MSSQL_PID: "Developer"
     ports:
       - "1433:1433"
