@@ -4,11 +4,6 @@
 
 ### Профессиональная система управления фотостудией
 
-[![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-8.0-purple?style=for-the-badge&logo=dotnet)](https://dotnet.microsoft.com/)
-[![React](https://img.shields.io/badge/React-18.2-blue?style=for-the-badge&logo=react)](https://reactjs.org/)
-[![SQL Server](https://img.shields.io/badge/SQL%20Server-2019-red?style=for-the-badge&logo=microsoft-sql-server)](https://www.microsoft.com/sql-server)
-[![JWT](https://img.shields.io/badge/JWT-Authentication-orange?style=for-the-badge&logo=json-web-tokens)](https://jwt.io/)
-
 </div>
 
 ---
