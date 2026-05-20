@@ -14,13 +14,7 @@ services:
     networks:
       - app-network
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P ${SA_PASSWORD} -Q 'SELECT 1' || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 30s
-
+    # healthcheck временно отключён
   # Бэкенд API
   backend:
     build:
@@ -39,8 +33,7 @@ services:
     networks:
       - app-network
     depends_on:
-      db:
-        condition: service_healthy
+      - db
     restart: unless-stopped
 
   # Фронтенд статика
@@ -58,9 +51,9 @@ services:
     restart: unless-stopped
 
 volumes:
-  sqlserver_data:   # Для SQL Server
-  backend_data:     # Для данных бэкенда (если нужны)
-  uploads_data:     # Для загруженных файлов (фото, документы)
+  sqlserver_data:
+  backend_data:
+  uploads_data:
 
 networks:
   app-network:
