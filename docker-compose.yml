@@ -1,0 +1,67 @@
+services:
+  # SQL Server база данных
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: photostudio-db
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${SA_PASSWORD}
+      MSSQL_PID: "Developer"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks:
+      - app-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P ${SA_PASSWORD} -Q 'SELECT 1' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # Бэкенд API
+  backend:
+    build:
+      context: ./PhotoStudioCRM.Backend
+      dockerfile: Dockerfile
+    container_name: photostudio-backend
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:7042
+      - ConnectionStrings__Default=Server=db,1433;Database=PhotoStudioDB;User Id=sa;Password=${SA_PASSWORD};TrustServerCertificate=True;
+    volumes:
+      - backend_data:/app/data
+      - uploads_data:/app/wwwroot/uploads
+    ports:
+      - "7042:7042"
+    networks:
+      - app-network
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Фронтенд статика
+  frontend:
+    build:
+      context: ./photo-frontend
+      dockerfile: Dockerfile
+    container_name: photostudio-frontend
+    ports:
+      - "5500:80"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+    restart: unless-stopped
+
+volumes:
+  sqlserver_data:   # Для SQL Server
+  backend_data:     # Для данных бэкенда (если нужны)
+  uploads_data:     # Для загруженных файлов (фото, документы)
+
+networks:
+  app-network:
+    driver: bridge
