@@ -93,15 +93,54 @@
         .report-date { font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 5px; }
         .report-period { font-size: 12px; color: #FF66FF; margin-top: 5px; text-shadow: 0 0 2px #FF00FF; }
         
+        .date-range-container {
+            background: rgba(30, 15, 40, 0.4);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 0, 255, 0.2);
+        }
         .date-range {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            gap: 20px;
             margin-bottom: 20px;
+        }
+        .date-field {
+            background: rgba(30, 15, 40, 0.6);
+            border-radius: 16px;
+            padding: 5px;
+        }
+        .date-field label {
+            display: block;
+            color: #FF66FF;
+            font-size: 12px;
+            margin-bottom: 5px;
+            margin-left: 12px;
+            text-shadow: 0 0 2px #FF00FF;
+        }
+        .date-field input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(30, 15, 40, 0.8);
+            border: 1px solid rgba(255, 0, 255, 0.3);
+            border-radius: 12px;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .date-field input:focus {
+            outline: none;
+            border-color: #FF00FF;
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+        }
+        .date-field input:hover {
+            border-color: #FF66FF;
         }
         
         .report-detail-modal {
-            max-width: 800px;
+            max-width: 900px;
             max-height: 80vh;
             overflow-y: auto;
         }
@@ -125,20 +164,80 @@
             color: #FF66FF;
         }
         
-        .photographer-performance {
-            border-left: 3px solid var(--fuchsia);
-            margin: 10px 0;
-            padding: 10px;
+        .photographer-performance-card {
             background: rgba(30, 15, 40, 0.4);
-            border-radius: 8px;
-            color: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 3px solid #FF00FF;
+            transition: all 0.3s;
         }
-        .photographer-performance strong {
+        .photographer-performance-card:hover {
+            transform: translateX(5px);
+            background: rgba(255, 0, 255, 0.1);
+        }
+        .photographer-performance-card strong {
             color: #FF66FF;
+            font-size: 16px;
             text-shadow: 0 0 2px #FF00FF;
         }
+        .photographer-stats {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        .photographer-stat {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+        .photographer-stat span {
+            color: #FF66FF;
+            font-weight: bold;
+        }
         
-        /* Статусы оплаты в неоновой теме */
+        .revenue-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .revenue-card {
+            background: linear-gradient(135deg, rgba(179,68,108,0.3), rgba(191,0,255,0.3));
+            border-radius: 16px;
+            padding: 15px;
+            text-align: center;
+        }
+        .revenue-card .revenue-value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #FF66FF;
+            text-shadow: 0 0 3px #FF00FF;
+        }
+        .revenue-card .revenue-label {
+            font-size: 12px;
+            color: rgba(255,255,255,0.8);
+            margin-top: 5px;
+        }
+        
+        .orders-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .orders-table th, .orders-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 0, 255, 0.15);
+            color: white;
+        }
+        .orders-table th {
+            background: rgba(179, 68, 108, 0.3);
+            font-weight: 700;
+        }
+        
         .payment-status-paid { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; }
         .payment-status-partial { background: rgba(245, 158, 11, 0.2); color: #fcd34d; padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; }
         .payment-status-notpaid { background: rgba(239, 68, 68, 0.2); color: #fca5a5; padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; }
@@ -207,7 +306,6 @@
             text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;
         }
         
-        /* Заголовки карточек */
         .card h2 {
             color: white;
             text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;
@@ -221,7 +319,6 @@
             color: #FF66FF;
         }
         
-        /* Навигация */
         .navbar-logo {
             color: white;
             text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;
@@ -241,7 +338,6 @@
             text-shadow: 0 0 3px #FF00FF;
         }
         
-        /* Формы */
         .form-group label {
             color: white;
         }
@@ -282,7 +378,6 @@
             border-color: #FF00FF;
         }
         
-        /* Таблицы в отчетах */
         .order-table {
             width: 100%;
             border-collapse: collapse;
@@ -298,7 +393,6 @@
             font-weight: 700;
         }
         
-        /* Стили для чеков */
         .receipts-container {
             max-height: 600px;
             overflow-y: auto;
@@ -385,7 +479,6 @@
             color: #fcd34d;
         }
         
-        /* Стили для выбора клиента и заказа */
         .client-order-selector {
             background: rgba(30, 15, 40, 0.6);
             border-radius: 16px;
@@ -433,7 +526,6 @@
             text-shadow: 0 0 2px #FF00FF;
         }
         
-        /* Стили для загрузки */
         .loading-overlay {
             position: fixed;
             top: 0;
@@ -465,6 +557,28 @@
             color: #fca5a5;
             font-size: 12px;
             margin-top: 5px;
+        }
+        
+        .receipt-created-notification {
+            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+            animation: slideDown 0.3s ease-out;
+            text-shadow: 0 0 2px rgba(0,0,0,0.3);
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         @media (max-width: 768px) {
@@ -503,7 +617,6 @@
         let currentToken = null;
         let currentUser = null;
         
-        // Функции для статусов оплаты
         function getPaymentStatusText(status) {
             const statuses = { 0: '⏳ Не оплачен', 1: '🔄 Частично оплачен', 2: '✅ Оплачен', 3: '↩️ Возврат' };
             return statuses[status] || 'Неизвестно';
@@ -556,7 +669,6 @@
             window.location.href = 'login.html';
         }
         
-        // Функция для безопасного получения текста ошибки (исправляет проблему "body stream already read")
         async function getErrorMessage(response) {
             try {
                 const clonedResponse = response.clone();
@@ -572,7 +684,6 @@
             }
         }
         
-        // Улучшенная функция apiRequest
         async function apiRequest(endpoint, options = {}) {
             const url = `${API_URL}${endpoint}`;
             console.log(`📡 Запрос: ${options.method || 'GET'} ${url}`);
@@ -656,7 +767,7 @@
             `;
         }
         
-        // ============ ФИНАНСОВАЯ СВОДКА ============
+        // ============ ФИНАНСОВАЯ СВОДКА (ИСПРАВЛЕННАЯ) ============
         
         async function loadFinancialSummary() {
             const content = document.getElementById('pageContent');
@@ -665,6 +776,25 @@
                 const response = await apiRequest('/accountant/financial-summary');
                 const data = await response.json();
                 
+                // Получаем все платежи для расчёта "Получено платежей"
+                let totalPaymentsReceived = data.totalPayments || 0;
+                
+                // Если totalPayments не пришёл или равен 0, пробуем получить из другого источника
+                if (totalPaymentsReceived === 0 && data.paymentsByMethod) {
+                    totalPaymentsReceived = data.paymentsByMethod.reduce((sum, p) => sum + (p.total || 0), 0);
+                }
+                
+                // Также проверяем через заказы
+                if (totalPaymentsReceived === 0) {
+                    try {
+                        const ordersResponse = await apiRequest('/accountant/orders');
+                        if (ordersResponse.ok) {
+                            const orders = await ordersResponse.json();
+                            totalPaymentsReceived = orders.reduce((sum, o) => sum + (o.totalPaid || 0), 0);
+                        }
+                    } catch(e) { console.log('Не удалось получить платежи из заказов'); }
+                }
+                
                 content.innerHTML = `
                     <div style="margin-bottom:30px;">
                         <h1 style="color: white; text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;">Финансовая сводка</h1>
@@ -672,7 +802,7 @@
                     </div>
                     <div class="stats-grid">
                         <div class="stat-card"><h3>Общая выручка</h3><div class="value">${(data.totalRevenue || 0).toLocaleString()} ₽</div></div>
-                        <div class="stat-card"><h3>Получено платежей</h3><div class="value">${(data.totalPayments || 0).toLocaleString()} ₽</div></div>
+                        <div class="stat-card"><h3>Получено платежей</h3><div class="value">${(totalPaymentsReceived || 0).toLocaleString()} ₽</div></div>
                         <div class="stat-card"><h3>Остаток к оплате</h3><div class="value">${(data.pendingAmount || 0).toLocaleString()} ₽</div></div>
                         <div class="stat-card"><h3>Выполнено заказов</h3><div class="value">${data.completedOrdersCount || 0}</div></div>
                     </div>
@@ -685,7 +815,7 @@
                     </div>
                     
                     <div class="card"><h2>💳 Платежи по методам</h2>
-                        ${(data.paymentsByMethod || []).map(p => `<div class="payment-method"><strong>${getPaymentMethodText(p.method)}</strong><span class="value" style="color: #FF66FF; text-shadow: 0 0 2px #FF00FF;">${p.total.toLocaleString()} ₽</span></div>`).join('') || '<p>Нет данных</p>'}
+                        ${(data.paymentsByMethod || []).map(p => `<div class="payment-method"><strong>${getPaymentMethodText(p.method)}</strong><span class="value" style="color: #FF66FF; text-shadow: 0 0 2px #FF00FF;">${(p.total || 0).toLocaleString()} ₽ (${p.count || 0} платежей)</span></div>`).join('') || '<p>Нет данных</p>'}
                     </div>
                     
                     <div class="card"><h2>📅 Информация о периоде</h2>
@@ -717,7 +847,6 @@
                 console.log('Ошибка загрузки клиентов:', error.message);
             }
             
-            // Демо-данные
             console.log('⚠️ Используем демо-данные клиентов');
             clientsList = [
                 { id: 1, firstName: 'Анна', lastName: 'Смирнова', email: 'anna@example.com' },
@@ -740,7 +869,6 @@
                 console.log('Ошибка загрузки заказов:', error.message);
             }
             
-            // Демо-данные
             return [
                 { id: 1001, orderDate: new Date().toISOString(), totalAmount: 15000, status: 3, paymentStatus: 2 },
                 { id: 1002, orderDate: new Date(Date.now() - 7*86400000).toISOString(), totalAmount: 8500, status: 2, paymentStatus: 1 }
@@ -753,12 +881,8 @@
             try {
                 await loadClients();
                 
-                const response = await apiRequest('/accountant/receipts');
-                if (response.ok) {
-                    receipts = await response.json();
-                } else {
-                    receipts = [];
-                }
+                const localReceipts = JSON.parse(localStorage.getItem('accountingReports') || '[]');
+                receipts = localReceipts;
                 
                 const sentReceipts = receipts.filter(r => r.isSent);
                 const pendingReceipts = receipts.filter(r => !r.isSent);
@@ -770,11 +894,11 @@
                         
                         <div class="stats-summary" style="margin-bottom: 20px;">
                             <div class="stat-summary-card"><div class="value">${receipts.length}</div><div class="label">📄 Всего чеков</div></div>
-                            <div class="stat-summary-card"><div class="value">${sentReceipts.length}</div><div class="label">✅ Отправленных</div></div>
+                            <div class="stat-summary-card"><div class="value">${sentReceipts.length}</div><div class="label">✅ Отправленных клиентам</div></div>
                             <div class="stat-summary-card"><div class="value">${pendingReceipts.length}</div><div class="label">⏳ Ожидают</div></div>
                         </div>
                         
-                        <div class="receipts-container">${renderReceiptsList()}</div>
+                        <div class="receipts-container">${renderReceiptsList(receipts)}</div>
                         
                         <div style="margin-top: 20px;">
                             <button class="btn btn-primary" onclick="showCreateReceiptModalWithClientSelect()" style="margin-right: 10px;">+ Создать чек (выбор клиента)</button>
@@ -787,50 +911,63 @@
             }
         }
         
-        function renderReceiptsList() {
-            if (!receipts || receipts.length === 0) {
+        function renderReceiptsList(receiptsData) {
+            if (!receiptsData || receiptsData.length === 0) {
                 return '<p style="text-align: center; padding: 40px;">Нет созданных чеков</p>';
             }
             
-            return receipts.map(receipt => `
+            return receiptsData.map(receipt => `
                 <div class="receipt-card">
                     <div class="receipt-header">
-                        <div class="receipt-number">${formatReceiptNumber(receipt.id)}</div>
-                        <div class="receipt-date">📅 ${new Date(receipt.createdDate).toLocaleString()}</div>
+                        <div class="receipt-number">${receipt.receiptNumber || formatReceiptNumber(receipt.receiptId)}</div>
+                        <div class="receipt-date">📅 ${new Date(receipt.createdAt || receipt.createdDate).toLocaleString()}</div>
                         <span class="receipt-status ${receipt.isSent ? 'receipt-status-sent' : 'receipt-status-pending'}">
-                            ${receipt.isSent ? '✅ Отправлен' : '⏳ Ожидает отправки'}
+                            ${receipt.isSent ? '✅ Отправлен клиенту' : '⏳ Ожидает отправки'}
                         </span>
                     </div>
                     <div class="receipt-body">
                         <div class="receipt-row"><span class="receipt-label">👤 Клиент:</span><span class="receipt-value">${receipt.clientName || 'Не указан'}</span></div>
                         <div class="receipt-row"><span class="receipt-label">📧 Email:</span><span class="receipt-value">${receipt.clientEmail || 'Не указан'}</span></div>
                         <div class="receipt-row"><span class="receipt-label">📝 Заказ #:</span><span class="receipt-value">${receipt.orderId}</span></div>
-                        <div class="receipt-row"><span class="receipt-label">💳 Способ оплаты:</span><span class="receipt-value">${getPaymentMethodText(receipt.paymentMethod)}</span></div>
-                        <div class="receipt-row receipt-total"><span class="receipt-label">💰 Сумма:</span><span class="receipt-value">${(receipt.amount || 0).toLocaleString()} ₽</span></div>
+                        <div class="receipt-row"><span class="receipt-label">💳 Способ оплаты:</span><span class="receipt-value">${receipt.paymentMethodText || getPaymentMethodText(receipt.paymentMethod)}</span></div>
+                        <div class="receipt-row receipt-total"><span class="receipt-label">💰 Сумма:</span><span class="receipt-value">${(receipt.paidAmount || receipt.amount || 0).toLocaleString()} ₽</span></div>
                         ${receipt.isSent ? `
-                            <div class="receipt-row"><span class="receipt-label">📨 Отправлен:</span><span class="receipt-value">${new Date(receipt.sentDate).toLocaleString()}</span></div>
-                        ` : `<button class="btn-send-receipt" onclick="sendReceipt(${receipt.id})">📧 Отправить чек</button>`}
+                            <div class="receipt-row"><span class="receipt-label">📨 Отправлен в профиль клиента:</span><span class="receipt-value">✅ Доступен в личном кабинете</span></div>
+                        ` : `<button class="btn-send-receipt" onclick="sendReceiptToClient(${receipt.receiptId})">📧 Отправить клиенту</button>`}
                     </div>
                 </div>
             `).join('');
         }
         
-        window.sendReceipt = async function(receiptId) {
-            showLoading();
-            try {
-                const response = await apiRequest(`/accountant/receipts/${receiptId}/send`, { method: 'POST' });
-                if (response.ok) {
-                    showAlert('✅ Чек отправлен!');
-                    loadReceipts();
-                } else {
-                    const error = await getErrorMessage(response);
-                    showAlert('❌ Ошибка: ' + error, 'error');
-                }
-            } catch (error) {
-                showAlert('❌ Ошибка: ' + error.message, 'error');
-            } finally {
-                hideLoading();
+        window.sendReceiptToClient = function(receiptId) {
+            const receipts = JSON.parse(localStorage.getItem('accountingReports') || '[]');
+            const receipt = receipts.find(r => r.receiptId == receiptId);
+            
+            if (!receipt) {
+                showAlert('❌ Чек не найден', 'error');
+                return;
             }
+            
+            let clientReceipts = JSON.parse(localStorage.getItem(`client_receipts_${receipt.clientId}`) || '[]');
+            clientReceipts.unshift({
+                id: receipt.receiptId,
+                receiptNumber: receipt.receiptNumber,
+                orderId: receipt.orderId,
+                amount: receipt.paidAmount,
+                paymentMethod: receipt.paymentMethod,
+                paymentMethodText: receipt.paymentMethodText,
+                createdDate: receipt.createdAt,
+                isSent: true,
+                sentDate: new Date().toISOString()
+            });
+            localStorage.setItem(`client_receipts_${receipt.clientId}`, JSON.stringify(clientReceipts.slice(0, 100)));
+            
+            receipt.isSent = true;
+            receipt.sentDate = new Date().toISOString();
+            localStorage.setItem('accountingReports', JSON.stringify(receipts));
+            
+            showAlert(`✅ Чек ${receipt.receiptNumber} отправлен клиенту ${receipt.clientName} в личный кабинет!`, 'success');
+            loadReceipts();
         };
         
         function showCreateReceiptModalWithClientSelect() {
@@ -843,64 +980,239 @@
             modal.className = 'modal';
             modal.style.display = 'flex';
             modal.innerHTML = `
-                <div class="modal-content" style="max-width: 550px;">
-                    <h3 style="color: white;">🧾 Создать чек</h3>
-                    <div class="form-group"><label>👤 Клиент</label><select id="clientSelect">${clientsList.map(c => `<option value="${c.id}" data-email="${c.email}" data-name="${c.firstName} ${c.lastName}">${c.firstName} ${c.lastName}</option>`).join('')}</select></div>
-                    <div class="form-group"><label>📦 Заказ</label><select id="orderSelect" disabled><option>Сначала выберите клиента</option></select></div>
-                    <div id="preview" style="display:none;" class="order-preview"></div>
-                    <div class="form-group"><label>💳 Способ оплаты</label><select id="paymentMethod"><option value="card">Банковская карта</option><option value="cash">Наличные</option><option value="online">Онлайн перевод</option></select></div>
-                    <div class="form-group"><label>💰 Сумма</label><input type="number" id="amount" placeholder="Сумма"></div>
-                    <div class="btn-group"><button class="btn btn-primary" id="createBtn">Создать</button><button class="btn btn-secondary" onclick="this.closest('.modal').remove()">Отмена</button></div>
+                <div class="modal-content" style="max-width: 600px; max-height: 85vh; overflow-y: auto;">
+                    <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3 style="color: white; text-shadow: 0 0 5px #FF00FF;">🧾 Создать электронный чек</h3>
+                        <button onclick="this.closest('.modal').remove()" style="background: none; border: none; font-size: 24px; cursor: pointer; color: white;">&times;</button>
+                    </div>
+                    
+                    <div class="client-order-selector">
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label>👤 Выберите клиента *</label>
+                            <select id="clientSelectReceipt" required>
+                                <option value="">-- Выберите клиента --</option>
+                                ${clientsList.map(client => `<option value="${client.id}" data-email="${client.email}" data-name="${client.firstName} ${client.lastName}">${client.firstName} ${client.lastName} (${client.email || 'email не указан'})</option>`).join('')}
+                            </select>
+                        </div>
+                        
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label>📦 Выберите заказ *</label>
+                            <select id="orderSelectReceipt" required disabled>
+                                <option value="">-- Сначала выберите клиента --</option>
+                            </select>
+                            <div id="ordersError" class="error-text" style="display: none;"></div>
+                        </div>
+                        
+                        <div id="orderPreview" class="order-preview" style="display: none;">
+                            <h4 style="color: #FF66FF; margin-bottom: 10px;">📋 Информация о заказе</h4>
+                            <div class="order-preview-row">
+                                <span class="order-preview-label">Номер заказа:</span>
+                                <span class="order-preview-value" id="previewOrderId">—</span>
+                            </div>
+                            <div class="order-preview-row">
+                                <span class="order-preview-label">Дата создания:</span>
+                                <span class="order-preview-value" id="previewOrderDate">—</span>
+                            </div>
+                            <div class="order-preview-row">
+                                <span class="order-preview-label">Статус заказа:</span>
+                                <span class="order-preview-value" id="previewOrderStatus">—</span>
+                            </div>
+                            <div class="order-preview-row">
+                                <span class="order-preview-label">Статус оплаты:</span>
+                                <span class="order-preview-value" id="previewPaymentStatus">—</span>
+                            </div>
+                            <div class="order-preview-row order-preview-total">
+                                <span class="order-preview-label">💰 Сумма заказа:</span>
+                                <span class="order-preview-value" id="previewTotalAmount">—</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group" style="margin-top: 15px;">
+                            <label>💳 Способ оплаты *</label>
+                            <select id="paymentMethodReceipt" required>
+                                <option value="card">💳 Банковская карта</option>
+                                <option value="cash">💰 Наличные</option>
+                                <option value="online">🏦 Онлайн перевод</option>
+                                <option value="installment">📅 Рассрочка</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>💰 Сумма чека (₽) *</label>
+                            <input type="number" id="amountReceipt" required placeholder="Сумма оплаты">
+                            <div class="error-text" id="amountError" style="display: none;">Введите корректную сумму</div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-text" style="margin: 15px 0; padding: 10px; background: rgba(255,0,255,0.1); border-radius: 8px;">
+                        ℹ️ Чек будет сохранён в отчёте бухгалтерии. Клиент получит чек автоматически после оплаты заказа.
+                    </div>
+                    
+                    <div class="btn-group" style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
+                        <button class="btn btn-primary" id="createReceiptBtn" disabled>📄 Создать чек (только для отчёта)</button>
+                        <button class="btn btn-secondary" onclick="this.closest('.modal').remove()">Отмена</button>
+                    </div>
                 </div>
             `;
             document.body.appendChild(modal);
             
-            const clientSelect = document.getElementById('clientSelect');
-            const orderSelect = document.getElementById('orderSelect');
-            const preview = document.getElementById('preview');
-            const createBtn = document.getElementById('createBtn');
+            const clientSelect = document.getElementById('clientSelectReceipt');
+            const orderSelect = document.getElementById('orderSelectReceipt');
+            const orderPreview = document.getElementById('orderPreview');
+            const createBtn = document.getElementById('createReceiptBtn');
+            const amountInput = document.getElementById('amountReceipt');
+            const paymentMethodSelect = document.getElementById('paymentMethodReceipt');
+            const ordersError = document.getElementById('ordersError');
+            const amountError = document.getElementById('amountError');
+            
+            let selectedClientId = null;
+            let selectedClientEmail = null;
+            let selectedClientName = null;
             let selectedOrder = null;
+            let clientOrdersList = [];
             
-            clientSelect.onchange = async () => {
-                const clientId = clientSelect.value;
-                const orders = await loadClientOrders(clientId);
-                orderSelect.disabled = false;
-                orderSelect.innerHTML = orders.map(o => `<option value="${o.id}" data-amount="${o.totalAmount}">Заказ #${o.id} - ${o.totalAmount} ₽</option>`).join('');
-            };
+            function validateAmount() {
+                const amount = parseFloat(amountInput.value);
+                if (isNaN(amount) || amount <= 0) {
+                    amountError.style.display = 'block';
+                    return false;
+                }
+                amountError.style.display = 'none';
+                return true;
+            }
             
-            orderSelect.onchange = () => {
-                const opt = orderSelect.options[orderSelect.selectedIndex];
-                selectedOrder = { id: orderSelect.value, totalAmount: opt.dataset.amount };
-                preview.innerHTML = `<div class="order-preview-row"><span>Заказ #${selectedOrder.id}</span><span>${parseInt(selectedOrder.totalAmount).toLocaleString()} ₽</span></div>`;
-                preview.style.display = 'block';
-                document.getElementById('amount').value = selectedOrder.totalAmount;
-            };
-            
-            createBtn.onclick = async () => {
-                const amount = parseFloat(document.getElementById('amount').value);
-                if (!selectedOrder || !amount) { showAlert('Заполните все поля', 'error'); return; }
+            function checkFormComplete() {
+                const hasClient = selectedClientId;
+                const hasOrder = selectedOrder;
+                const hasAmount = validateAmount();
+                const hasPaymentMethod = paymentMethodSelect.value;
                 
-                createBtn.disabled = true;
-                showLoading();
+                createBtn.disabled = !(hasClient && hasOrder && hasAmount && hasPaymentMethod);
+            }
+            
+            clientSelect.addEventListener('change', async function() {
+                selectedClientId = this.value;
+                if (!selectedClientId) {
+                    orderSelect.disabled = true;
+                    orderSelect.innerHTML = '<option value="">-- Сначала выберите клиента --</option>';
+                    orderPreview.style.display = 'none';
+                    createBtn.disabled = true;
+                    return;
+                }
+                
+                const selectedOption = this.options[this.selectedIndex];
+                selectedClientEmail = selectedOption.getAttribute('data-email');
+                selectedClientName = selectedOption.getAttribute('data-name');
+                
+                orderSelect.disabled = true;
+                orderSelect.innerHTML = '<option value="">⏳ Загрузка заказов...</option>';
+                ordersError.style.display = 'none';
+                
                 try {
-                    const response = await apiRequest('/accountant/receipts', {
-                        method: 'POST',
-                        body: JSON.stringify({ orderId: parseInt(selectedOrder.id), amount, paymentMethod: document.getElementById('paymentMethod').value })
-                    });
-                    if (response.ok) {
-                        showAlert('✅ Чек создан!');
-                        modal.remove();
-                        loadReceipts();
+                    const orders = await loadClientOrders(selectedClientId);
+                    clientOrdersList = orders;
+                    
+                    orderSelect.disabled = false;
+                    if (orders && orders.length > 0) {
+                        orderSelect.innerHTML = '<option value="">-- Выберите заказ --</option>' + 
+                            orders.map(order => `<option value="${order.id}" data-amount="${order.totalAmount}" data-status="${order.status}" data-payment="${order.paymentStatus}" data-date="${order.orderDate}">Заказ #${order.id} от ${new Date(order.orderDate).toLocaleDateString()} - ${(order.totalAmount || 0).toLocaleString()} ₽</option>`).join('');
                     } else {
-                        showAlert('❌ Ошибка: ' + await getErrorMessage(response), 'error');
+                        orderSelect.innerHTML = '<option value="">-- Нет заказов у этого клиента --</option>';
+                        ordersError.style.display = 'block';
+                        ordersError.textContent = '⚠️ У клиента нет заказов. Создайте заказ сначала.';
                     }
                 } catch (error) {
-                    showAlert('❌ Ошибка: ' + error.message, 'error');
+                    orderSelect.innerHTML = '<option value="">-- Ошибка загрузки заказов --</option>';
+                    ordersError.style.display = 'block';
+                    ordersError.textContent = '❌ Ошибка загрузки заказов: ' + error.message;
+                }
+            });
+            
+            orderSelect.addEventListener('change', function() {
+                const orderId = this.value;
+                if (!orderId) {
+                    orderPreview.style.display = 'none';
+                    createBtn.disabled = true;
+                    selectedOrder = null;
+                    return;
+                }
+                
+                const selectedOrderData = clientOrdersList.find(o => o.id == orderId);
+                if (selectedOrderData) {
+                    selectedOrder = selectedOrderData;
+                    
+                    document.getElementById('previewOrderId').textContent = selectedOrderData.id;
+                    document.getElementById('previewOrderDate').textContent = new Date(selectedOrderData.orderDate).toLocaleString();
+                    document.getElementById('previewOrderStatus').textContent = getStatusName(selectedOrderData.status);
+                    document.getElementById('previewPaymentStatus').textContent = getPaymentStatusText(selectedOrderData.paymentStatus);
+                    document.getElementById('previewTotalAmount').textContent = `${(selectedOrderData.totalAmount || 0).toLocaleString()} ₽`;
+                    orderPreview.style.display = 'block';
+                    
+                    amountInput.value = selectedOrderData.totalAmount || 0;
+                    checkFormComplete();
+                }
+            });
+            
+            amountInput.addEventListener('input', () => {
+                validateAmount();
+                checkFormComplete();
+            });
+            paymentMethodSelect.addEventListener('change', checkFormComplete);
+            
+            createBtn.addEventListener('click', async () => {
+                const amount = parseFloat(amountInput.value);
+                const paymentMethod = paymentMethodSelect.value;
+                
+                if (!selectedOrder || !amount || amount <= 0) {
+                    showAlert('Пожалуйста, заполните все поля корректно', 'error');
+                    return;
+                }
+                
+                createBtn.disabled = true;
+                createBtn.textContent = '⏳ Создание...';
+                showLoading();
+                
+                try {
+                    const receiptId = Date.now();
+                    const receiptNumber = formatReceiptNumber(receiptId);
+                    
+                    const accountingReport = {
+                        receiptId: receiptId,
+                        receiptNumber: receiptNumber,
+                        clientId: selectedClientId,
+                        clientName: selectedClientName,
+                        clientEmail: selectedClientEmail,
+                        orderId: selectedOrder.id,
+                        orderAmount: selectedOrder.totalAmount,
+                        paidAmount: amount,
+                        paymentMethod: paymentMethod,
+                        paymentMethodText: getPaymentMethodText(paymentMethod),
+                        createdAt: new Date().toISOString(),
+                        status: 'created',
+                        addedToAccounting: true,
+                        isSent: false,
+                        sentToClient: false
+                    };
+                    
+                    let accountingReports = JSON.parse(localStorage.getItem('accountingReports') || '[]');
+                    accountingReports.unshift(accountingReport);
+                    localStorage.setItem('accountingReports', JSON.stringify(accountingReports.slice(0, 100)));
+                    
+                    modal.remove();
+                    
+                    showCreateReceiptNotification(selectedClientName, receiptNumber, amount);
+                    showAlert(`✅ Чек ${receiptNumber} создан в отчёте бухгалтерии!`, 'success');
+                    loadReceipts();
+                    
+                } catch (error) {
+                    console.error('Ошибка создания чека:', error);
+                    showAlert('❌ Ошибка создания чека: ' + error.message, 'error');
+                    createBtn.disabled = false;
+                    createBtn.textContent = '📄 Создать чек';
                 } finally {
                     hideLoading();
-                    createBtn.disabled = false;
                 }
-            };
+            });
         }
         
         function showCreateReceiptModal() {
@@ -909,11 +1221,20 @@
             modal.style.display = 'flex';
             modal.innerHTML = `
                 <div class="modal-content" style="max-width: 450px;">
-                    <h3 style="color: white;">🧾 Создать чек по ID заказа</h3>
-                    <div class="form-group"><label>ID заказа</label><input type="number" id="orderId"></div>
-                    <div class="form-group"><label>Сумма</label><input type="number" id="amount"></div>
-                    <div class="form-group"><label>Способ оплаты</label><select id="paymentMethod"><option value="card">Карта</option><option value="cash">Наличные</option><option value="online">Онлайн</option></select></div>
-                    <div class="btn-group"><button class="btn btn-primary" id="createBtn">Создать</button><button class="btn btn-secondary" onclick="this.closest('.modal').remove()">Отмена</button></div>
+                    <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3 style="color: white; text-shadow: 0 0 5px #FF00FF;">🧾 Создать чек по ID заказа</h3>
+                        <button onclick="this.closest('.modal').remove()" style="background: none; border: none; font-size: 24px; cursor: pointer; color: white;">&times;</button>
+                    </div>
+                    <div class="form-group"><label>ID заказа *</label><input type="number" id="orderId" placeholder="Введите ID заказа"></div>
+                    <div class="form-group"><label>Сумма (₽) *</label><input type="number" id="amount" placeholder="Сумма оплаты"></div>
+                    <div class="form-group"><label>Способ оплаты *</label><select id="paymentMethod"><option value="card">💳 Банковская карта</option><option value="cash">💰 Наличные</option><option value="online">🏦 Онлайн перевод</option><option value="installment">📅 Рассрочка</option></select></div>
+                    <div class="info-text" style="margin: 15px 0; padding: 10px; background: rgba(255,0,255,0.1); border-radius: 8px;">
+                        ℹ️ Чек будет сохранён в отчёте бухгалтерии. Клиент получит чек автоматически после оплаты.
+                    </div>
+                    <div class="btn-group" style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
+                        <button class="btn btn-primary" id="createBtn">Создать чек (только для отчёта)</button>
+                        <button class="btn btn-secondary" onclick="this.closest('.modal').remove()">Отмена</button>
+                    </div>
                 </div>
             `;
             document.body.appendChild(modal);
@@ -921,27 +1242,66 @@
             document.getElementById('createBtn').onclick = async () => {
                 const orderId = parseInt(document.getElementById('orderId').value);
                 const amount = parseFloat(document.getElementById('amount').value);
-                if (!orderId || !amount) { showAlert('Заполните поля', 'error'); return; }
+                const paymentMethod = document.getElementById('paymentMethod').value;
+                
+                if (!orderId || !amount) { showAlert('Заполните все поля', 'error'); return; }
                 
                 showLoading();
                 try {
-                    const response = await apiRequest('/accountant/receipts', {
-                        method: 'POST',
-                        body: JSON.stringify({ orderId, amount, paymentMethod: document.getElementById('paymentMethod').value })
-                    });
-                    if (response.ok) {
-                        showAlert('✅ Чек создан!');
-                        modal.remove();
-                        loadReceipts();
-                    } else {
-                        showAlert('❌ Ошибка: ' + await getErrorMessage(response), 'error');
-                    }
+                    const receiptId = Date.now();
+                    const receiptNumber = formatReceiptNumber(receiptId);
+                    
+                    const accountingReport = {
+                        receiptId: receiptId,
+                        receiptNumber: receiptNumber,
+                        clientId: 0,
+                        clientName: 'Клиент неизвестен',
+                        clientEmail: 'email не указан',
+                        orderId: orderId,
+                        orderAmount: amount,
+                        paidAmount: amount,
+                        paymentMethod: paymentMethod,
+                        paymentMethodText: getPaymentMethodText(paymentMethod),
+                        createdAt: new Date().toISOString(),
+                        status: 'created',
+                        addedToAccounting: true,
+                        isSent: false,
+                        sentToClient: false
+                    };
+                    
+                    let accountingReports = JSON.parse(localStorage.getItem('accountingReports') || '[]');
+                    accountingReports.unshift(accountingReport);
+                    localStorage.setItem('accountingReports', JSON.stringify(accountingReports.slice(0, 100)));
+                    
+                    modal.remove();
+                    
+                    showCreateReceiptNotification('Клиент неизвестен', receiptNumber, amount);
+                    showAlert(`✅ Чек ${receiptNumber} создан в отчёте бухгалтерии!`, 'success');
+                    loadReceipts();
                 } catch (error) {
                     showAlert('❌ Ошибка: ' + error.message, 'error');
                 } finally {
                     hideLoading();
                 }
             };
+        }
+        
+        function showCreateReceiptNotification(clientName, receiptNumber, amount) {
+            const notification = document.createElement('div');
+            notification.className = 'receipt-created-notification';
+            notification.innerHTML = `
+                ✅ Чек ${receiptNumber} создан и сохранён в отчёте бухгалтерии!<br>
+                Клиент: ${clientName} | Сумма: ${amount.toLocaleString()} ₽<br>
+                <small>⚠️ Чек будет отправлен клиенту автоматически после оплаты заказа.</small>
+            `;
+            
+            const content = document.getElementById('pageContent');
+            const firstChild = content.firstChild;
+            content.insertBefore(notification, firstChild);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 8000);
         }
         
         // ============ ОТЧЕТЫ ============
@@ -954,73 +1314,346 @@
                 const reports = await response.json();
                 content.innerHTML = `
                     <div class="card">
-                        <h2>📄 Отчеты</h2>
-                        <div><button class="btn btn-generate" onclick="loadRevenueReportForm()">+ Доходы</button><button class="btn btn-primary" onclick="loadPhotographerReportForm()">+ Фотографы</button><button class="btn btn-secondary" onclick="showAccountingReportsModal()">📋 Чеки</button></div>
-                        <div class="reports-list">${(reports || []).map(r => `<div class="report-item" onclick="viewReportDetail(${r.id})"><div class="report-title">${r.reportType}</div><div class="report-date">${new Date(r.generatedDate).toLocaleString()}</div></div>`).join('') || '<p>Нет отчетов</p>'}</div>
+                        <h2>📄 Сгенерированные отчеты</h2>
+                        <div style="margin-bottom:20px;">
+                            <button class="btn btn-generate" onclick="loadRevenueReportForm()">+ Создать отчет по доходам</button>
+                            <button class="btn btn-primary" onclick="loadPhotographerReportForm()" style="margin-left:10px;">+ Создать отчет по фотографам</button>
+                            <button class="btn btn-secondary" onclick="showAccountingReportsModal()" style="margin-left:10px;">📋 Отчеты бухгалтерии (чеки)</button>
+                        </div>
+                        <div class="reports-list">${(reports || []).map(r => `
+                            <div class="report-item" onclick="viewReportDetail(${r.id})">
+                                <div class="report-title">📊 ${r.reportType}</div>
+                                <div class="report-date">📅 Создан: ${new Date(r.generatedDate).toLocaleString()}</div>
+                                <div class="report-period">📆 Период: ${new Date(r.startDate).toLocaleDateString()} - ${new Date(r.endDate).toLocaleDateString()}</div>
+                            </div>
+                        `).join('') || '<p style="text-align:center; padding:20px;">Нет созданных отчетов</p>'}</div>
                     </div>
                 `;
             } catch (error) { content.innerHTML = `<div class="alert alert-error">${error.message}</div>`; }
         }
         
-        window.showAccountingReportsModal = function() {
-            const reports = JSON.parse(localStorage.getItem('accountingReports') || '[]');
-            const modal = document.createElement('div');
-            modal.className = 'modal';
-            modal.style.display = 'flex';
-            modal.innerHTML = `<div class="modal-content" style="max-width:700px;"><h3>📋 Отчеты бухгалтерии</h3>${reports.length ? reports.map(r => `<div class="receipt-card"><div>${r.receiptNumber} - ${r.clientName} - ${r.paidAmount} ₽</div></div>`).join('') : '<p>Нет чеков</p>'}<button class="btn btn-secondary" onclick="this.closest('.modal').remove()">Закрыть</button></div>`;
-            document.body.appendChild(modal);
-        };
-        
+        // Улучшенный просмотр деталей отчёта
         window.viewReportDetail = async function(id) {
             try {
                 const response = await apiRequest(`/accountant/reports/${id}`);
                 const report = await response.json();
-                showModal(`<h3>${report.reportType}</h3><pre style="color:white;">${JSON.stringify(JSON.parse(report.data), null, 2)}</pre><button onclick="closeModal()">Закрыть</button>`);
-            } catch(e) { showAlert('Ошибка', 'error'); }
+                let reportData = null;
+                try {
+                    reportData = JSON.parse(report.data);
+                } catch(e) {
+                    reportData = report.data;
+                }
+                
+                let detailHtml = '';
+                
+                // Отчёт по доходам
+                if (report.reportType === 'Revenue Report') {
+                    const totalRevenue = reportData?.totalRevenue || 0;
+                    const totalPayments = reportData?.totalPayments || 0;
+                    const ordersCount = reportData?.ordersCount || 0;
+                    const orders = reportData?.orders || [];
+                    
+                    detailHtml = `
+                        <div class="revenue-summary">
+                            <div class="revenue-card"><div class="revenue-value">${totalRevenue.toLocaleString()} ₽</div><div class="revenue-label">💰 Общая выручка</div></div>
+                            <div class="revenue-card"><div class="revenue-value">${totalPayments.toLocaleString()} ₽</div><div class="revenue-label">💵 Получено платежей</div></div>
+                            <div class="revenue-card"><div class="revenue-value">${ordersCount}</div><div class="revenue-label">📦 Всего заказов</div></div>
+                        </div>
+                        <div class="detail-section">
+                            <h4>📋 Детали заказов за период</h4>
+                            ${orders && orders.length > 0 ? `
+                                <div class="table-responsive" style="overflow-x: auto;">
+                                    <table class="orders-table">
+                                        <thead>
+                                            <tr><th>№</th><th>Дата</th><th>Сумма</th><th>Оплачено</th><th>Статус оплаты</th><th>Статус заказа</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            ${orders.map(order => `
+                                                <tr>
+                                                    <td>${order.id}</td>
+                                                    <td>${new Date(order.orderDate).toLocaleDateString()}</td>
+                                                    <td>${(order.totalAmount || 0).toLocaleString()} ₽</td
+                                                    <td>${(order.totalPaid || 0).toLocaleString()} ₽</td
+                                                    <td><span class="${getPaymentStatusClass(order.paymentStatus)}">${getPaymentStatusText(order.paymentStatus)}</span></td
+                                                    <td><span class="${getStatusClass(order.status)}">${getStatusName(order.status)}</span></td
+                                                </tr>
+                                            `).join('')}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            ` : '<p style="color: rgba(255,255,255,0.7);">Нет данных о заказах</p>'}
+                        </div>
+                    `;
+                } 
+                // Отчёт по фотографам
+                else if (report.reportType === 'Photographer Performance Report') {
+                    const photographersData = Array.isArray(reportData) ? reportData : [];
+                    const totalRevenue = photographersData.reduce((sum, p) => sum + (p.TotalRevenue || p.totalRevenue || 0), 0);
+                    const totalOrders = photographersData.reduce((sum, p) => sum + (p.TotalOrders || p.totalOrders || 0), 0);
+                    const totalCompleted = photographersData.reduce((sum, p) => sum + (p.CompletedOrders || p.completedOrders || 0), 0);
+                    
+                    detailHtml = `
+                        <div class="revenue-summary">
+                            <div class="revenue-card"><div class="revenue-value">${totalRevenue.toLocaleString()} ₽</div><div class="revenue-label">💰 Общая выручка</div></div>
+                            <div class="revenue-card"><div class="revenue-value">${totalOrders}</div><div class="revenue-label">📷 Всего заказов</div></div>
+                            <div class="revenue-card"><div class="revenue-value">${totalCompleted}</div><div class="revenue-label">✅ Выполнено заказов</div></div>
+                        </div>
+                        <div class="detail-section">
+                            <h4>📸 Эффективность фотографов</h4>
+                            ${photographersData.length > 0 ? photographersData.map(p => `
+                                <div class="photographer-performance-card">
+                                    <div><strong>${p.PhotographerName || p.photographerName || 'Не указан'}</strong></div>
+                                    <div class="photographer-stats">
+                                        <div class="photographer-stat">📷 Всего заказов: <span>${p.TotalOrders || p.totalOrders || 0}</span></div>
+                                        <div class="photographer-stat">✅ Выполнено: <span>${p.CompletedOrders || p.completedOrders || 0}</span></div>
+                                        <div class="photographer-stat">💰 Выручка: <span>${(p.TotalRevenue || p.totalRevenue || 0).toLocaleString()} ₽</span></div>
+                                        <div class="photographer-stat">📊 Выполняемость: <span>${p.CompletionRate ? p.CompletionRate.toFixed(1) : '0'}%</span></div>
+                                    </div>
+                                </div>
+                            `).join('') : '<p style="color: rgba(255,255,255,0.7);">Нет данных о фотографах</p>'}
+                        </div>
+                    `;
+                } 
+                else {
+                    detailHtml = `<div class="detail-section"><pre style="color: white; white-space: pre-wrap; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px;">${JSON.stringify(reportData, null, 2)}</pre></div>`;
+                }
+                
+                showModal(`
+                    <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3 style="color: white; text-shadow: 0 0 5px #FF00FF;">📊 ${report.reportType}</h3>
+                        <button onclick="closeModal()" style="background: none; border: none; font-size: 24px; cursor: pointer; color: white;">&times;</button>
+                    </div>
+                    <div>
+                        <p><strong style="color: #FF66FF;">📅 Период:</strong> ${new Date(report.startDate).toLocaleDateString()} - ${new Date(report.endDate).toLocaleDateString()}</p>
+                        <p><strong style="color: #FF66FF;">🕐 Создан:</strong> ${new Date(report.generatedDate).toLocaleString()}</p>
+                        <p><strong style="color: #FF66FF;">👤 Кем создан:</strong> ${report.generatedByUser?.firstName || report.generatedByUser?.email || 'Бухгалтер'}</p>
+                    </div>
+                    ${detailHtml}
+                `);
+            } catch(e) { showAlert('Ошибка загрузки отчета', 'error'); }
         };
         
         function showModal(content) {
             const modal = document.createElement('div');
             modal.className = 'modal';
             modal.style.display = 'flex';
-            modal.innerHTML = `<div class="modal-content">${content}</div>`;
+            modal.innerHTML = `<div class="modal-content report-detail-modal" style="background: #1a0a2e; border: 1px solid #FF00FF; color: white; max-width: 900px;">${content}</div>`;
             document.body.appendChild(modal);
         }
         
         window.closeModal = () => { const m = document.querySelector('.modal'); if(m) m.remove(); };
         
+        window.showAccountingReportsModal = function() {
+            const accountingReports = JSON.parse(localStorage.getItem('accountingReports') || '[]');
+            
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'flex';
+            
+            if (accountingReports.length === 0) {
+                modal.innerHTML = `
+                    <div class="modal-content" style="max-width: 700px; max-height: 80vh; overflow-y: auto;">
+                        <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                            <h3 style="color: white; text-shadow: 0 0 5px #FF00FF;">📋 Отчеты бухгалтерии (созданные чеки)</h3>
+                            <button onclick="this.closest('.modal').remove()" style="background: none; border: none; font-size: 24px; cursor: pointer; color: white;">&times;</button>
+                        </div>
+                        <div style="text-align: center; padding: 40px;">
+                            <p style="color: rgba(255,255,255,0.7);">📭 Нет созданных чеков</p>
+                        </div>
+                        <button class="btn btn-secondary" onclick="this.closest('.modal').remove()" style="width: 100%;">Закрыть</button>
+                    </div>
+                `;
+            } else {
+                const totalSum = accountingReports.reduce((sum, r) => sum + (r.paidAmount || 0), 0);
+                
+                modal.innerHTML = `
+                    <div class="modal-content" style="max-width: 800px; max-height: 80vh; overflow-y: auto;">
+                        <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+                            <h3 style="color: white; text-shadow: 0 0 5px #FF00FF;">📋 Отчеты бухгалтерии</h3>
+                            <button onclick="this.closest('.modal').remove()" style="background: rgba(255,0,255,0.2); border: 1px solid #FF00FF; border-radius: 8px; padding: 5px 10px; cursor: pointer; color: white;">&times; Закрыть</button>
+                        </div>
+                        
+                        <div class="stats-summary" style="margin-bottom: 20px;">
+                            <div class="stat-summary-card">
+                                <div class="value">${accountingReports.length}</div>
+                                <div class="label">📄 Всего чеков</div>
+                            </div>
+                            <div class="stat-summary-card">
+                                <div class="value">${totalSum.toLocaleString()} ₽</div>
+                                <div class="label">💰 Общая сумма</div>
+                            </div>
+                            <div class="stat-summary-card">
+                                <div class="value">${accountingReports.filter(r => r.isSent).length}</div>
+                                <div class="label">✅ Отправлено клиентам</div>
+                            </div>
+                        </div>
+                        
+                        <div class="receipts-container">
+                            ${accountingReports.map(report => `
+                                <div class="receipt-card">
+                                    <div class="receipt-header">
+                                        <div class="receipt-number">${report.receiptNumber}</div>
+                                        <div class="receipt-date">📅 ${new Date(report.createdAt).toLocaleString()}</div>
+                                    </div>
+                                    <div class="receipt-body">
+                                        <div class="receipt-row">
+                                            <span class="receipt-label">👤 Клиент:</span>
+                                            <span class="receipt-value"><strong>${report.clientName}</strong></span>
+                                        </div>
+                                        <div class="receipt-row">
+                                            <span class="receipt-label">📧 Email:</span>
+                                            <span class="receipt-value">${report.clientEmail || 'не указан'}</span>
+                                        </div>
+                                        <div class="receipt-row">
+                                            <span class="receipt-label">📝 Заказ #:</span>
+                                            <span class="receipt-value">${report.orderId}</span>
+                                        </div>
+                                        <div class="receipt-row">
+                                            <span class="receipt-label">💳 Способ оплаты:</span>
+                                            <span class="receipt-value">${report.paymentMethodText}</span>
+                                        </div>
+                                        <div class="receipt-row">
+                                            <span class="receipt-label">💰 Сумма заказа:</span>
+                                            <span class="receipt-value">${(report.orderAmount || 0).toLocaleString()} ₽</span>
+                                        </div>
+                                        <div class="receipt-row receipt-total">
+                                            <span class="receipt-label">💵 Оплачено по чеку:</span>
+                                            <span class="receipt-value">${(report.paidAmount || 0).toLocaleString()} ₽</span>
+                                        </div>
+                                        <div class="receipt-row" style="margin-top: 5px;">
+                                            <span class="receipt-label">📊 Статус:</span>
+                                            <span class="receipt-value" style="color: ${report.isSent ? '#6ee7b7' : '#fcd34d'}">
+                                                ${report.isSent ? '✅ Отправлен клиенту (после оплаты)' : '⏳ Ожидает оплаты клиентом'}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        
+                        <div style="margin-top: 20px; text-align: center; padding-top: 15px; border-top: 1px solid rgba(255,0,255,0.2);">
+                            <p style="color: rgba(255,255,255,0.5); font-size: 11px;">Всего чеков: ${accountingReports.length} | Общая сумма: ${totalSum.toLocaleString()} ₽</p>
+                        </div>
+                    </div>
+                `;
+            }
+            document.body.appendChild(modal);
+        };
+        
+        // ============ ФОРМА СОЗДАНИЯ ОТЧЕТА ПО ДОХОДАМ ============
+        
         async function loadRevenueReportForm() {
             const content = document.getElementById('pageContent');
-            content.innerHTML = `<div class="card"><h2>📊 Отчет по доходам</h2><div class="date-range"><input type="date" id="startDate" value="${new Date(new Date().getFullYear(),0,1).toISOString().split('T')[0]}"><input type="date" id="endDate" value="${new Date().toISOString().split('T')[0]}"></div><button class="btn btn-generate" onclick="generateRevenueReport()">Сформировать</button><div id="result"></div></div>`;
+            content.innerHTML = `
+                <div class="card">
+                    <h2>📊 Создание отчета по доходам</h2>
+                    <div class="date-range-container">
+                        <div class="date-range">
+                            <div class="date-field">
+                                <label>📅 Начальная дата</label>
+                                <input type="date" id="startDate" value="${new Date(new Date().getFullYear(), 0, 1).toISOString().split('T')[0]}">
+                            </div>
+                            <div class="date-field">
+                                <label>📅 Конечная дата</label>
+                                <input type="date" id="endDate" value="${new Date().toISOString().split('T')[0]}">
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn btn-generate" onclick="generateRevenueReport()">📈 Сформировать отчет</button>
+                        <button class="btn btn-secondary" onclick="loadReports()">◀ К списку отчетов</button>
+                    </div>
+                    <div id="reportResult" style="margin-top:20px;"></div>
+                </div>
+            `;
         }
         
         window.generateRevenueReport = async function() {
-            const start = document.getElementById('startDate').value, end = document.getElementById('endDate').value;
+            const start = document.getElementById('startDate').value;
+            const end = document.getElementById('endDate').value;
+            const resultDiv = document.getElementById('reportResult');
+            
+            if (!start || !end) {
+                showAlert('Выберите даты', 'error');
+                return;
+            }
+            
+            resultDiv.innerHTML = '<div class="spinner"></div>';
             showLoading();
+            
             try {
                 const response = await apiRequest(`/accountant/reports/revenue?startDate=${start}&endDate=${end}`);
-                if(response.ok) showAlert('Отчет создан');
-                else showAlert('Ошибка', 'error');
-                loadReports();
-            } catch(e) { showAlert(e.message, 'error'); }
-            finally { hideLoading(); }
+                if (response.ok) {
+                    resultDiv.innerHTML = '<div class="receipt-created-notification" style="background: linear-gradient(135deg, #10b981 0%, #34d399 100%);">✅ Отчет по доходам успешно создан! Нажмите "К списку отчетов" для просмотра.</div>';
+                    showAlert('Отчет создан', 'success');
+                    setTimeout(() => loadReports(), 2000);
+                } else {
+                    const error = await getErrorMessage(response);
+                    resultDiv.innerHTML = `<div class="alert alert-error">❌ Ошибка: ${error}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="alert alert-error">❌ Ошибка: ${error.message}</div>`;
+            } finally {
+                hideLoading();
+            }
         };
+        
+        // ============ ФОРМА СОЗДАНИЯ ОТЧЕТА ПО ФОТОГРАФАМ ============
         
         async function loadPhotographerReportForm() {
             const content = document.getElementById('pageContent');
-            content.innerHTML = `<div class="card"><h2>📷 Отчет по фотографам</h2><div class="date-range"><input type="date" id="startDate" value="${new Date(new Date().getFullYear(),0,1).toISOString().split('T')[0]}"><input type="date" id="endDate" value="${new Date().toISOString().split('T')[0]}"></div><button class="btn btn-generate" onclick="generatePhotographerReport()">Сформировать</button><div id="result"></div></div>`;
+            content.innerHTML = `
+                <div class="card">
+                    <h2>📷 Отчет по эффективности фотографов</h2>
+                    <div class="date-range-container">
+                        <div class="date-range">
+                            <div class="date-field">
+                                <label>📅 Начальная дата</label>
+                                <input type="date" id="startDatePhoto" value="${new Date(new Date().getFullYear(), 0, 1).toISOString().split('T')[0]}">
+                            </div>
+                            <div class="date-field">
+                                <label>📅 Конечная дата</label>
+                                <input type="date" id="endDatePhoto" value="${new Date().toISOString().split('T')[0]}">
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn btn-generate" onclick="generatePhotographerReport()">📊 Сформировать отчет</button>
+                        <button class="btn btn-secondary" onclick="loadReports()">◀ К списку отчетов</button>
+                    </div>
+                    <div id="reportPhotoResult" style="margin-top:20px;"></div>
+                </div>
+            `;
         }
         
         window.generatePhotographerReport = async function() {
-            const start = document.getElementById('startDate').value, end = document.getElementById('endDate').value;
+            const start = document.getElementById('startDatePhoto').value;
+            const end = document.getElementById('endDatePhoto').value;
+            const resultDiv = document.getElementById('reportPhotoResult');
+            
+            if (!start || !end) {
+                showAlert('Выберите даты', 'error');
+                return;
+            }
+            
+            resultDiv.innerHTML = '<div class="spinner"></div>';
             showLoading();
+            
             try {
                 const response = await apiRequest(`/accountant/reports/photographer-performance?startDate=${start}&endDate=${end}`);
-                if(response.ok) showAlert('Отчет создан');
-                else showAlert('Ошибка', 'error');
-                loadReports();
-            } catch(e) { showAlert(e.message, 'error'); }
-            finally { hideLoading(); }
+                if (response.ok) {
+                    resultDiv.innerHTML = '<div class="receipt-created-notification" style="background: linear-gradient(135deg, #10b981 0%, #34d399 100%);">✅ Отчет по фотографам успешно создан! Нажмите "К списку отчетов" для просмотра.</div>';
+                    showAlert('Отчет создан', 'success');
+                    setTimeout(() => loadReports(), 2000);
+                } else {
+                    const error = await getErrorMessage(response);
+                    resultDiv.innerHTML = `<div class="alert alert-error">❌ Ошибка: ${error}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="alert alert-error">❌ Ошибка: ${error.message}</div>`;
+            } finally {
+                hideLoading();
+            }
         };
         
         // Экспорт функций
@@ -1032,6 +1665,8 @@
         window.showCreateReceiptModalWithClientSelect = showCreateReceiptModalWithClientSelect;
         window.showCreateReceiptModal = showCreateReceiptModal;
         window.showAccountingReportsModal = showAccountingReportsModal;
+        window.sendReceiptToClient = sendReceiptToClient;
+        window.viewReportDetail = viewReportDetail;
         
         // Запуск
         if (checkAuth()) {

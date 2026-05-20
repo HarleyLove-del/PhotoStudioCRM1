@@ -85,7 +85,6 @@
             margin-top: 5px;
         }
         
-        /* Кнопка по центру */
         .btn-center {
             width: 100%;
             display: flex;
@@ -112,6 +111,7 @@
         .btn-primary:disabled {
             opacity: 0.6;
             transform: none;
+            cursor: not-allowed;
         }
         
         .register-success {
@@ -181,7 +181,6 @@
             display: none;
         }
         
-        /* Переопределение стилей форм для неоновой темы */
         .form-group label {
             color: white;
             text-shadow: 0 0 2px rgba(0,0,0,0.5);
@@ -191,18 +190,37 @@
             background: rgba(30, 15, 40, 0.8);
             border: 2px solid rgba(255, 0, 255, 0.3);
             color: white;
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            transition: all 0.3s;
         }
         
         .form-group input:focus {
             border-color: var(--fuchsia);
             box-shadow: 0 0 0 3px rgba(255, 0, 255, 0.2);
+            outline: none;
+        }
+        
+        .form-group input.error {
+            border-color: #ef4444;
         }
         
         .form-group input:hover {
             border-color: var(--neon-purple);
         }
         
-        /* Стили для заголовков внутри auth-card */
+        .error-message {
+            color: #fca5a5;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .error-message.show {
+            display: block;
+        }
+        
         .auth-card .logo {
             font-size: 64px;
             text-align: center;
@@ -240,7 +258,6 @@
             <h2>PhotoStudio CRM</h2>
             <p class="subtitle">Система управления фотостудией</p>
             
-            <!-- Переключатель между клиентом и сотрудником -->
             <div class="auth-switch">
                 <div class="auth-switch-btn active" onclick="switchUserType('client')">👤 Клиент</div>
                 <div class="auth-switch-btn" onclick="switchUserType('staff')">👔 Сотрудник</div>
@@ -271,38 +288,44 @@
                     <div id="clientErrorMessage" class="alert alert-error hidden"></div>
                 </div>
                 
-                <!-- Регистрация клиента -->
+                <!-- Регистрация клиента с валидацией -->
                 <div id="clientRegisterForm" class="auth-form">
                     <form id="clientRegisterElement">
                         <div class="form-row">
                             <div class="form-group">
                                 <label>Имя *</label>
                                 <input type="text" id="regFirstName" required placeholder="Иван">
+                                <div class="error-message" id="regFirstNameError">Введите имя</div>
                             </div>
                             <div class="form-group">
                                 <label>Фамилия *</label>
                                 <input type="text" id="regLastName" required placeholder="Петров">
+                                <div class="error-message" id="regLastNameError">Введите фамилию</div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Email *</label>
                             <input type="email" id="regEmail" required placeholder="ivan@example.com">
+                            <div class="error-message" id="regEmailError">Введите корректный email</div>
                         </div>
                         <div class="form-group">
                             <label>Телефон</label>
                             <input type="tel" id="regPhone" placeholder="+7 (999) 123-45-67">
+                            <div class="error-message" id="regPhoneError">Телефон должен содержать только цифры</div>
                         </div>
                         <div class="form-group">
                             <label>Пароль *</label>
                             <input type="password" id="regPassword" required placeholder="минимум 6 символов">
                             <div class="password-hint">Пароль должен содержать минимум 6 символов</div>
+                            <div class="error-message" id="regPasswordError">Пароль должен быть не менее 6 символов</div>
                         </div>
                         <div class="form-group">
                             <label>Подтверждение пароля *</label>
                             <input type="password" id="regConfirmPassword" required placeholder="повторите пароль">
+                            <div class="error-message" id="regConfirmError">Пароли не совпадают</div>
                         </div>
                         <div class="btn-center">
-                            <button type="submit" class="btn-primary">📝 Зарегистрироваться</button>
+                            <button type="submit" class="btn-primary" id="registerBtn">📝 Зарегистрироваться</button>
                         </div>
                     </form>
                     <div id="clientRegisterError" class="alert alert-error hidden"></div>
@@ -310,7 +333,7 @@
                 </div>
             </div>
             
-            <!-- Форма для СОТРУДНИКА (админ, фотограф, бухгалтер) -->
+            <!-- Форма для СОТРУДНИКА -->
             <div id="staffForm" class="auth-form">
                 <form id="staffLoginElement">
                     <div class="form-group">
@@ -331,7 +354,6 @@
                 </div>
             </div>
             
-            <!-- Ссылка на главную -->
             <div class="back-link">
                 <a href="../index.html">← На главную</a>
             </div>
@@ -343,7 +365,155 @@
         const API_URL = 'https://localhost:7042/api';
         let clientTab = 'login';
         
-        // Переключение между клиентом и сотрудником
+        // ============ ФУНКЦИИ ДЛЯ ТЕЛЕФОНА ============
+        
+        // Форматирование номера телефона
+        function formatPhoneNumber(input) {
+            let value = input.value.replace(/\D/g, '');
+            if (value.length === 0) {
+                input.value = '';
+                return;
+            }
+            
+            let formatted = '';
+            if (value.length >= 1) formatted = '+7';
+            if (value.length >= 2) formatted += ' (' + value.substring(1, 4);
+            if (value.length >= 5) formatted += ') ' + value.substring(4, 7);
+            if (value.length >= 8) formatted += '-' + value.substring(7, 9);
+            if (value.length >= 10) formatted += '-' + value.substring(9, 11);
+            
+            input.value = formatted;
+        }
+        
+        // Получение только цифр из телефона
+        function getDigitsOnly(phone) {
+            return phone.replace(/\D/g, '');
+        }
+        
+        // Валидация телефона (только цифры, если заполнен)
+        function validatePhone(phone) {
+            if (!phone) return true;
+            const digits = getDigitsOnly(phone);
+            if (digits.length === 0) {
+                return false;
+            }
+            return /^\d+$/.test(digits);
+        }
+        
+        // Валидация email
+        function validateEmail(email) {
+            const re = /^[^\s@]+@([^\s@]+\.)+[^\s@]+$/;
+            return re.test(email);
+        }
+        
+        // ============ ПРОВЕРКА УНИКАЛЬНОСТИ EMAIL И ТЕЛЕФОНА ============
+        
+        async function checkUniqueUser(email, phone) {
+            try {
+                const requestBody = { 
+                    email: email
+                };
+                if (phone) {
+                    requestBody.phone = getDigitsOnly(phone);
+                }
+                
+                const response = await fetch(`${API_URL}/auth/check-unique`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(requestBody)
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    return { isUnique: true, errors: [] };
+                } else if (response.status === 409) {
+                    const error = await response.json();
+                    return { isUnique: false, errors: error.errors || [] };
+                }
+                return { isUnique: true, errors: [] };
+            } catch (error) {
+                console.log('API check unique error:', error);
+                return { isUnique: true, errors: [] };
+            }
+        }
+        
+        // ============ ВАЛИДАЦИЯ ФОРМЫ РЕГИСТРАЦИИ ============
+        
+        function validateRegistrationForm() {
+            let isValid = true;
+            
+            const firstName = document.getElementById('regFirstName').value.trim();
+            const lastName = document.getElementById('regLastName').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const phone = document.getElementById('regPhone').value.trim();
+            const password = document.getElementById('regPassword').value;
+            const confirmPassword = document.getElementById('regConfirmPassword').value;
+            
+            // Имя
+            if (!firstName) {
+                document.getElementById('regFirstNameError').classList.add('show');
+                document.getElementById('regFirstName').classList.add('error');
+                isValid = false;
+            } else {
+                document.getElementById('regFirstNameError').classList.remove('show');
+                document.getElementById('regFirstName').classList.remove('error');
+            }
+            
+            // Фамилия
+            if (!lastName) {
+                document.getElementById('regLastNameError').classList.add('show');
+                document.getElementById('regLastName').classList.add('error');
+                isValid = false;
+            } else {
+                document.getElementById('regLastNameError').classList.remove('show');
+                document.getElementById('regLastName').classList.remove('error');
+            }
+            
+            // Email
+            if (!email || !validateEmail(email)) {
+                document.getElementById('regEmailError').classList.add('show');
+                document.getElementById('regEmail').classList.add('error');
+                isValid = false;
+            } else {
+                document.getElementById('regEmailError').classList.remove('show');
+                document.getElementById('regEmail').classList.remove('error');
+            }
+            
+            // Телефон (только цифры, если заполнен)
+            if (phone && !validatePhone(phone)) {
+                document.getElementById('regPhoneError').classList.add('show');
+                document.getElementById('regPhone').classList.add('error');
+                isValid = false;
+            } else {
+                document.getElementById('regPhoneError').classList.remove('show');
+                document.getElementById('regPhone').classList.remove('error');
+            }
+            
+            // Пароль
+            if (!password || password.length < 6) {
+                document.getElementById('regPasswordError').classList.add('show');
+                document.getElementById('regPassword').classList.add('error');
+                isValid = false;
+            } else {
+                document.getElementById('regPasswordError').classList.remove('show');
+                document.getElementById('regPassword').classList.remove('error');
+            }
+            
+            // Подтверждение пароля
+            if (password !== confirmPassword) {
+                document.getElementById('regConfirmError').classList.add('show');
+                document.getElementById('regConfirmPassword').classList.add('error');
+                isValid = false;
+            } else {
+                document.getElementById('regConfirmError').classList.remove('show');
+                document.getElementById('regConfirmPassword').classList.remove('error');
+            }
+            
+            return isValid;
+        }
+        
+        // ============ ПЕРЕКЛЮЧЕНИЕ МЕЖДУ КЛИЕНТОМ И СОТРУДНИКОМ ============
+        
         function switchUserType(type) {
             const clientBtn = document.querySelector('.auth-switch-btn:first-child');
             const staffBtn = document.querySelector('.auth-switch-btn:last-child');
@@ -362,12 +532,12 @@
                 staffForm.classList.add('active');
             }
             
-            // Очищаем ошибки
             document.getElementById('clientErrorMessage')?.classList.add('hidden');
             document.getElementById('staffErrorMessage')?.classList.add('hidden');
         }
         
-        // Переключение вкладок для клиента
+        // ============ ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК ДЛЯ КЛИЕНТА ============
+        
         function switchClientTab(tab) {
             clientTab = tab;
             const tabs = document.querySelectorAll('#clientForm .auth-tab');
@@ -390,7 +560,8 @@
             document.getElementById('clientRegisterSuccess').classList.add('hidden');
         }
         
-        // Декодирование JWT токена
+        // ============ ДЕКОДИРОВАНИЕ JWT ============
+        
         function decodeJWT(token) {
             try {
                 const parts = token.split('.');
@@ -417,6 +588,7 @@
         }
         
         // ============ ВХОД ДЛЯ КЛИЕНТОВ ============
+        
         document.getElementById('clientLoginElement').addEventListener('submit', async (e) => {
             e.preventDefault();
             
@@ -465,39 +637,58 @@
             }
         });
         
-        // ============ РЕГИСТРАЦИЯ КЛИЕНТА ============
+        // ============ РЕГИСТРАЦИЯ КЛИЕНТА С ВАЛИДАЦИЕЙ ============
+        
         document.getElementById('clientRegisterElement').addEventListener('submit', async (e) => {
             e.preventDefault();
+            
+            if (!validateRegistrationForm()) {
+                return;
+            }
             
             const firstName = document.getElementById('regFirstName').value.trim();
             const lastName = document.getElementById('regLastName').value.trim();
             const email = document.getElementById('regEmail').value.trim();
             const phone = document.getElementById('regPhone').value.trim();
             const password = document.getElementById('regPassword').value;
-            const confirmPassword = document.getElementById('regConfirmPassword').value;
             const submitBtn = e.target.querySelector('button[type="submit"]');
-            
-            if (!firstName || !lastName || !email || !password) {
-                showError('clientRegisterError', 'Пожалуйста, заполните все обязательные поля');
-                return;
-            }
-            if (password.length < 6) {
-                showError('clientRegisterError', 'Пароль должен содержать минимум 6 символов');
-                return;
-            }
-            if (password !== confirmPassword) {
-                showError('clientRegisterError', 'Пароли не совпадают');
-                return;
-            }
             
             submitBtn.disabled = true;
             submitBtn.textContent = 'Регистрация...';
             
             try {
+                // Проверка уникальности email и телефона
+                const uniqueCheck = await checkUniqueUser(email, phone);
+                if (!uniqueCheck.isUnique) {
+                    if (uniqueCheck.errors.email) {
+                        showError('clientRegisterError', uniqueCheck.errors.email);
+                    } else if (uniqueCheck.errors.phone) {
+                        showError('clientRegisterError', uniqueCheck.errors.phone);
+                    } else {
+                        showError('clientRegisterError', 'Пользователь с таким email или телефоном уже существует');
+                    }
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Зарегистрироваться';
+                    return;
+                }
+                
+                const requestBody = { 
+                    email, 
+                    password, 
+                    firstName, 
+                    lastName, 
+                    role: 'Client' 
+                };
+                
+                // Добавляем телефон только если он заполнен
+                if (phone) {
+                    requestBody.phone = getDigitsOnly(phone);
+                }
+                
                 const response = await fetch(`${API_URL}/auth/register`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, password, firstName, lastName, phone, role: 'Client' })
+                    body: JSON.stringify(requestBody)
                 });
                 
                 const data = await response.json();
@@ -507,6 +698,7 @@
                     successDiv.innerHTML = '✅ ' + (data.message || 'Регистрация успешна! Теперь вы можете войти.');
                     successDiv.classList.remove('hidden');
                     
+                    // Очистка формы
                     document.getElementById('regFirstName').value = '';
                     document.getElementById('regLastName').value = '';
                     document.getElementById('regEmail').value = '';
@@ -526,7 +718,12 @@
                         setTimeout(() => successMsg.classList.add('hidden'), 5000);
                     }, 2000);
                 } else {
-                    showError('clientRegisterError', data.message || 'Ошибка регистрации');
+                    let errorMessage = data.message || 'Ошибка регистрации';
+                    // Если ошибка от валидации телефона
+                    if (data.errors && data.errors.phone) {
+                        errorMessage = data.errors.phone;
+                    }
+                    showError('clientRegisterError', errorMessage);
                 }
             } catch (error) {
                 console.error('Ошибка:', error);
@@ -538,6 +735,7 @@
         });
         
         // ============ ВХОД ДЛЯ СОТРУДНИКОВ ============
+        
         document.getElementById('staffLoginElement').addEventListener('submit', async (e) => {
             e.preventDefault();
             
@@ -564,9 +762,7 @@
                 
                 if (response.ok && data.token) {
                     const payload = decodeJWT(data.token);
-                    console.log('Декодированный payload:', payload);
                     
-                    // Получаем роль из токена (пробуем разные варианты)
                     let role = payload?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
                     if (!role) role = payload?.role;
                     if (!role) role = payload?.Role;
@@ -574,27 +770,20 @@
                     
                     const firstName = payload?.FirstName || email.split('@')[0] || 'Сотрудник';
                     
-                    console.log('Определенная роль:', role);
-                    
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('user', JSON.stringify({ email, firstName, role }));
                     
-                    // Перенаправление по роли
                     switch(role) {
                         case 'Admin':
-                            console.log('Перенаправление в админ-панель');
                             window.location.href = 'admin-dashboard.html';
                             break;
                         case 'Photographer':
-                            console.log('Перенаправление в панель фотографа');
                             window.location.href = 'photographer-dashboard.html';
                             break;
                         case 'Accountant':
-                            console.log('Перенаправление в панель бухгалтера');
                             window.location.href = 'accountant-dashboard.html';
                             break;
                         default:
-                            console.log('Перенаправление в панель клиента (роль не определена)');
                             window.location.href = 'client-dashboard.html';
                     }
                 } else {
@@ -609,7 +798,87 @@
             }
         });
         
-        // Проверка активной сессии
+        // ============ ВАЛИДАЦИЯ В РЕАЛЬНОМ ВРЕМЕНИ ============
+        
+        // Маска для телефона
+        const phoneInput = document.getElementById('regPhone');
+        if (phoneInput) {
+            phoneInput.addEventListener('input', function(e) {
+                formatPhoneNumber(this);
+                // Проверка валидации
+                if (this.value && !validatePhone(this.value)) {
+                    document.getElementById('regPhoneError').classList.add('show');
+                    this.classList.add('error');
+                } else {
+                    document.getElementById('regPhoneError').classList.remove('show');
+                    this.classList.remove('error');
+                }
+            });
+            
+            phoneInput.addEventListener('keydown', function(e) {
+                const allowedKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab', 'Enter'];
+                if (allowedKeys.includes(e.key)) return;
+                if (!/^[\d\+\(\)\-\s]$/.test(e.key)) {
+                    e.preventDefault();
+                }
+            });
+        }
+        
+        // Валидация полей в реальном времени
+        document.getElementById('regFirstName')?.addEventListener('input', () => {
+            const val = document.getElementById('regFirstName').value.trim();
+            if (val) {
+                document.getElementById('regFirstNameError').classList.remove('show');
+                document.getElementById('regFirstName').classList.remove('error');
+            }
+        });
+        
+        document.getElementById('regLastName')?.addEventListener('input', () => {
+            const val = document.getElementById('regLastName').value.trim();
+            if (val) {
+                document.getElementById('regLastNameError').classList.remove('show');
+                document.getElementById('regLastName').classList.remove('error');
+            }
+        });
+        
+        document.getElementById('regEmail')?.addEventListener('input', () => {
+            const val = document.getElementById('regEmail').value.trim();
+            if (val && validateEmail(val)) {
+                document.getElementById('regEmailError').classList.remove('show');
+                document.getElementById('regEmail').classList.remove('error');
+            }
+        });
+        
+        document.getElementById('regPassword')?.addEventListener('input', () => {
+            const val = document.getElementById('regPassword').value;
+            if (val && val.length >= 6) {
+                document.getElementById('regPasswordError').classList.remove('show');
+                document.getElementById('regPassword').classList.remove('error');
+            }
+            const confirm = document.getElementById('regConfirmPassword').value;
+            if (confirm && confirm !== val) {
+                document.getElementById('regConfirmError').classList.add('show');
+                document.getElementById('regConfirmPassword').classList.add('error');
+            } else if (confirm && confirm === val) {
+                document.getElementById('regConfirmError').classList.remove('show');
+                document.getElementById('regConfirmPassword').classList.remove('error');
+            }
+        });
+        
+        document.getElementById('regConfirmPassword')?.addEventListener('input', () => {
+            const pass = document.getElementById('regPassword').value;
+            const confirm = document.getElementById('regConfirmPassword').value;
+            if (pass === confirm) {
+                document.getElementById('regConfirmError').classList.remove('show');
+                document.getElementById('regConfirmPassword').classList.remove('error');
+            } else {
+                document.getElementById('regConfirmError').classList.add('show');
+                document.getElementById('regConfirmPassword').classList.add('error');
+            }
+        });
+        
+        // ============ ПРОВЕРКА АКТИВНОЙ СЕССИИ ============
+        
         function checkExistingSession() {
             const token = localStorage.getItem('token');
             const userStr = localStorage.getItem('user');

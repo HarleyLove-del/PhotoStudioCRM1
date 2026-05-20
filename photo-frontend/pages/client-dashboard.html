@@ -41,50 +41,27 @@
             text-shadow: 0 0 2px rgba(0,0,0,0.5);
         }
         
-        .order-form-container { max-width: 800px; margin: 0 auto; }
-        .selected-services { background: rgba(30, 15, 40, 0.6); border-radius: 12px; padding: 15px; margin: 15px 0; }
-        .service-tag { display: inline-block; background: var(--main-gradient); color: white; padding: 5px 12px; border-radius: 20px; margin: 5px; font-size: 12px; }
-        .service-tag button { background: none; border: none; color: white; margin-left: 8px; cursor: pointer; font-weight: bold; }
-        .total-price { font-size: 24px; font-weight: bold; color: #FF66FF; text-align: right; margin-top: 20px; padding-top: 15px; border-top: 2px solid #FF00FF; text-shadow: 0 0 3px #FF00FF; }
-        
         .photographer-card { border: 2px solid rgba(255, 0, 255, 0.3); border-radius: 12px; padding: 15px; margin: 10px 0; cursor: pointer; transition: all 0.3s; background: rgba(30, 15, 40, 0.6); color: white; }
         .photographer-card.selected { border-color: #FF00FF; background: rgba(255, 0, 255, 0.15); box-shadow: var(--shadow-glow); }
         .photographer-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: #FF00FF; }
         
-        .time-slot { display: inline-block; background: rgba(30, 15, 40, 0.6); border: 1px solid rgba(255, 0, 255, 0.3); border-radius: 20px; padding: 8px 16px; margin: 5px; cursor: pointer; transition: all 0.3s; color: white; }
-        .time-slot.selected { background: var(--main-gradient); color: white; border-color: #FF00FF; box-shadow: var(--shadow-glow); }
-        .time-slot:hover { background: rgba(255, 0, 255, 0.2); color: white; }
+        .payment-status-paid { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; white-space: nowrap; }
+        .payment-status-partial { background: rgba(245, 158, 11, 0.2); color: #fcd34d; padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; white-space: nowrap; }
+        .payment-status-notpaid { background: rgba(239, 68, 68, 0.2); color: #fca5a5; padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; white-space: nowrap; }
         
-        .step-indicator { display: flex; justify-content: space-between; margin-bottom: 30px; flex-wrap: wrap; }
-        .step { flex: 1; text-align: center; padding: 10px; background: rgba(30, 15, 40, 0.6); border-radius: 10px; margin: 0 5px; font-size: 12px; color: white; }
-        .step.active { background: var(--main-gradient); color: white; box-shadow: var(--shadow-glow); text-shadow: 0 0 3px rgba(0,0,0,0.5); }
-        .step.completed { background: linear-gradient(135deg, #10b981 0%, #34d399 100%); color: white; }
+        .status-pending { background: rgba(254, 243, 199, 0.2); color: #fde047; padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; white-space: nowrap; }
+        .status-confirmed { background: rgba(219, 234, 254, 0.2); color: #93c5fd; padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; white-space: nowrap; }
+        .status-progress { background: rgba(252, 231, 243, 0.2); color: #f9a8d4; padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; white-space: nowrap; }
+        .status-completed { background: rgba(209, 250, 229, 0.2); color: #6ee7b7; padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; white-space: nowrap; }
+        .status-cancelled { background: rgba(254, 226, 226, 0.2); color: #fca5a5; padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; white-space: nowrap; }
         
-        .payment-methods-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0; }
-        .payment-method-card { border: 2px solid rgba(255, 0, 255, 0.3); border-radius: 16px; padding: 20px; cursor: pointer; transition: all 0.3s; background: rgba(30, 15, 40, 0.6); color: white; }
-        .payment-method-card.selected { border-color: #FF00FF; background: rgba(255, 0, 255, 0.15); transform: translateY(-3px); box-shadow: var(--shadow-glow); }
-        .payment-method-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: #FF00FF; }
-        .payment-icon { font-size: 48px; margin-bottom: 10px; }
-        .payment-method-card h3 { margin-bottom: 8px; font-size: 18px; color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5); }
-        .payment-method-card p { font-size: 12px; color: rgba(255,255,255,0.8); margin-bottom: 10px; }
-        .payment-badge { display: inline-block; padding: 4px 8px; border-radius: 20px; font-size: 11px; font-weight: 600; }
-        .badge-popular { background: linear-gradient(135deg, #10b981 0%, #34d399 100%); color: white; }
-        .badge-installment { background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); color: white; }
-        
-        .payment-status-paid { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; }
-        .payment-status-partial { background: rgba(245, 158, 11, 0.2); color: #fcd34d; padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; }
-        .payment-status-notpaid { background: rgba(239, 68, 68, 0.2); color: #fca5a5; padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; }
-        
-        .status-pending { background: rgba(254, 243, 199, 0.2); color: #fde047; padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; }
-        .status-confirmed { background: rgba(219, 234, 254, 0.2); color: #93c5fd; padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; }
-        .status-progress { background: rgba(252, 231, 243, 0.2); color: #f9a8d4; padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; }
-        .status-completed { background: rgba(209, 250, 229, 0.2); color: #6ee7b7; padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; }
-        .status-cancelled { background: rgba(254, 226, 226, 0.2); color: #fca5a5; padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; }
-        
-        .btn-cancel { background: linear-gradient(135deg, #ef4444 0%, #f87171 100%); color: white; border: none; padding: 5px 10px; border-radius: 8px; cursor: pointer; font-size: 12px; margin-left: 10px; transition: all 0.3s; }
+        .btn-cancel { background: linear-gradient(135deg, #ef4444 0%, #f87171 100%); color: white; border: none; padding: 5px 12px; border-radius: 8px; cursor: pointer; font-size: 12px; transition: all 0.3s; white-space: nowrap; }
         .btn-cancel:hover { transform: translateY(-2px); box-shadow: var(--shadow-glow); }
         
-        /* Таблица заказов - фиксированная ширина без переносов */
+        .btn-pay { background: linear-gradient(135deg, #10b981 0%, #34d399 100%); color: white; border: none; padding: 5px 12px; border-radius: 8px; cursor: pointer; font-size: 12px; transition: all 0.3s; white-space: nowrap; }
+        .btn-pay:hover { transform: translateY(-2px); box-shadow: 0 0 10px rgba(16, 185, 129, 0.5); }
+        .btn-pay:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        
         .table-responsive {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
@@ -92,20 +69,26 @@
         .order-table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 800px;
+            min-width: 1000px;
         }
         .order-table th, .order-table td {
-            padding: 12px;
+            padding: 12px 15px;
             text-align: left;
             border-bottom: 1px solid rgba(255, 0, 255, 0.15);
             color: white;
             white-space: nowrap;
+            vertical-align: middle;
         }
         .order-table th {
             background: rgba(179, 68, 108, 0.3);
             font-weight: 700;
             color: white;
             text-shadow: 0 0 2px rgba(0,0,0,0.5);
+        }
+        .order-table td .status-badge, 
+        .order-table td .payment-status {
+            white-space: nowrap;
+            display: inline-block;
         }
         
         .services-grid-custom { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; margin-top: 20px; }
@@ -137,61 +120,6 @@
         .btn-order:hover { transform: translateY(-2px); box-shadow: var(--shadow-glow); }
         .btn-order:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
         
-        .filter-tabs { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
-        .filter-tab { padding: 8px 20px; background: rgba(30, 15, 40, 0.6); border-radius: 30px; cursor: pointer; transition: all 0.3s; font-size: 14px; color: white; border: 1px solid rgba(255, 0, 255, 0.2); text-shadow: 0 0 2px rgba(0,0,0,0.5); }
-        .filter-tab:hover { background: rgba(255, 0, 255, 0.15); transform: translateY(-2px); text-shadow: 0 0 5px #FF00FF; }
-        .filter-tab.active { background: var(--main-gradient); color: white; box-shadow: var(--shadow-glow); border-color: transparent; text-shadow: 0 0 3px rgba(0,0,0,0.5); }
-        
-        /* Эффекты для клиента в неоновой теме */
-        .effects-grid-client {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .effect-card-client {
-            background: rgba(30, 15, 40, 0.8);
-            border-radius: 16px;
-            padding: 20px;
-            text-align: center;
-            border: 1px solid rgba(255, 0, 255, 0.2);
-            transition: all 0.3s;
-            color: white;
-        }
-        .effect-card-client:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
-            border-color: #FF00FF;
-        }
-        .effect-icon-client {
-            font-size: 48px;
-            margin-bottom: 10px;
-        }
-        .effect-name-client {
-            font-size: 18px;
-            font-weight: bold;
-            color: white;
-            margin-bottom: 8px;
-            text-shadow: 0 0 3px #FF00FF;
-        }
-        .effect-price-client {
-            font-size: 20px;
-            font-weight: bold;
-            color: #FF66FF;
-            margin: 10px 0;
-            text-shadow: 0 0 3px #FF00FF;
-        }
-        .effect-category-client {
-            display: inline-block;
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 11px;
-            margin-bottom: 10px;
-        }
-        .category-effect { background: rgba(224, 231, 255, 0.2); color: #a78bfa; }
-        .category-frame { background: rgba(252, 231, 243, 0.2); color: #f9a8d4; }
-        .category-filter { background: rgba(209, 250, 229, 0.2); color: #6ee7b7; }
-        
         .section-title-client {
             font-size: 24px;
             color: white;
@@ -215,102 +143,148 @@
             color: white;
         }
         
-        /* Стили для чеков */
-        .receipts-container {
-            max-height: 600px;
-            overflow-y: auto;
+        /* Модальное окно для оплаты */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
         }
-        .receipt-card {
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            background: linear-gradient(135deg, #1e0f28 0%, #2a1a38 100%);
+            border-radius: 32px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid rgba(255, 0, 255, 0.3);
+            box-shadow: 0 0 40px rgba(255, 0, 255, 0.2);
+            animation: modalFadeIn 0.3s ease;
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .modal-content h3 {
+            color: white;
+            text-shadow: 0 0 5px #FF00FF;
+            margin-bottom: 20px;
+        }
+        .modal-content .form-group {
+            margin-bottom: 20px;
+        }
+        .modal-content label {
+            color: rgba(255,255,255,0.8);
+            display: block;
+            margin-bottom: 8px;
+        }
+        .modal-content input, .modal-content select {
+            width: 100%;
+            padding: 12px;
             background: rgba(30, 15, 40, 0.8);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 15px;
-            border: 1px solid rgba(255, 0, 255, 0.2);
+            border: 1px solid rgba(255, 0, 255, 0.3);
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+        }
+        .modal-content input:focus, .modal-content select:focus {
+            outline: none;
+            border-color: #FF00FF;
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+        }
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        .modal-actions button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
             transition: all 0.3s;
         }
-        .receipt-card:hover {
-            transform: translateX(5px);
-            border-color: #FF00FF;
-        }
-        .receipt-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 0, 255, 0.2);
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .receipt-number {
-            font-size: 18px;
-            font-weight: bold;
-            color: #FF66FF;
-            text-shadow: 0 0 2px #FF00FF;
-        }
-        .receipt-date {
-            font-size: 12px;
-            color: rgba(255,255,255,0.7);
-        }
-        .receipt-body {
-            display: grid;
-            gap: 10px;
-        }
-        .receipt-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .receipt-label {
-            color: rgba(255,255,255,0.7);
-            font-size: 13px;
-        }
-        .receipt-value {
+        .btn-modal-confirm {
+            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
             color: white;
-            font-weight: 600;
         }
-        .receipt-total {
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid rgba(255, 0, 255, 0.2);
-            font-size: 16px;
+        .btn-modal-confirm:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
         }
-        .receipt-total .receipt-label {
-            font-size: 16px;
+        .btn-modal-cancel {
+            background: rgba(239, 68, 68, 0.3);
+            color: white;
+            border: 1px solid rgba(239, 68, 68, 0.5);
+        }
+        .btn-modal-cancel:hover {
+            background: rgba(239, 68, 68, 0.5);
+        }
+        .payment-summary {
+            background: rgba(255, 0, 255, 0.1);
+            border-radius: 16px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        .payment-summary .amount {
+            font-size: 28px;
             font-weight: bold;
-        }
-        .receipt-total .receipt-value {
-            font-size: 20px;
             color: #FF66FF;
-            text-shadow: 0 0 2px #FF00FF;
-        }
-        .receipt-status {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-        }
-        .receipt-status-sent {
-            background: rgba(16, 185, 129, 0.2);
-            color: #6ee7b7;
+            text-shadow: 0 0 5px #FF00FF;
         }
         
         @media (max-width: 768px) {
             .stats-grid { grid-template-columns: 1fr 1fr; }
             .services-grid-custom { grid-template-columns: 1fr; }
             .options-grid { grid-template-columns: 1fr; }
-            .effects-grid-client { grid-template-columns: 1fr; }
-            .filter-tabs { justify-content: center; }
-            .receipt-header { flex-direction: column; align-items: flex-start; }
-            .receipt-row { flex-direction: column; align-items: flex-start; }
+            .order-table { min-width: 800px; }
+            .order-table th, .order-table td { padding: 8px 10px; }
         }
     </style>
 </head>
 <body>
     <div id="app"></div>
+    
+    <!-- Модальное окно оплаты -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <h3>💳 Оплата заказа</h3>
+            <div id="modalOrderInfo"></div>
+            <div class="form-group">
+                <label>💰 Сумма оплаты (₽)</label>
+                <input type="number" id="paymentAmount" step="1" min="1">
+                <small style="color: rgba(255,255,255,0.6); display: block; margin-top: 5px;">Можно оплатить полностью или частично (предоплата)</small>
+            </div>
+            <div class="form-group">
+                <label>💳 Способ оплаты</label>
+                <select id="paymentMethodModal">
+                    <option value="card">💳 Банковская карта (онлайн)</option>
+                    <option value="online">🏦 Онлайн перевод (СБП)</option>
+                    <option value="cash">💰 Наличные в студии</option>
+                </select>
+            </div>
+            <div class="payment-summary" id="paymentSummary">
+                <div>К оплате:</div>
+                <div class="amount" id="modalAmount">0 ₽</div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-modal-cancel" onclick="closePaymentModal()">Отмена</button>
+                <button class="btn-modal-confirm" id="confirmPayBtn" onclick="processPayment()">✅ Оплатить</button>
+            </div>
+        </div>
+    </div>
     
     <script src="../js/animations-light.js"></script>
     <script>
@@ -319,11 +293,11 @@
         let currentUser = null;
         let selectedServices = [];
         let selectedPhotographer = null;
-        let selectedTimeSlot = null;
-        let selectedPaymentMethod = null;
         let selectedOptions = [];
         let services = [];
         let photographers = [];
+        
+        let currentPaymentOrderData = null;
         
         function checkAuth() {
             const token = localStorage.getItem('token');
@@ -369,6 +343,10 @@
             alertDiv.style.zIndex = '9999';
             alertDiv.style.padding = '15px';
             alertDiv.style.borderRadius = '10px';
+            alertDiv.style.backgroundColor = type === 'error' ? 'rgba(239, 68, 68, 0.9)' : 'rgba(16, 185, 129, 0.9)';
+            alertDiv.style.color = 'white';
+            alertDiv.style.backdropFilter = 'blur(10px)';
+            alertDiv.style.zIndex = '10001';
             document.body.appendChild(alertDiv);
             setTimeout(() => alertDiv.remove(), 3000);
         }
@@ -407,7 +385,6 @@
                             <a onclick="loadDashboard()" style="color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5);">🏠 Дашборд</a>
                             <a onclick="loadOrders()" style="color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5);">📋 Мои заказы</a>
                             <a onclick="loadServicesWithOptions()" style="color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5);">🎨 Выбрать услугу</a>
-                            <a onclick="loadReceipts()" style="color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5);">🧾 Мои чеки</a>
                         </div>
                         <div class="user-info">
                             <span class="user-name" style="color: white; text-shadow: 0 0 3px #FF00FF;">👤 ${currentUser.firstName}</span>
@@ -419,67 +396,44 @@
             `;
         }
         
-        // Загрузка эффектов из localStorage (синхронизация с админ-панелью)
-        function loadEffectsForClient() {
-            let effects = [];
-            const savedEffects = localStorage.getItem('photoStudioExtraOptions');
-            
-            if (savedEffects) {
-                try {
-                    effects = JSON.parse(savedEffects);
-                } catch(e) {
-                    effects = getDefaultEffects();
-                }
-            } else {
-                effects = getDefaultEffects();
-                localStorage.setItem('photoStudioExtraOptions', JSON.stringify(effects));
-            }
-            
-            const availableEffects = effects.filter(e => e.isAvailable !== false);
-            
-            let effectsHtml = '';
-            if (availableEffects.length > 0) {
-                effectsHtml = `
-                    <div class="card" style="margin-top: 30px;">
-                        <h2 class="section-title-client">✨ Доступные эффекты и обработка</h2>
-                        <div class="effects-grid-client">
-                            ${availableEffects.map(effect => `
-                                <div class="effect-card-client">
-                                    <div class="effect-icon-client">${effect.icon || '✨'}</div>
-                                    <span class="effect-category-client category-${effect.category}">${getCategoryName(effect.category)}</span>
-                                    <div class="effect-name-client">${effect.name}</div>
-                                    <div class="effect-price-client">+${effect.price} ₽</div>
-                                    <div class="effect-description-client" style="font-size: 12px; color: rgba(255,255,255,0.7);">${effect.description || 'Профессиональная обработка'}</div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                `;
-            }
-            
-            return effectsHtml;
-        }
-        
-        function getCategoryName(category) {
-            if (category === 'effect') return '✨ Эффект';
-            if (category === 'frame') return '🖼️ Рамка';
-            if (category === 'filter') return '🎨 Фильтр';
-            return '✨ Эффект';
-        }
-        
         function getDefaultEffects() {
             return [
-                { id: 1, name: "Винтажный эффект", description: "Старение фото, пленочный эффект", price: 500, icon: "📷", category: "effect", isAvailable: true },
-                { id: 2, name: "Черно-белый", description: "Классическое черно-белое фото", price: 300, icon: "⚫", category: "effect", isAvailable: true },
-                { id: 3, name: "Цветокоррекция", description: "Профессиональная цветокоррекция", price: 800, icon: "🎨", category: "effect", isAvailable: true },
-                { id: 4, name: "Глянец", description: "Эффект глянцевой поверхности", price: 400, icon: "✨", category: "effect", isAvailable: true },
-                { id: 5, name: "Рамка", description: "Декоративная рамка для фото", price: 200, icon: "🖼️", category: "frame", isAvailable: true },
-                { id: 6, name: "Свечение", description: "Мягкое свечение вокруг объекта", price: 600, icon: "💫", category: "effect", isAvailable: true },
-                { id: 7, name: "Пленка", description: "Эффект старой пленки", price: 450, icon: "🎞️", category: "effect", isAvailable: true },
-                { id: 8, name: "Звездная пыль", description: "Эффект звездной пыли", price: 700, icon: "🌟", category: "effect", isAvailable: true },
-                { id: 9, name: "Розовая дымка", description: "Романтический розовый эффект", price: 550, icon: "💖", category: "effect", isAvailable: true },
-                { id: 10, name: "Акварель", description: "Эффект акварельного рисунка", price: 650, icon: "🎨", category: "effect", isAvailable: true }
+                { id: 1, name: "Винтажный эффект", price: 500, icon: "📷", isAvailable: true },
+                { id: 2, name: "Черно-белый", price: 300, icon: "⚫", isAvailable: true },
+                { id: 3, name: "Цветокоррекция", price: 800, icon: "🎨", isAvailable: true },
+                { id: 4, name: "Глянец", price: 400, icon: "✨", isAvailable: true },
+                { id: 5, name: "Рамка", price: 200, icon: "🖼️", isAvailable: true },
+                { id: 6, name: "Свечение", price: 600, icon: "💫", isAvailable: true },
+                { id: 7, name: "Пленка", price: 450, icon: "🎞️", isAvailable: true },
+                { id: 8, name: "Звездная пыль", price: 700, icon: "🌟", isAvailable: true }
             ];
+        }
+        
+        // Функция для расчёта общей суммы потраченных средств
+        function calculateTotalSpent(orders) {
+            if (!orders || orders.length === 0) return 0;
+            
+            let totalSpent = 0;
+            orders.forEach(order => {
+                // Если заказ оплачен полностью
+                if (order.paymentStatus === 2) {
+                    totalSpent += (order.totalAmount || 0);
+                }
+                // Если заказ оплачен частично - добавляем только оплаченную сумму
+                else if (order.paymentStatus === 1 && order.paidAmount) {
+                    totalSpent += (order.paidAmount || 0);
+                }
+                // Если заказ имеет записи о платежах, суммируем их
+                else if (order.payments && order.payments.length > 0) {
+                    const paidSum = order.payments.reduce((sum, p) => sum + (p.amount || 0), 0);
+                    totalSpent += paidSum;
+                }
+                // Если есть поле paidAmount
+                else if (order.paidAmount) {
+                    totalSpent += order.paidAmount;
+                }
+            });
+            return totalSpent;
         }
         
         async function loadDashboard() {
@@ -490,14 +444,35 @@
                 const text = await response.text();
                 let stats = { totalOrders: 0, completedOrders: 0, pendingOrders: 0, totalSpent: 0 };
                 let recentOrders = [];
+                let allOrders = [];
+                
                 if (text && text.trim() !== '') {
-                    try { const data = JSON.parse(text); stats = data.stats || stats; recentOrders = data.recentOrders || []; } catch(e) {}
+                    try { 
+                        const data = JSON.parse(text); 
+                        stats = data.stats || stats; 
+                        recentOrders = data.recentOrders || [];
+                        allOrders = data.allOrders || data.orders || [];
+                    } catch(e) {}
                 }
                 
-                const totalOrders = stats.totalOrders || 0;
-                const completedOrders = stats.completedOrders || 0;
-                const pendingOrders = stats.pendingOrders || 0;
-                const totalSpent = stats.totalSpent || 0;
+                // Если в ответе нет allOrders, загружаем заказы отдельно
+                if (allOrders.length === 0 && recentOrders.length > 0) {
+                    try {
+                        const ordersResponse = await apiRequest('/client/orders');
+                        const ordersText = await ordersResponse.text();
+                        if (ordersText && ordersText.trim() !== '') {
+                            allOrders = JSON.parse(ordersText);
+                        }
+                    } catch(e) {}
+                }
+                
+                // Рассчитываем реальную сумму потраченных средств
+                let totalSpent = stats.totalSpent || 0;
+                if (allOrders.length > 0) {
+                    totalSpent = calculateTotalSpent(allOrders);
+                } else if (recentOrders.length > 0) {
+                    totalSpent = calculateTotalSpent(recentOrders);
+                }
                 
                 content.innerHTML = `
                     <div style="margin-bottom:20px;">
@@ -505,37 +480,21 @@
                         <p style="color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5);">Добро пожаловать в систему управления фотостудией</p>
                     </div>
                     <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="value">${totalOrders}</div>
-                            <div class="label">Всего заказов</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="value">${completedOrders}</div>
-                            <div class="label">Выполнено</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="value">${pendingOrders}</div>
-                            <div class="label">В обработке</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="value">${totalSpent.toLocaleString()} ₽</div>
-                            <div class="label">Потрачено</div>
-                        </div>
+                        <div class="stat-card"><div class="value">${stats.totalOrders || 0}</div><div class="label">Всего заказов</div></div>
+                        <div class="stat-card"><div class="value">${stats.completedOrders || 0}</div><div class="label">Выполнено</div></div>
+                        <div class="stat-card"><div class="value">${stats.pendingOrders || 0}</div><div class="label">В обработке</div></div>
+                        <div class="stat-card"><div class="value">${totalSpent.toLocaleString()} ₽</div><div class="label">Потрачено</div></div>
                     </div>
-                    
                     <div class="card">
                         <h2>📋 Последние заказы</h2>
                         ${recentOrders.length > 0 ? renderOrdersTable(recentOrders) : '<div class="empty-state">У вас пока нет заказов. <button class="btn btn-primary" onclick="loadServicesWithOptions()">Создать заказ →</button></div>'}
                     </div>
-                    
-                    ${loadEffectsForClient()}
                 `;
             } catch (error) { 
                 content.innerHTML = `<div class="alert alert-error">❌ Ошибка: ${error.message}</div>`; 
             }
         }
         
-        // ИСПРАВЛЕННАЯ функция отображения таблицы заказов - без фигурной скобки и с правильным форматированием
         function renderOrdersTable(orders) {
             if (!orders || orders.length === 0) return '<div class="empty-state">Нет заказов</div>';
             let html = `
@@ -556,15 +515,32 @@
             `;
             orders.forEach(order => {
                 const canCancel = order.status === 0 || order.status === 1;
+                const canPay = (order.paymentStatus !== 2) && order.status !== 4;
+                const remainingAmount = (order.totalAmount || 0) - (order.paidAmount || 0);
+                const displayRemaining = remainingAmount > 0 ? remainingAmount : 0;
+                const paidAmount = order.paidAmount || 0;
+                
+                let paymentStatusHtml = `<span class="${getPaymentStatusClass(order.paymentStatus)}">${getPaymentStatusText(order.paymentStatus)}</span>`;
+                if (order.paymentStatus === 1 && paidAmount > 0) {
+                    paymentStatusHtml += `<br><small style="font-size:10px; white-space:nowrap;">Оплачено: ${paidAmount.toLocaleString()} ₽</small>`;
+                }
+                if (displayRemaining > 0 && order.paymentStatus !== 2) {
+                    paymentStatusHtml += `<br><small style="font-size:10px; color:#fcd34d; white-space:nowrap;">Остаток: ${displayRemaining.toLocaleString()} ₽</small>`;
+                }
+                
                 html += `<tr>
                     <td>${order.id}</td>
                     <td>${new Date(order.orderDate).toLocaleDateString()}</td>
                     <td>${(order.totalAmount || 0).toLocaleString()} ₽</td>
                     <td>${getPaymentMethodText(order.paymentMethod)}</td>
-                    <td><span class="${getPaymentStatusClass(order.paymentStatus)}">${getPaymentStatusText(order.paymentStatus)}</span></td>
+                    <td>${paymentStatusHtml}</td>
                     <td><span class="${getStatusClass(order.status)}">${getStatusName(order.status)}</span></td>
-                    <td>${canCancel ? `<button class="btn-cancel" onclick="cancelOrder(${order.id})">❌ Отменить</button>` : '—'}</td>
-                `;
+                    <td>
+                        ${canCancel ? `<button class="btn-cancel" onclick="cancelOrder(${order.id})">❌ Отменить</button>` : ''}
+                        ${canPay && displayRemaining > 0 ? `<button class="btn-pay" onclick="openPaymentModal(${order.id}, ${order.totalAmount || 0}, ${paidAmount})">💰 Оплатить</button>` : ''}
+                        ${canPay && displayRemaining <= 0 && order.paymentStatus === 2 ? `<span style="color:#6ee7b7;">✓ Оплачено</span>` : ''}
+                    </td>
+                </tr>`;
             });
             html += `
                         </tbody>
@@ -574,6 +550,89 @@
             return html;
         }
         
+        window.openPaymentModal = function(orderId, totalAmount, paidAmount = 0) {
+            currentPaymentOrderData = {
+                id: orderId,
+                totalAmount: totalAmount,
+                paidAmount: paidAmount,
+                remainingAmount: totalAmount - paidAmount
+            };
+            const remaining = currentPaymentOrderData.remainingAmount;
+            
+            document.getElementById('modalOrderInfo').innerHTML = `
+                <div class="payment-summary">
+                    <div>Заказ #${orderId}</div>
+                    <div>Общая сумма: <strong style="color:#FF66FF;">${totalAmount.toLocaleString()} ₽</strong></div>
+                    <div>Остаток: <strong style="color:#fcd34d;">${remaining.toLocaleString()} ₽</strong></div>
+                </div>
+            `;
+            const amountInput = document.getElementById('paymentAmount');
+            amountInput.value = remaining;
+            amountInput.max = remaining;
+            amountInput.min = 1;
+            document.getElementById('modalAmount').innerText = `${remaining.toLocaleString()} ₽`;
+            amountInput.oninput = function() {
+                let val = parseFloat(this.value) || 0;
+                if (val > remaining) val = remaining;
+                if (val < 1) val = 1;
+                this.value = val;
+                document.getElementById('modalAmount').innerText = `${val.toLocaleString()} ₽`;
+            };
+            document.getElementById('paymentModal').classList.add('active');
+        };
+        
+        window.closePaymentModal = function() {
+            document.getElementById('paymentModal').classList.remove('active');
+            currentPaymentOrderData = null;
+        };
+        
+        window.processPayment = async function() {
+            const confirmBtn = document.getElementById('confirmPayBtn');
+            if (!currentPaymentOrderData || !currentPaymentOrderData.id) {
+                showAlert('❌ Ошибка: данные заказа не найдены', 'error');
+                closePaymentModal();
+                return;
+            }
+            
+            const paymentAmount = parseFloat(document.getElementById('paymentAmount').value);
+            const paymentMethod = document.getElementById('paymentMethodModal').value;
+            
+            if (isNaN(paymentAmount) || paymentAmount <= 0) {
+                showAlert('❌ Введите корректную сумму', 'error');
+                return;
+            }
+            
+            const remaining = currentPaymentOrderData.remainingAmount;
+            if (paymentAmount > remaining) {
+                showAlert(`❌ Сумма не может превышать остаток (${remaining.toLocaleString()} ₽)`, 'error');
+                return;
+            }
+            
+            const originalText = confirmBtn.innerHTML;
+            confirmBtn.innerHTML = '⏳ Обработка...';
+            confirmBtn.disabled = true;
+            
+            try {
+                const requestBody = { orderId: currentPaymentOrderData.id, amount: paymentAmount, paymentMethod: paymentMethod };
+                const response = await apiRequest('/client/payments', { method: 'POST', body: JSON.stringify(requestBody) });
+                
+                if (response.ok) {
+                    showAlert(`✅ Оплата прошла успешно! Сумма: ${paymentAmount.toLocaleString()} ₽`, 'success');
+                    closePaymentModal();
+                    await loadOrders();
+                    await loadDashboard();
+                } else {
+                    const errorText = await response.text();
+                    showAlert(`❌ Ошибка оплаты (${response.status}): ${errorText}`, 'error');
+                }
+            } catch (error) {
+                showAlert(`❌ Ошибка: ${error.message}`, 'error');
+            } finally {
+                confirmBtn.innerHTML = originalText;
+                confirmBtn.disabled = false;
+            }
+        };
+        
         async function loadOrders() {
             const content = document.getElementById('pageContent');
             content.innerHTML = '<div class="spinner"></div>';
@@ -582,7 +641,7 @@
                 const text = await response.text();
                 let orders = [];
                 if (text && text.trim() !== '') { 
-                    try { orders = JSON.parse(text); } catch(e) { console.error('Ошибка парсинга заказов:', e); } 
+                    try { orders = JSON.parse(text); } catch(e) {} 
                 }
                 if (orders.length === 0) {
                     content.innerHTML = `<div class="card"><h2>Мои заказы</h2><div class="empty-state">У вас пока нет заказов</div><button class="btn btn-primary" onclick="loadServicesWithOptions()">Создать заказ</button></div>`;
@@ -594,89 +653,16 @@
             }
         }
         
-        // ============ ЗАГРУЗКА ЧЕКОВ КЛИЕНТА (С ОБРАБОТКОЙ ОШИБОК) ============
-        
-        async function loadReceipts() {
-            const content = document.getElementById('pageContent');
-            content.innerHTML = '<div class="spinner"></div>';
-            try {
-                const response = await apiRequest('/client/receipts');
-                
-                // Проверяем, есть ли данные в ответе
-                const text = await response.text();
-                console.log('Ответ сервера (чеки):', text);
-                
-                if (!text || text.trim() === '') {
-                    content.innerHTML = '<div class="card"><h2>🧾 Мои чеки</h2><p style="color: rgba(255,255,255,0.7); text-align: center; padding: 40px;">У вас пока нет чеков</p></div>';
-                    return;
-                }
-                
-                let receipts = [];
-                try {
-                    receipts = JSON.parse(text);
-                } catch(e) {
-                    console.error('Ошибка парсинга JSON:', e);
-                    content.innerHTML = '<div class="card"><h2>🧾 Мои чеки</h2><p style="color: rgba(255,255,255,0.7); text-align: center; padding: 40px;">У вас пока нет чеков</p></div>';
-                    return;
-                }
-                
-                if (!receipts || receipts.length === 0) {
-                    content.innerHTML = '<div class="card"><h2>🧾 Мои чеки</h2><p style="color: rgba(255,255,255,0.7); text-align: center; padding: 40px;">У вас пока нет чеков</p></div>';
-                    return;
-                }
-                
-                content.innerHTML = `
-                    <div class="card">
-                        <h2>🧾 Мои электронные чеки</h2>
-                        <div class="receipts-container">
-                            ${receipts.map(receipt => `
-                                <div class="receipt-card">
-                                    <div class="receipt-header">
-                                        <div class="receipt-number">ЧЕК-${String(receipt.id).padStart(6, '0')}</div>
-                                        <div class="receipt-date">📅 ${new Date(receipt.createdDate).toLocaleString()}</div>
-                                        <span class="receipt-status receipt-status-sent">✅ Оплачено</span>
-                                    </div>
-                                    <div class="receipt-body">
-                                        <div class="receipt-row">
-                                            <span class="receipt-label">📝 Назначение:</span>
-                                            <span class="receipt-value">Оплата заказа #${receipt.orderId}</span>
-                                        </div>
-                                        <div class="receipt-row">
-                                            <span class="receipt-label">💳 Способ оплаты:</span>
-                                            <span class="receipt-value">${getPaymentMethodText(receipt.paymentMethod)}</span>
-                                        </div>
-                                        <div class="receipt-row receipt-total">
-                                            <span class="receipt-label">💰 Сумма:</span>
-                                            <span class="receipt-value">${(receipt.amount || 0).toLocaleString()} ₽</span>
-                                        </div>
-                                        ${receipt.sentDate ? `
-                                            <div class="receipt-row" style="margin-top: 10px;">
-                                                <span class="receipt-label">📨 Получен:</span>
-                                                <span class="receipt-value" style="color: #6ee7b7;">${new Date(receipt.sentDate).toLocaleString()}</span>
-                                            </div>
-                                        ` : ''}
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                `;
-            } catch (error) {
-                console.error('Ошибка загрузки чеков:', error);
-                content.innerHTML = `<div class="card"><h2>🧾 Мои чеки</h2><p style="color: rgba(255,255,255,0.7); text-align: center; padding: 40px;">У вас пока нет чеков</p></div>`;
-            }
-        }
-        
         window.cancelOrder = async function(orderId) {
-            if (!confirm('Вы уверены, что хотите отменить этот заказ?')) return;
+            if (!confirm('Отменить заказ?')) return;
             try {
                 const response = await apiRequest(`/client/orders/${orderId}/cancel`, { method: 'PUT' });
-                if (response.ok) { showAlert('✅ Заказ успешно отменен', 'success'); loadOrders(); loadDashboard(); }
-                else { showAlert('❌ Ошибка отмены заказа', 'error'); }
+                if (response.ok) { showAlert('✅ Заказ отменен', 'success'); loadOrders(); loadDashboard(); }
+                else { showAlert('❌ Ошибка отмены', 'error'); }
             } catch (error) { showAlert('❌ Ошибка: ' + error.message, 'error'); }
         };
         
-        // ============ ВЫБОР УСЛУГИ С ЭФФЕКТАМИ ============
+        // ============ ВЫБОР УСЛУГ ============
         
         async function loadServicesWithOptions() {
             const content = document.getElementById('pageContent');
@@ -684,8 +670,6 @@
             selectedServices = [];
             selectedOptions = [];
             selectedPhotographer = null;
-            selectedTimeSlot = null;
-            selectedPaymentMethod = null;
             
             try {
                 const response = await fetch(`${API_URL}/services`);
@@ -704,9 +688,7 @@
             let availableOptions = [];
             const savedEffects = localStorage.getItem('photoStudioExtraOptions');
             if (savedEffects) {
-                try {
-                    availableOptions = JSON.parse(savedEffects);
-                } catch(e) {}
+                try { availableOptions = JSON.parse(savedEffects); } catch(e) {}
             }
             if (!availableOptions || availableOptions.length === 0) {
                 availableOptions = getDefaultEffects();
@@ -724,7 +706,7 @@
                         <div class="service-content">
                             <h4>${service.name}</h4>
                             <p>${service.description || 'Профессиональная фотосъемка'}</p>
-                            <div><span class="service-price">${service.price.toLocaleString()} ₽</span><span class="service-duration">⏱ ${service.durationMinutes} мин</span></div>
+                            <div><span class="service-price">${service.price.toLocaleString()} ₽</span></div>
                         </div>
                     </div>
                 `;
@@ -735,29 +717,20 @@
                     <div class="option-icon">${opt.icon || '✨'}</div>
                     <div class="option-name">${opt.name}</div>
                     <div class="option-price">+${opt.price} ₽</div>
-                    <div style="font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 5px;">${opt.description || 'Профессиональная обработка'}</div>
+                    <div style="font-size: 11px; color: rgba(255,255,255,0.7);">${opt.description || 'Профессиональная обработка'}</div>
                     ${selectedOptions.some(o => o.id === opt.id) ? '<div class="option-check">✓</div>' : ''}
                 </div>
             `).join('');
             
             content.innerHTML = `
                 <div class="services-catalog">
-                    <h1 style="margin-bottom:30px; color: white; text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;">🎨 Выберите услугу и эффекты</h1>
-                    <div class="filter-tabs">
-                        <div class="filter-tab active" onclick="filterServices('all')">Все услуги</div>
-                        <div class="filter-tab" onclick="filterServices('photo')">Фотосессии</div>
-                        <div class="filter-tab" onclick="filterServices('video')">Видеосъемка</div>
-                        <div class="filter-tab" onclick="filterServices('edit')">Обработка</div>
+                    <h1 style="margin-bottom:30px; color: white; text-shadow: 0 0 5px #FF00FF;">🎨 Выберите услугу</h1>
+                    <div id="servicesListContainer">
+                        ${services.length === 0 ? '<div class="empty-state">Нет доступных услуг</div>' : `<div class="services-grid-custom">${servicesHtml}</div>`}
                     </div>
-                    <div id="servicesListContainer"><div class="services-grid-custom">${servicesHtml}</div></div>
-                    <div class="options-title" style="margin-top:30px; color: white; text-shadow: 0 0 3px #FF00FF;">✨ Добавить эффекты и обработку</div>
+                    <h2 style="color: white; margin-top: 30px;">✨ Дополнительные эффекты и обработка</h2>
                     <div class="options-grid" id="optionsGrid">${optionsHtml}</div>
                     <div class="order-summary">
-                        <h4>🛒 Ваш заказ</h4>
-                        <div id="orderSummaryItems">
-                            ${selectedServices.length === 0 ? '<div class="order-item">Выберите услугу</div>' : selectedServices.map(s => `<div class="order-item"><span>${s.name}</span><span>${s.price} ₽</span></div>`).join('')}
-                            ${selectedOptions.map(opt => `<div class="order-item"><span>${opt.icon || '✨'} ${opt.name}</span><span>+${opt.price} ₽</span></div>`).join('')}
-                        </div>
                         <div class="order-total"><span>Итого:</span><span>${totalPrice} ₽</span></div>
                         <button class="btn-order" onclick="proceedToCheckout()" ${selectedServices.length === 0 ? 'disabled' : ''}>✅ Продолжить оформление</button>
                     </div>
@@ -777,31 +750,6 @@
             if (index === -1) { selectedOptions.push({ id: optId, name: optName, price: optPrice, icon: optIcon }); } 
             else { selectedOptions.splice(index, 1); }
             renderServicesCatalog();
-        };
-        
-        window.filterServices = function(filter) {
-            const container = document.getElementById('servicesListContainer');
-            let filteredServices = services;
-            if (filter === 'photo') filteredServices = services.filter(s => s.name.includes('Портрет') || s.name.includes('Свадеб') || s.name.includes('Love') || s.name.includes('Семейн') || s.name.includes('Детск') || s.name.includes('Беремен'));
-            else if (filter === 'video') filteredServices = services.filter(s => s.name.includes('Видео'));
-            else if (filter === 'edit') filteredServices = services.filter(s => s.name.includes('Ретуш') || s.name.includes('Обработк'));
-            
-            const servicesHtml = filteredServices.map(service => {
-                const icon = getServiceIcon(service.name);
-                const isSelected = selectedServices.some(s => s.id === service.id);
-                return `<div class="service-card-custom ${isSelected ? 'selected' : ''}" onclick="toggleService(${service.id}, '${service.name}', ${service.price})">
-                    ${isSelected ? '<div class="service-check">✓</div>' : ''}
-                    <div class="service-image">${icon}</div>
-                    <div class="service-content">
-                        <h4>${service.name}</h4>
-                        <p>${service.description || 'Профессиональная фотосъемка'}</p>
-                        <div><span class="service-price">${service.price.toLocaleString()} ₽</span><span class="service-duration">⏱ ${service.durationMinutes} мин</span></div>
-                    </div>
-                </div>`;
-            }).join('');
-            container.innerHTML = `<div class="services-grid-custom">${servicesHtml}</div>`;
-            document.querySelectorAll('.filter-tab').forEach(tab => tab.classList.remove('active'));
-            event.target.classList.add('active');
         };
         
         function getServiceIcon(name) {
@@ -828,7 +776,7 @@
             } catch (error) {
                 content.innerHTML = `
                     <div class="card" style="max-width:600px; margin:0 auto;">
-                        <h2 style="color: white; text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;">❌ Ошибка загрузки фотографов</h2>
+                        <h2 style="color: white;">❌ Ошибка загрузки фотографов</h2>
                         <p style="color: white;">${error.message}</p>
                         <button class="btn btn-primary" onclick="loadServicesWithOptions()">← Вернуться к услугам</button>
                     </div>
@@ -840,17 +788,8 @@
             const content = document.getElementById('pageContent');
             content.innerHTML = `
                 <div class="card" style="max-width:600px; margin:0 auto;">
-                    <h2 style="color: white; text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;">📷 Выберите фотографа</h2>
-                    <div id="photographersList">
-                        ${photographers.map(p => `
-                            <div class="photographer-card" onclick="selectPhotographer(${p.id}, '${p.firstName} ${p.lastName}')" id="photog_${p.id}">
-                                <div style="display:flex; align-items:center; gap:15px;">
-                                    <div style="font-size:40px;">📸</div>
-                                    <div><h3 style="color: white; text-shadow: 0 0 2px rgba(0,0,0,0.5);">${p.firstName} ${p.lastName}</h3><p style="color: rgba(255,255,255,0.7);">${p.email}</p></div>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
+                    <h2 style="color: white;">📷 Выберите фотографа</h2>
+                    ${photographers.map(p => `<div class="photographer-card" onclick="selectPhotographer(${p.id}, '${p.firstName} ${p.lastName}')"><div style="display:flex; align-items:center; gap:15px;"><div style="font-size:40px;">📸</div><div><h3 style="color: white;">${p.firstName} ${p.lastName}</h3><p style="color: rgba(255,255,255,0.7);">${p.email}</p></div></div></div>`).join('')}
                     <button class="btn btn-secondary" onclick="loadServicesWithOptions()">← Назад к услугам</button>
                 </div>
             `;
@@ -865,23 +804,10 @@
             const content = document.getElementById('pageContent');
             content.innerHTML = `
                 <div class="card" style="max-width:600px; margin:0 auto;">
-                    <h2 style="color: white; text-shadow: 0 0 5px #FF00FF, 0 0 10px #BF00FF;">⏰ Выберите дату и время</h2>
+                    <h2 style="color: white;">⏰ Выберите дату и время</h2>
                     <div class="form-group"><label style="color: white;">Дата</label><input type="date" id="orderDate" min="${new Date().toISOString().split('T')[0]}"></div>
-                    <div class="form-group">
-                        <label style="color: white;">Время</label>
-                        <select id="orderTime">
-                            <option value="10:00">10:00</option><option value="11:00">11:00</option><option value="12:00">12:00</option>
-                            <option value="13:00">13:00</option><option value="14:00">14:00</option><option value="15:00">15:00</option>
-                            <option value="16:00">16:00</option><option value="17:00">17:00</option><option value="18:00">18:00</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label style="color: white;">Способ оплаты</label>
-                        <select id="paymentMethodSelect">
-                            <option value="card">💳 Банковская карта</option><option value="cash">💰 Наличные</option>
-                            <option value="online">🏦 Онлайн перевод</option><option value="installment">📅 Рассрочка</option>
-                        </select>
-                    </div>
+                    <div class="form-group"><label style="color: white;">Время</label><select id="orderTime"><option value="10:00">10:00</option><option value="11:00">11:00</option><option value="12:00">12:00</option><option value="13:00">13:00</option><option value="14:00">14:00</option><option value="15:00">15:00</option><option value="16:00">16:00</option><option value="17:00">17:00</option><option value="18:00">18:00</option></select></div>
+                    <div class="form-group"><label style="color: white;">Способ оплаты</label><select id="paymentMethodSelect"><option value="card">💳 Банковская карта</option><option value="cash">💰 Наличные</option><option value="online">🏦 Онлайн перевод</option><option value="installment">📅 Рассрочка</option></select></div>
                     <button class="btn btn-primary" onclick="createFinalOrder()">✅ Подтвердить заказ</button>
                     <button class="btn btn-secondary" onclick="loadPhotographersForOrder()">← Назад</button>
                 </div>
@@ -896,7 +822,6 @@
             if (!orderDate) { showAlert('Выберите дату', 'error'); return; }
             if (!selectedPhotographer) { showAlert('Выберите фотографа', 'error'); return; }
             
-            const totalPrice = selectedServices.reduce((sum, s) => sum + s.price, 0) + selectedOptions.reduce((sum, o) => sum + o.price, 0);
             const optionsText = selectedOptions.length > 0 ? `, Эффекты: ${selectedOptions.map(o => o.name).join(', ')}` : '';
             const notes = `Фотограф: ${selectedPhotographer.name}, Дата: ${orderDate} ${orderTime}${optionsText}`;
             
@@ -909,13 +834,12 @@
                         paymentMethod: paymentMethod
                     })
                 });
-                
                 if (response.ok) {
-                    showAlert('✅ Заказ успешно создан! Мы свяжемся с вами для подтверждения.', 'success');
+                    showAlert('✅ Заказ успешно создан!', 'success');
                     loadDashboard();
                 } else {
                     const error = await response.text();
-                    showAlert('❌ Ошибка при создании заказа: ' + error, 'error');
+                    showAlert('❌ Ошибка: ' + error, 'error');
                 }
             } catch (error) {
                 showAlert('❌ Ошибка: ' + error.message, 'error');
@@ -924,7 +848,6 @@
         
         window.loadDashboard = loadDashboard;
         window.loadOrders = loadOrders;
-        window.loadReceipts = loadReceipts;
         window.loadServicesWithOptions = loadServicesWithOptions;
         
         if (checkAuth()) {
