@@ -5,7 +5,7 @@ services:
     container_name: photostudio-db
     environment:
       ACCEPT_EULA: "Y"
-      MSSQL_SA_PASSWORD: ${SA_PASSWORD}
+      MSSQL_SA_PASSWORD: "Admin@123456"
       MSSQL_PID: "Developer"
     ports:
       - "1433:1433"
@@ -14,7 +14,13 @@ services:
     networks:
       - app-network
     restart: unless-stopped
-    # healthcheck временно отключён
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P ${SA_PASSWORD} -Q 'SELECT 1' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
   # Бэкенд API
   backend:
     build:
@@ -33,7 +39,8 @@ services:
     networks:
       - app-network
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     restart: unless-stopped
 
   # Фронтенд статика
@@ -51,9 +58,9 @@ services:
     restart: unless-stopped
 
 volumes:
-  sqlserver_data:
-  backend_data:
-  uploads_data:
+  sqlserver_data:   # Для SQL Server
+  backend_data:     # Для данных бэкенда (если нужны)
+  uploads_data:     # Для загруженных файлов (фото, документы)
 
 networks:
   app-network:
