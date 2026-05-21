@@ -1,6 +1,3 @@
-### ========================================
-### 1. ЛОГИН АДМИНИСТРАТОРА (выполнить первым)
-### ========================================
 POST https://localhost:7042/api/auth/login
 Content-Type: application/json
 
@@ -9,9 +6,6 @@ Content-Type: application/json
   "password": "Admin123!"
 }
 
-### ========================================
-### 2. СОЗДАНИЕ КЛИЕНТА (ВСТАВЬТЕ ТОКЕН АДМИНА ВМЕСТО XXXX)
-### ========================================
 POST https://localhost:7042/api/admin/users
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwiZW1haWwiOiJhZG1pbkBwaG90b3N0dWRpby5jb20iLCJyb2xlIjoiQWRtaW4iLCJGaXJzdE5hbWUiOiJBZG1pbiIsIkxhc3ROYW1lIjoiVXNlciIsIm5iZiI6MTc3OTAwMzA1OSwiZXhwIjoxNzc5NjA3ODU5LCJpYXQiOjE3NzkwMDMwNTksImlzcyI6IlBob3RvU3R1ZGlvQ1JNIiwiYXVkIjoiUGhvdG9TdHVkaW9DUk1DbGllbnQifQ.bThDk-zCX55rwmUpv8YRVA7ZnUFuliL4OjLBOw1BSdc
 Content-Type: application/json
@@ -25,9 +19,6 @@ Content-Type: application/json
   "role": "Client"
 }
 
-### ========================================
-### 3. СОЗДАНИЕ ФОТОГРАФА (ВСТАВЬТЕ ТОКЕН АДМИНА ВМЕСТО XXXX)
-### ========================================
 POST https://localhost:7042/api/admin/users
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwiZW1haWwiOiJhZG1pbkBwaG90b3N0dWRpby5jb20iLCJyb2xlIjoiQWRtaW4iLCJGaXJzdE5hbWUiOiJBZG1pbiIsIkxhc3ROYW1lIjoiVXNlciIsIm5iZiI6MTc3OTAwMzA1OSwiZXhwIjoxNzc5NjA3ODU5LCJpYXQiOjE3NzkwMDMwNTksImlzcyI6IlBob3RvU3R1ZGlvQ1JNIiwiYXVkIjoiUGhvdG9TdHVkaW9DUk1DbGllbnQifQ.bThDk-zCX55rwmUpv8YRVA7ZnUFuliL4OjLBOw1BSdc
 Content-Type: application/json
@@ -41,9 +32,6 @@ Content-Type: application/json
   "role": "Photographer"
 }
 
-### ========================================
-### 4. СОЗДАНИЕ БУХГАЛТЕРА (ВСТАВЬТЕ ТОКЕН АДМИНА ВМЕСТО XXXX)
-### ========================================
 POST https://localhost:7042/api/admin/users
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwiZW1haWwiOiJhZG1pbkBwaG90b3N0dWRpby5jb20iLCJyb2xlIjoiQWRtaW4iLCJGaXJzdE5hbWUiOiJBZG1pbiIsIkxhc3ROYW1lIjoiVXNlciIsIm5iZiI6MTc3OTAwMzA1OSwiZXhwIjoxNzc5NjA3ODU5LCJpYXQiOjE3NzkwMDMwNTksImlzcyI6IlBob3RvU3R1ZGlvQ1JNIiwiYXVkIjoiUGhvdG9TdHVkaW9DUk1DbGllbnQifQ.bThDk-zCX55rwmUpv8YRVA7ZnUFuliL4OjLBOw1BSdc
 Content-Type: application/json
@@ -57,15 +45,9 @@ Content-Type: application/json
   "role": "Accountant"
 }
 
-### ========================================
-### 5. ПРОВЕРКА - ПОЛУЧИТЬ ВСЕХ ПОЛЬЗОВАТЕЛЕЙ (ВСТАВЬТЕ ТОКЕН АДМИНА ВМЕСТО XXXX)
-### ========================================
 GET https://localhost:7042/api/admin/users
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwiZW1haWwiOiJhZG1pbkBwaG90b3N0dWRpby5jb20iLCJyb2xlIjoiQWRtaW4iLCJGaXJzdE5hbWUiOiJBZG1pbiIsIkxhc3ROYW1lIjoiVXNlciIsIm5iZiI6MTc3OTAwMzA1OSwiZXhwIjoxNzc5NjA3ODU5LCJpYXQiOjE3NzkwMDMwNTksImlzcyI6IlBob3RvU3R1ZGlvQ1JNIiwiYXVkIjoiUGhvdG9TdHVkaW9DUk1DbGllbnQifQ.bThDk-zCX55rwmUpv8YRVA7ZnUFuliL4OjLBOw1BSdc
 
-### ========================================
-### 6. СОЗДАНИЕ УСЛУГИ 1 (ВСТАВЬТЕ ТОКЕН АДМИНА ВМЕСТО XXXX)
-### ========================================
 POST https://localhost:7042/api/services
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwiZW1haWwiOiJhZG1pbkBwaG90b3N0dWRpby5jb20iLCJyb2xlIjoiQWRtaW4iLCJGaXJzdE5hbWUiOiJBZG1pbiIsIkxhc3ROYW1lIjoiVXNlciIsIm5iZiI6MTc3OTAwMzA1OSwiZXhwIjoxNzc5NjA3ODU5LCJpYXQiOjE3NzkwMDMwNTksImlzcyI6IlBob3RvU3R1ZGlvQ1JNIiwiYXVkIjoiUGhvdG9TdHVkaW9DUk1DbGllbnQifQ.bThDk-zCX55rwmUpv8YRVA7ZnUFuliL4OjLBOw1BSdc
 Content-Type: application/json
@@ -78,9 +60,7 @@ Content-Type: application/json
   "isActive": true
 }
 
-### ========================================
-### 7. СОЗДАНИЕ УСЛУГИ 2 (ВСТАВЬТЕ ТОКЕН АДМИНА ВМЕСТО XXXX)
-### ========================================
+
 POST https://localhost:7042/api/services
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwiZW1haWwiOiJhZG1pbkBwaG90b3N0dWRpby5jb20iLCJyb2xlIjoiQWRtaW4iLCJGaXJzdE5hbWUiOiJBZG1pbiIsIkxhc3ROYW1lIjoiVXNlciIsIm5iZiI6MTc3OTAwMzA1OSwiZXhwIjoxNzc5NjA3ODU5LCJpYXQiOjE3NzkwMDMwNTksImlzcyI6IlBob3RvU3R1ZGlvQ1JNIiwiYXVkIjoiUGhvdG9TdHVkaW9DUk1DbGllbnQifQ.bThDk-zCX55rwmUpv8YRVA7ZnUFuliL4OjLBOw1BSdc
 Content-Type: application/json
@@ -93,9 +73,7 @@ Content-Type: application/json
   "isActive": true
 }
 
-### ========================================
-### 8. СОЗДАНИЕ УСЛУГИ 3 (ВСТАВЬТЕ ТОКЕН АДМИНА ВМЕСТО XXXX)
-### ========================================
+
 POST https://localhost:7042/api/services
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwiZW1haWwiOiJhZG1pbkBwaG90b3N0dWRpby5jb20iLCJyb2xlIjoiQWRtaW4iLCJGaXJzdE5hbWUiOiJBZG1pbiIsIkxhc3ROYW1lIjoiVXNlciIsIm5iZiI6MTc3OTAwMzA1OSwiZXhwIjoxNzc5NjA3ODU5LCJpYXQiOjE3NzkwMDMwNTksImlzcyI6IlBob3RvU3R1ZGlvQ1JNIiwiYXVkIjoiUGhvdG9TdHVkaW9DUk1DbGllbnQifQ.bThDk-zCX55rwmUpv8YRVA7ZnUFuliL4OjLBOw1BSdc
 Content-Type: application/json
@@ -108,14 +86,10 @@ Content-Type: application/json
   "isActive": true
 }
 
-### ========================================
-### 9. ПРОВЕРКА - ПОЛУЧИТЬ ВСЕ УСЛУГИ
-### ========================================
+
 GET https://localhost:7042/api/services
 
-### ========================================
-### 10. ЛОГИН КЛИЕНТА (получить токен для заказа)
-### ========================================
+
 POST https://localhost:7042/api/auth/login
 Content-Type: application/json
 
@@ -124,9 +98,6 @@ Content-Type: application/json
   "password": "Client123!"
 }
 
-### ========================================
-### 11. СОЗДАНИЕ ЗАКАЗА (ВСТАВЬТЕ ТОКЕН КЛИЕНТА ВМЕСТО XXXX)
-### ========================================
 POST https://localhost:7042/api/client/orders
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwiZW1haWwiOiJhZG1pbkBwaG90b3N0dWRpby5jb20iLCJyb2xlIjoiQWRtaW4iLCJGaXJzdE5hbWUiOiJBZG1pbiIsIkxhc3ROYW1lIjoiVXNlciIsIm5iZiI6MTc3OTAwMzA1OSwiZXhwIjoxNzc5NjA3ODU5LCJpYXQiOjE3NzkwMDMwNTksImlzcyI6IlBob3RvU3R1ZGlvQ1JNIiwiYXVkIjoiUGhvdG9TdHVkaW9DUk1DbGllbnQifQ.bThDk-zCX55rwmUpv8YRVA7ZnUFuliL4OjLBOw1BSdc
 Content-Type: application/json
@@ -136,9 +107,7 @@ Content-Type: application/json
   "notes": "Хочу сделать семейную фотосессию"
 }
 
-### ========================================
-### 12. ЛОГИН ФОТОГРАФА (получить токен для расписания)
-### ========================================
+
 POST https://localhost:7042/api/auth/login
 Content-Type: application/json
 
@@ -146,10 +115,6 @@ Content-Type: application/json
   "email": "photographer@test.com",
   "password": "Photo123!"
 }
-
-### ========================================
-### 13. ДОБАВЛЕНИЕ РАСПИСАНИЯ (ВСТАВЬТЕ ТОКЕН ФОТОГРАФА ВМЕСТО XXXX)
-### ========================================
 POST https://localhost:7042/api/photographer/schedule
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwiZW1haWwiOiJhZG1pbkBwaG90b3N0dWRpby5jb20iLCJyb2xlIjoiQWRtaW4iLCJGaXJzdE5hbWUiOiJBZG1pbiIsIkxhc3ROYW1lIjoiVXNlciIsIm5iZiI6MTc3OTAwMzA1OSwiZXhwIjoxNzc5NjA3ODU5LCJpYXQiOjE3NzkwMDMwNTksImlzcyI6IlBob3RvU3R1ZGlvQ1JNIiwiYXVkIjoiUGhvdG9TdHVkaW9DUk1DbGllbnQifQ.bThDk-zCX55rwmUpv8YRVA7ZnUFuliL4OjLBOw1BSdc
 Content-Type: application/json
