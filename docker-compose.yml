@@ -1,12 +1,14 @@
 services:
   # SQL Server база данных
   db:
-    image: mcr.microsoft.com/mssql/server:2022-latest
+    image: mcr.microsoft.com/mssql/server:2019-latest  # Используем стабильную версию 2019
     container_name: photostudio-db
     environment:
       ACCEPT_EULA: "Y"
-      MSSQL_SA_PASSWORD: "P@ssw0rd2024!"
+      SA_PASSWORD: "P@ssw0rd2024!"
       MSSQL_PID: "Developer"
+      # Отключаем некоторые расширенные возможности TLS
+      MSSQL_COLLATION: "SQL_Latin1_General_CP1_CI_AS"
     ports:
       - "1433:1433"
     volumes:
@@ -15,7 +17,7 @@ services:
       - app-network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P ${SA_PASSWORD} -Q 'SELECT 1' || exit 1"]
+      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'P@ssw0rd2024!' -Q 'SELECT 1' || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -30,10 +32,8 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:7042
-      - ConnectionStrings__Default=Server=db,1433;Database=PhotoStudioDB;User Id=sa;Password=${SA_PASSWORD};TrustServerCertificate=True;
-    volumes:
-      - backend_data:/app/data
-      - uploads_data:/app/wwwroot/uploads
+      # Ключевое изменение - полная строка подключения с минимальными требованиями
+      - ConnectionStrings__Default=Server=db,1433;Database=PhotoStudioDB;User Id=sa;Password=P@ssw0rd2024!;TrustServerCertificate=true;Encrypt=false;MultipleActiveResultSets=true;Connect Timeout=30;
     ports:
       - "7042:7042"
     networks:
@@ -58,9 +58,9 @@ services:
     restart: unless-stopped
 
 volumes:
-  sqlserver_data:   # Для SQL Server
-  backend_data:     # Для данных бэкенда (если нужны)
-  uploads_data:     # Для загруженных файлов (фото, документы)
+  sqlserver_data:
+  backend_data:
+  uploads_data:
 
 networks:
   app-network:
